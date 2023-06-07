@@ -10,6 +10,8 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.2
+  flutter_svg: ^2.0.5
+  salomon_bottom_bar: ^3.3.2
 
 dev_dependencies:
   flutter_test:
@@ -25,6 +27,7 @@ flutter:
   assets:
     - assets/fonts/
     - assets/images/
+    - assets/icons/
 
   fonts:
     - family: fonts

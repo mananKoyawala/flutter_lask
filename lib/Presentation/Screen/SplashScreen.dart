@@ -4,7 +4,7 @@ import 'package:lask/Package/Constants.dart';
 import 'package:lask/Package/CustomeTexts.dart';
 
 import '../../Data/Controller/Splash/SplashScreenViewModel.dart';
-import '../Utils/Constants.dart';
+import '../Constants.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);

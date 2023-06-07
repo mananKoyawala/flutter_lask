@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lask/Presentation/Screen/ArticaleScreen.dart';
+import 'package:lask/Presentation/Screen/Dashboard.dart';
+import 'package:lask/Presentation/Utils/Widgets/SearchPage.dart';
+import 'Presentation/Screen/ClappedArticalesScreen.dart';
+import 'Presentation/Screen/ExploreScreen.dart';
+import 'Presentation/Screen/MyAccountScreen.dart';
+import 'Presentation/Screen/ProfileScreen.dart';
+import 'Presentation/Screen/SearchResult.dart';
 import 'Presentation/Screen/SplashScreen.dart';
-import 'Presentation/Utils/Constants.dart';
+import 'Presentation/Constants.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +23,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: materialThemeColor, fontFamily: 'fonts'),
-      home: const SplashScreen(),
+      home: Dashboard(),
     );
   }
 }

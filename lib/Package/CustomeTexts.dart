@@ -33,6 +33,40 @@ class TextFW700 extends StatelessWidget {
   }
 }
 
+class TextFW600 extends StatelessWidget {
+  const TextFW600(
+      {super.key,
+      required this.text,
+      this.textcolor,
+      this.fontWeight,
+      required this.fontSize,
+      this.textAlign,
+      this.fontStyle,
+      this.fontFamily,
+      this.decoration});
+  final String text;
+  final Color? textcolor;
+  final FontWeight? fontWeight;
+  final double fontSize;
+  final TextAlign? textAlign;
+  final FontStyle? fontStyle;
+  final String? fontFamily;
+  final TextDecoration? decoration;
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      textAlign: textAlign,
+      style: TextStyle(
+          fontFamily: fontFamily,
+          fontSize: fontSize,
+          fontWeight: fontWeight ?? FontWeight.w600,
+          color: textcolor ?? Colors.black,
+          decoration: decoration),
+    );
+  }
+}
+
 class TextFW500 extends StatelessWidget {
   const TextFW500(
       {super.key,

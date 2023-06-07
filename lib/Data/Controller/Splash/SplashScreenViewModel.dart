@@ -25,10 +25,9 @@ class SplashScreenViewModel extends GetxController
       update();
       WelcomeScreen();
     });
-    animationController.forward().then((value) => Navigator.pushAndRemoveUntil(
+    animationController.forward().then((value) => Navigator.push(
           Get.context!,
           MaterialPageRoute(builder: (_) => WelcomeScreen()),
-          (route) => false,
         ));
   }
 }
