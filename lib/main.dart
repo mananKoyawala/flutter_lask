@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: materialThemeColor, fontFamily: 'fonts'),
-      home: Dashboard(),
+      home: SplashScreen(),
     );
   }
 }

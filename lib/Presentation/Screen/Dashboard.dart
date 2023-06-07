@@ -33,14 +33,14 @@ class Dashboard extends StatelessWidget {
             /// Likes
             SalomonBottomBarItem(
               icon: Icon(Icons.favorite_border),
-              title: Text("Likes"),
+              title: Text("Explore"),
               selectedColor: Colors.pink,
             ),
 
             /// Search
             SalomonBottomBarItem(
               icon: Icon(Icons.search),
-              title: Text("Search"),
+              title: Text("Bookmark"),
               selectedColor: Colors.orange,
             ),
 
