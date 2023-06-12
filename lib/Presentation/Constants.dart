@@ -12,3 +12,4 @@ Color textColor2 = const Color(0xFF6D6265);
 Color textColor3 = const Color(0xFF47363A);
 Color textColor4 = const Color(0xFF8A8184);
 Color background1 = const Color(0xFFE9EEFA).withOpacity(.1);
+Color navBG = const Color(0xFFFCE9EE);

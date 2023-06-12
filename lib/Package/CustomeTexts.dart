@@ -9,7 +9,9 @@ class TextFW700 extends StatelessWidget {
       required this.fontSize,
       this.textAlign,
       this.fontFamily,
-      this.decoration});
+      this.decoration,
+      this.overflow,
+      this.maxLines});
   final String text;
   final Color? textcolor;
   final FontWeight? fontWeight;
@@ -17,11 +19,15 @@ class TextFW700 extends StatelessWidget {
   final TextAlign? textAlign;
   final String? fontFamily;
   final TextDecoration? decoration;
+  final TextOverflow? overflow;
+  final int? maxLines;
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
+      maxLines: maxLines,
+      overflow: overflow,
       textAlign: textAlign,
       style: TextStyle(
           fontSize: fontSize,
@@ -43,7 +49,9 @@ class TextFW600 extends StatelessWidget {
       this.textAlign,
       this.fontStyle,
       this.fontFamily,
-      this.decoration});
+      this.decoration,
+      this.overflow,
+      this.maxLines});
   final String text;
   final Color? textcolor;
   final FontWeight? fontWeight;
@@ -52,10 +60,15 @@ class TextFW600 extends StatelessWidget {
   final FontStyle? fontStyle;
   final String? fontFamily;
   final TextDecoration? decoration;
+  final TextOverflow? overflow;
+  final int? maxLines;
+
   @override
   Widget build(BuildContext context) {
     return Text(
+      maxLines: maxLines,
       text,
+      overflow: overflow,
       textAlign: textAlign,
       style: TextStyle(
           fontFamily: fontFamily,
@@ -77,7 +90,9 @@ class TextFW500 extends StatelessWidget {
       this.textAlign,
       this.fontStyle,
       this.fontFamily,
-      this.decoration});
+      this.decoration,
+      this.overflow,
+      this.maxLines});
   final String text;
   final Color? textcolor;
   final FontWeight? fontWeight;
@@ -86,10 +101,15 @@ class TextFW500 extends StatelessWidget {
   final FontStyle? fontStyle;
   final String? fontFamily;
   final TextDecoration? decoration;
+  final TextOverflow? overflow;
+  final int? maxLines;
+
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
+      maxLines: maxLines,
+      overflow: overflow,
       textAlign: textAlign,
       style: TextStyle(
           fontFamily: fontFamily,
@@ -111,7 +131,9 @@ class TextFW400 extends StatelessWidget {
       this.textAlign,
       this.fontStyle,
       this.fontFamily,
-      this.decoration});
+      this.decoration,
+      this.overflow,
+      this.maxLines});
   final String text;
   final Color? textcolor;
   final FontWeight? fontWeight;
@@ -120,11 +142,15 @@ class TextFW400 extends StatelessWidget {
   final FontStyle? fontStyle;
   final String? fontFamily;
   final TextDecoration? decoration;
+  final TextOverflow? overflow;
+  final int? maxLines;
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
+      maxLines: maxLines,
+      overflow: overflow,
       textAlign: textAlign,
       style: TextStyle(
           fontFamily: fontFamily,

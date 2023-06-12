@@ -65,13 +65,14 @@ class HomeScreen extends StatelessWidget {
                         controller: scrollController,
                         physics: const BouncingScrollPhysics(),
                         scrollDirection: Axis.horizontal,
-                        children: const [
+                        children: [
                           NewContainer(
                             imgUrl: 'assets/images/img1.png',
                             title:
                                 "Experience the Serenity of Japan's Traditional Countryside",
                             category: 'Technology',
                           ),
+                          sizeW(20),
                           NewContainer(
                             imgUrl: 'assets/images/img2.png',
                             title:
@@ -87,12 +88,13 @@ class HomeScreen extends StatelessWidget {
                         controller: scrollController,
                         physics: const BouncingScrollPhysics(),
                         scrollDirection: Axis.horizontal,
-                        children: const [
+                        children: [
                           NewContainer(
                             imgUrl: 'assets/images/img3.png',
                             title: "The Pros and Cons of Remote Work",
                             category: 'Technology',
                           ),
+                          sizeW(20),
                           NewContainer(
                             imgUrl: 'assets/images/img4.png',
                             title: "The Pros and Cons of Remote Work",
@@ -133,11 +135,14 @@ class NewContainer extends StatelessWidget {
             child: Image.asset(imgUrl)),
         sizeH(20),
         SizedBox(
-          width: 285,
+          width: 230,
+          height: 50,
           child: TextFW600(
+            maxLines: 2,
             text: title,
-            fontSize: 18,
+            fontSize: 20,
             textcolor: black,
+            overflow: TextOverflow.ellipsis,
           ),
         ),
         sizeH10(),
