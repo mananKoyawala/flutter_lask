@@ -103,6 +103,27 @@ class HomeScreen extends StatelessWidget {
                         ],
                       ),
                     ),
+                    SizedBox(
+                      height: 350,
+                      child: ListView(
+                        controller: scrollController,
+                        physics: const BouncingScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          NewContainer(
+                            imgUrl: 'assets/images/img3.png',
+                            title: "The Pros and Cons of Remote Work",
+                            category: 'Technology',
+                          ),
+                          sizeW(20),
+                          NewContainer(
+                            imgUrl: 'assets/images/img4.png',
+                            title: "The Pros and Cons of Remote Work",
+                            category: 'Technology',
+                          )
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ))

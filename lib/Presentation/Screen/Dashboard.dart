@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:lask/Data/Controller/DashboardController.dart';
 import 'package:lask/Package/Constants.dart';
@@ -23,14 +25,37 @@ class Dashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: ClipRRect(
-        clipBehavior: Clip.hardEdge,
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
-        ),
-        child: Obx(
-          () => Container(
+        extendBody: true,
+        bottomNavigationBar: Stack(
+          alignment: Alignment.bottomCenter,
+          children: [
+            Obx(() => pages[controller.currentIndex.value]),
+            BottomNav(controller: controller),
+          ],
+        ));
+  }
+}
+
+class BottomNav extends StatelessWidget {
+  const BottomNav({
+    super.key,
+    required this.controller,
+  });
+
+  final DashboardController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      clipBehavior: Clip.hardEdge,
+      borderRadius: const BorderRadius.only(
+        topLeft: Radius.circular(20),
+        topRight: Radius.circular(20),
+      ),
+      child: Obx(
+        () => BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0),
+          child: Container(
             decoration: BoxDecoration(color: navBG, borderRadius: radius(10)),
             child: SalomonBottomBar(
               currentIndex: controller.currentIndex.value,
@@ -72,7 +97,6 @@ class Dashboard extends StatelessWidget {
           ),
         ),
       ),
-      body: Obx(() => pages[controller.currentIndex.value]),
     );
   }
 }

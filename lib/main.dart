@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: materialThemeColor, fontFamily: 'fonts'),
-      home: OTPScreen(),
+      home: Dashboard(),
     );
   }
 }
