@@ -4,6 +4,8 @@ import 'package:lask/Package/CustomePadding.dart';
 import 'package:lask/Package/CustomeTexts.dart';
 import 'package:lask/Package/ScrollColorRemove.dart';
 import 'package:lask/Presentation/Constants.dart';
+import 'package:lask/Presentation/Screen/ClappedArticalesScreen.dart';
+import 'package:lask/Presentation/Screen/ReadArticalesScreen.dart';
 
 import 'MyAccountScreen.dart';
 
@@ -25,12 +27,12 @@ class ProfileScreen extends StatelessWidget {
               Row(
                 children: [
                   CircleAvatar(
-                      radius: 65,
+                      radius: 55,
                       child: Image.asset(
                         'assets/images/person1.png',
                         height: 150,
                       )),
-                  sizeW10(),
+                  sizeW(20),
                   Expanded(
                       child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -85,13 +87,17 @@ class ProfileScreen extends StatelessWidget {
               sizeH10(),
               SingleAccountItem(
                 title: 'Clapped Articles',
-                onTap: () {},
+                onTap: () {
+                  Nav.pushMaterial(context, ClappedArticalesScreen());
+                },
                 vPadd: 15,
               ),
               sizeH10(),
               SingleAccountItem(
                 title: 'Read Articles',
-                onTap: () {},
+                onTap: () {
+                  Nav.pushMaterial(context, ReadArticalesScreen());
+                },
                 vPadd: 15,
               ),
               sizeH10(),
@@ -100,7 +106,9 @@ class ProfileScreen extends StatelessWidget {
               sizeH10(),
               SingleAccountItem(
                 title: 'My Account',
-                onTap: () {},
+                onTap: () {
+                  Nav.pushMaterial(context, MyAccountScreen());
+                },
                 vPadd: 15,
               ),
               sizeH10(),

@@ -60,26 +60,28 @@ class BottomNav extends StatelessWidget {
             child: SalomonBottomBar(
               currentIndex: controller.currentIndex.value,
               onTap: (i) => controller.changeIndex(i),
+              activeItemBackgroundColor: black,
+              // selectedItemColor: Colors.blue,
               items: [
                 /// Home
                 SalomonBottomBarItem(
                   icon: Icon(Icons.home),
                   title: Text("Home"),
-                  selectedColor: Colors.purple,
+                  selectedColor: white,
                 ),
 
                 /// Likes
                 SalomonBottomBarItem(
                   icon: Icon(Icons.supervised_user_circle_outlined),
                   title: Text("Explore"),
-                  selectedColor: Colors.pink,
+                  selectedColor: white,
                 ),
 
                 /// Search
                 SalomonBottomBarItem(
                   icon: Icon(Icons.bookmark_outline),
                   title: Text("Bookmark"),
-                  selectedColor: Colors.orange,
+                  selectedColor: white,
                 ),
 
                 /// Profile
@@ -90,7 +92,7 @@ class BottomNav extends StatelessWidget {
                   // icon: Image.asset('assets/icons/nav4.png', height: 24),
                   title: Text("Profile"),
                   // title: TextFW600(text: 'Profile', fontSize: 12),
-                  selectedColor: Colors.teal,
+                  selectedColor: white,
                 ),
               ],
             ),

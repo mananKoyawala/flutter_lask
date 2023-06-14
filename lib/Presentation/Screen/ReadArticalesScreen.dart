@@ -36,8 +36,6 @@ class ReadArticalesScreen extends StatelessWidget {
                   IconButton(
                       onPressed: () {
                         Nav.pop(context);
-                        unfocus();
-                        Nav.pop(context);
                       },
                       icon: const Icon(Icons.arrow_back)),
                   TextFW600(
