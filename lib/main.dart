@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lask/Data/Controller/GreetingController.dart';
 import 'package:lask/Presentation/Screen/ArticaleScreen.dart';
 import 'package:lask/Presentation/Screen/Dashboard.dart';
 import 'package:lask/Presentation/Utils/Widgets/SearchPage.dart';
@@ -14,6 +15,7 @@ import 'Presentation/Screen/SignInScreen.dart';
 import 'Presentation/Screen/SignUpScreen.dart';
 import 'Presentation/Screen/SplashScreen.dart';
 import 'Presentation/Constants.dart';
+import 'package:intl/intl.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,6 +30,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: materialThemeColor, fontFamily: 'fonts'),
       home: Dashboard(),
+      // initialBinding: Bind(),
     );
   }
 }

@@ -8,9 +8,10 @@ import 'package:lask/Presentation/Constants.dart';
 import 'package:lask/Presentation/Screen/ExploreScreen.dart';
 import 'package:lask/Presentation/Screen/HomeScreen.dart';
 import 'package:lask/Presentation/Screen/ProfileScreen.dart';
-import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+// import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:get/get.dart';
 
+import '../../Package/NavigationBar.dart';
 import 'BookmarkedScreen.dart';
 
 class Dashboard extends StatelessWidget {

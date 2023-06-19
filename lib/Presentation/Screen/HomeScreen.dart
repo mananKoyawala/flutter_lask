@@ -1,14 +1,21 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:lask/Package/Constants.dart';
 import 'package:lask/Package/CustomeTexts.dart';
+import 'package:lask/Package/RippleEffectContainer.dart';
 import 'package:lask/Package/ScrollColorRemove.dart';
 import 'package:lask/Presentation/Constants.dart';
-
+import 'package:intl/intl.dart';
+import '../../Data/Controller/GreetingController.dart';
 import '../../Package/CustomePadding.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
   ScrollController scrollController = ScrollController();
+  final Greeting greetings = Get.put(Greeting());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,29 +30,35 @@ class HomeScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Column(
-                      children: [
-                        TextFW400(
-                            text: 'Good Morning, Trung',
-                            fontSize: 14,
-                            textcolor: textColor2),
-                        TextFW600(
-                          text: 'Sun 9 April, 2023',
-                          fontSize: 18,
-                          textcolor: black,
-                        )
-                      ],
-                    ),
+                    GetBuilder<Greeting>(builder: (greet) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Obx(
+                            () => TextFW400(
+                                text: '${greet.greeting.value}, Manan',
+                                fontSize: 14,
+                                textcolor: textColor2),
+                          ),
+                          TextFW600(
+                            text: DateFormat('EE dd MMM, yyyy')
+                                .format(DateTime.now()),
+                            fontSize: 18,
+                            textcolor: black,
+                          )
+                        ],
+                      );
+                    }),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         SizedBox(
-                            height: 30,
+                            height: 24,
                             child: Image.asset('assets/images/sun.png')),
                         sizeW10(),
                         TextFW600(
                           text: 'Sunny 32oC',
-                          fontSize: 16,
+                          fontSize: 14,
                           textcolor: textColor2,
                         )
                       ],
@@ -67,6 +80,7 @@ class HomeScreen extends StatelessWidget {
                         scrollDirection: Axis.horizontal,
                         children: [
                           NewContainer(
+                            onTap: () {},
                             imgUrl: 'assets/images/img1.png',
                             title:
                                 "Experience the Serenity of Japan's Traditional Countryside",
@@ -74,6 +88,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                           sizeW(20),
                           NewContainer(
+                            onTap: () {},
                             imgUrl: 'assets/images/img2.png',
                             title:
                                 "Discovering the Magic of Paris: A Journey through",
@@ -90,6 +105,7 @@ class HomeScreen extends StatelessWidget {
                         scrollDirection: Axis.horizontal,
                         children: [
                           NewContainer(
+                            onTap: () {},
                             imgUrl: 'assets/images/img3.png',
                             title: "The Pros and Cons of Remote Work",
                             category: 'Technology',
@@ -97,6 +113,7 @@ class HomeScreen extends StatelessWidget {
                           sizeW(20),
                           NewContainer(
                             imgUrl: 'assets/images/img4.png',
+                            onTap: () {},
                             title: "The Pros and Cons of Remote Work",
                             category: 'Technology',
                           )
@@ -113,11 +130,13 @@ class HomeScreen extends StatelessWidget {
                           NewContainer(
                             imgUrl: 'assets/images/img3.png',
                             title: "The Pros and Cons of Remote Work",
+                            onTap: () {},
                             category: 'Technology',
                           ),
                           sizeW(20),
                           NewContainer(
                             imgUrl: 'assets/images/img4.png',
+                            onTap: () {},
                             title: "The Pros and Cons of Remote Work",
                             category: 'Technology',
                           )
@@ -141,38 +160,44 @@ class NewContainer extends StatelessWidget {
     required this.imgUrl,
     required this.title,
     required this.category,
+    required this.onTap,
   });
   final String imgUrl;
   final String title;
   final String category;
+  final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-            height: 230,
-            decoration: BoxDecoration(borderRadius: radius(10)),
-            child: Image.asset(imgUrl)),
-        sizeH(20),
-        SizedBox(
-          width: 230,
-          height: 50,
-          child: TextFW600(
-            maxLines: 2,
-            text: title,
-            fontSize: 20,
-            textcolor: black,
-            overflow: TextOverflow.ellipsis,
+    return ClickEffect(
+      onTap: onTap,
+      borderRadius: radius(10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+              height: 230,
+              decoration: BoxDecoration(borderRadius: radius(10)),
+              child: Image.asset(imgUrl)),
+          sizeH(20),
+          SizedBox(
+            width: 230,
+            height: 50,
+            child: TextFW600(
+              maxLines: 2,
+              text: title,
+              fontSize: 20,
+              textcolor: black,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
-        ),
-        sizeH10(),
-        TextFW400(
-          text: category,
-          fontSize: 14,
-          textcolor: textColor2,
-        )
-      ],
+          sizeH10(),
+          TextFW400(
+            text: category,
+            fontSize: 14,
+            textcolor: textColor2,
+          )
+        ],
+      ),
     );
   }
 }
