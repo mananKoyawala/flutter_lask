@@ -6,13 +6,13 @@ import '../../Data/Controller/Splash/SplashScreenViewModel.dart';
 import '../Constants.dart';
 
 class SplashScreen extends StatelessWidget {
-  const SplashScreen({Key? key}) : super(key: key);
-
+  const SplashScreen({Key? key, this.initScreen}) : super(key: key);
+  final int? initScreen;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: GetBuilder<SplashScreenViewModel>(
-        init: SplashScreenViewModel(),
+        init: SplashScreenViewModel(initScreen),
         builder: (controller) {
           return Container(
               alignment: Alignment.center,

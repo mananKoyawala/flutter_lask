@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lask/Data/Controller/GreetingController.dart';
+import 'package:lask/Data/Controller/OTPController.dart';
 import 'package:lask/Presentation/Screen/ArticaleScreen.dart';
 import 'package:lask/Presentation/Screen/Dashboard.dart';
 import 'package:lask/Presentation/Utils/Widgets/SearchPage.dart';
@@ -16,8 +17,19 @@ import 'Presentation/Screen/SignUpScreen.dart';
 import 'Presentation/Screen/SplashScreen.dart';
 import 'Presentation/Constants.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
+int? initScreen;
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  initScreen = prefs.getInt("initScreen");
+  // print('initScreen ${initScreen}');
+
+  await prefs.setInt("initScreen", 1);
+  // controller.change(initScreen);
+
+  // print('initScreen ${initScreen}');
   runApp(const MyApp());
 }
 
@@ -29,7 +41,9 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: materialThemeColor, fontFamily: 'fonts'),
-      home: Dashboard(),
+      home: SplashScreen(
+        initScreen: initScreen,
+      ),
       // initialBinding: Bind(),
     );
   }

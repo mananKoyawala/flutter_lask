@@ -28,6 +28,7 @@ dev_dependencies:
   get: ^4.6.5
   dotted_line: ^3.1.0
   intl: ^0.18.1
+  shared_preferences: ^2.1.2
 
 flutter:
   uses-material-design: true
