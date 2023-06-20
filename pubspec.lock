@@ -97,6 +97,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
+  curved_nav_bar:
+    dependency: "direct dev"
+    description:
+      path: "."
+      ref: master
+      resolved-ref: f753f87f0183ab9ec1e29a27654b00cf7d251950
+      url: "git@github.com:mananKoyawala/package_curverd_nav_bar.git"
+    source: git
+    version: "0.0.1"
   dotted_line:
     dependency: "direct dev"
     description:

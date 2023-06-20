@@ -29,6 +29,10 @@ dev_dependencies:
   dotted_line: ^3.1.0
   intl: ^0.18.1
   shared_preferences: ^2.1.2
+  curved_nav_bar:
+    git:
+      url: git@github.com:mananKoyawala/package_curverd_nav_bar.git
+      ref: master
 
 flutter:
   uses-material-design: true

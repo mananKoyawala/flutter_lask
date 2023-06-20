@@ -10,8 +10,8 @@ import 'package:lask/Presentation/Screen/HomeScreen.dart';
 import 'package:lask/Presentation/Screen/ProfileScreen.dart';
 // import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:get/get.dart';
-
-import '../../Package/NavigationBar.dart';
+import 'package:curved_nav_bar/curved_nav_bar.dart';
+// import '../../Package/NavigationBar.dart';
 import 'BookmarkedScreen.dart';
 
 class Dashboard extends StatelessWidget {
