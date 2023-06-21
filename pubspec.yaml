@@ -33,6 +33,8 @@ dev_dependencies:
     git:
       url: git@github.com:mananKoyawala/package_curverd_nav_bar.git
       ref: master
+  firebase_core: ^2.14.0
+  firebase_auth: ^4.6.3
 
 flutter:
   uses-material-design: true

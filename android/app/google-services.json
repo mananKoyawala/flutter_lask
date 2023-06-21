@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "389574323327",
+    "project_id": "lask-177aa",
+    "storage_bucket": "lask-177aa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:389574323327:android:c4ea73eeabc8456fe9a34a",
+        "android_client_info": {
+          "package_name": "com.example.lask"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "389574323327-90bhmmvn5p1j0ub3rmgtmkj4912b42vv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.lask",
+            "certificate_hash": "7af938d30c5f8effb9134cc48a1039bbb381beff"
+          }
+        },
+        {
+          "client_id": "389574323327-l10qjj741kbsa50ju512ihf3oacfl7qk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpLk1zjC8IiONaFTR1OHdu2X1v7T02hwA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "389574323327-l10qjj741kbsa50ju512ihf3oacfl7qk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "389574323327-33ggc1m067u3t06itou2hkaojnl3db52.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.lask"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
