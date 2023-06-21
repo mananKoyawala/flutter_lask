@@ -12,19 +12,38 @@ import '../../Package/ScrollColorRemove.dart';
 import '../../Package/TextFormFeilds.dart';
 import '../Constants.dart';
 import 'SignInScreen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 //Used fonts SpaceGrotesk for signup and signin or otp screen
 class AuthenticationScreen extends StatelessWidget {
   AuthenticationScreen({super.key});
   final formKey = GlobalKey<FormState>();
+  final auth = FirebaseAuth.instance;
   validation() {
     // if (formKey.currentState!.validate()) {
     //   ScaffoldMessenger.of(Get.context!)
     //       .showSnackBar(SnackBar(content: const Text('Validated')));
     // }
     print('..................${controller.phoneNumber.value}');
-    Navigator.push(
-        Get.context!, MaterialPageRoute(builder: (_) => OTPScreen()));
+    auth.verifyPhoneNumber(
+        phoneNumber: '+91${controller.phoneNumber.value}',
+        verificationCompleted: (_) {},
+        verificationFailed: (e) {
+          print('...........${e.toString()}');
+        },
+        codeSent: (String verificationId, int? token) {
+          Navigator.push(
+              Get.context!,
+              MaterialPageRoute(
+                  builder: (_) => OTPScreen(
+                        verificationId: verificationId,
+                      )));
+        },
+        codeAutoRetrievalTimeout: (e) {
+          print('...........${e.toString()}');
+        });
+    // Navigator.push(
+    //     Get.context!, MaterialPageRoute(builder: (_) => OTPScreen()));
   }
 
   OTPController controller = Get.put(OTPController());
