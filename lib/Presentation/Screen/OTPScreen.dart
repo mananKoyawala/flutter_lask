@@ -20,7 +20,7 @@ class OTPScreen extends StatelessWidget {
   OTPScreen({super.key});
   ScrollController controller = ScrollController();
   StreamController<ErrorAnimationType>? errorController;
-  OTPController otpController = OTPController();
+  OTPController otpController = Get.find<OTPController>();
   var otp;
   @override
   Widget build(BuildContext context) {
@@ -63,11 +63,13 @@ class OTPScreen extends StatelessWidget {
                                 fontSize: 14,
                                 textcolor: textColor1,
                               ),
-                              TextFW700(
-                                text: '01XXXXXXXXXX',
-                                fontSize: 14,
-                                textcolor: textColor1,
-                                fontWeight: FontWeight.w900,
+                              Obx(
+                                () => TextFW700(
+                                  text: otpController.phoneNumber.value,
+                                  fontSize: 14,
+                                  textcolor: textColor1,
+                                  fontWeight: FontWeight.w900,
+                                ),
                               ),
                             ],
                           ),
@@ -103,20 +105,21 @@ class OTPScreen extends StatelessWidget {
                                   const Duration(milliseconds: 300),
                               enableActiveFill: true,
                               errorAnimationController: errorController,
-                              controller: otpController.textEditingController,
+                              // controller: otpController.textEditingController,
                               keyboardType: TextInputType.number,
                               boxShadows: const [],
                               onCompleted: (v) {
-                                if (otpController.textEditingController.text ==
-                                    "123456") {
-                                  debugPrint("Completed");
-                                } else {}
+                                // if (otpController.textEditingController.text ==
+                                //     "123456") {
+                                //   debugPrint("Completed");
+                                // } else {}
                               },
                               onChanged: (value) {
                                 debugPrint(value);
                                 otpController.changeValue(value);
                                 print(otpController.currentValue.value
                                     .toString());
+                                // print('................')
                               },
                               beforeTextPaste: (text) {
                                 debugPrint("Allowing to paste $text");
@@ -136,7 +139,9 @@ class OTPScreen extends StatelessWidget {
                                         fontFamily: 'poppins'),
                                     title: 'Resend OTP'),
                                 CustomTextButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Nav.pop(context);
+                                    },
                                     textStyle: TextStyle(
                                         color: Colors.grey.shade500,
                                         fontSize: 14,

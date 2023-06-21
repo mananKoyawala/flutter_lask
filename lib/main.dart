@@ -5,6 +5,7 @@ import 'package:lask/Data/Controller/OTPController.dart';
 import 'package:lask/Presentation/Screen/ArticaleScreen.dart';
 import 'package:lask/Presentation/Screen/Dashboard.dart';
 import 'package:lask/Presentation/Utils/Widgets/SearchPage.dart';
+import 'Presentation/Screen/AuthenticationScreen.dart';
 import 'Presentation/Screen/ClappedArticalesScreen.dart';
 import 'Presentation/Screen/ExploreScreen.dart';
 import 'Presentation/Screen/ForgetPasswordScreen.dart';
@@ -39,12 +40,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: materialThemeColor, fontFamily: 'fonts'),
-      home: SplashScreen(
-        initScreen: initScreen,
-      ),
-      // initialBinding: Bind(),
-    );
+        debugShowCheckedModeBanner: false,
+        theme:
+            ThemeData(primarySwatch: materialThemeColor, fontFamily: 'fonts'),
+        home: AuthenticationScreen()
+        // SplashScreen(
+        //   initScreen: initScreen,
+        // ),
+        // initialBinding: Bind(),
+        );
   }
 }

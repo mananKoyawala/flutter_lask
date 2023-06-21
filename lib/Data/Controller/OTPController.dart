@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 class OTPController extends GetxController {
   var visible = true.obs;
   var currentValue = Rx<String>("");
-  TextEditingController textEditingController = TextEditingController();
+  // TextEditingController textEditingController = TextEditingController();
 
   void changeVisible() {
     visible.toggle();
@@ -12,5 +12,12 @@ class OTPController extends GetxController {
 
   changeValue(String val) {
     currentValue.value = val;
+  }
+
+  //!Auth
+  var phoneNumber = ''.obs;
+
+  void chnagePhoneNumber(number) {
+    phoneNumber.value = number;
   }
 }
