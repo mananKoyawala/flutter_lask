@@ -6,6 +6,7 @@ import 'package:lask/Package/ElevatedButton.dart';
 import 'package:lask/Package/CustomeRightIconButton.dart';
 import 'package:lask/Presentation/Constants.dart';
 import 'package:get/get.dart';
+import 'package:lask/Presentation/Screen/AuthenticationScreen.dart';
 import 'package:lask/Presentation/Screen/Dashboard.dart';
 import 'package:lask/Presentation/Screen/HomeScreen.dart';
 
@@ -51,7 +52,7 @@ class WelcomeScreen extends StatelessWidget {
                     isIcon: true,
                     onTap: () => Navigator.pushAndRemoveUntil(
                       Get.context!,
-                      MaterialPageRoute(builder: (_) => Dashboard()),
+                      MaterialPageRoute(builder: (_) => AuthenticationScreen()),
                       (route) => false,
                     ),
                     textColor: white,

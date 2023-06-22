@@ -30,12 +30,11 @@ Future<void> main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   SharedPreferences prefs = await SharedPreferences.getInstance();
   initScreen = prefs.getInt("initScreen");
-  // print('initScreen ${initScreen}');
-
+  print('initScreen ${initScreen}');
   await prefs.setInt("initScreen", 1);
   // controller.change(initScreen);
 
-  // print('initScreen ${initScreen}');
+  print('initScreen ${initScreen}');
   runApp(const MyApp());
 }
 
@@ -48,7 +47,9 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme:
             ThemeData(primarySwatch: materialThemeColor, fontFamily: 'fonts'),
-        home: AuthenticationScreen()
+        home: SplashScreen(
+          initScreen: initScreen,
+        )
         // SplashScreen(
         //   initScreen: initScreen,
         // ),

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lask/Data/Controller/OTPController.dart';
+import 'package:lask/Data/Controller/SharedPreferences.dart';
 import 'package:lask/Package/CustomeRightIconButton.dart';
 import 'package:lask/Presentation/Screen/SignUpScreen.dart';
 import '../../Package/Constants.dart';
@@ -19,8 +20,10 @@ import '../Constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class OTPScreen extends StatelessWidget {
-  OTPScreen({super.key, required this.verificationId});
-  final String verificationId;
+  OTPScreen({
+    super.key,
+  });
+  // final String verificationId;
   ScrollController controller = ScrollController();
   StreamController<ErrorAnimationType>? errorController;
   OTPController otpController = Get.find<OTPController>();
@@ -29,15 +32,20 @@ class OTPScreen extends StatelessWidget {
   verify() async {
     print('.....${otpController.currentValue.value}');
     final credential = PhoneAuthProvider.credential(
-        verificationId: verificationId,
+        verificationId: otpController.verificationId.value,
         smsCode: otpController.currentValue.value);
 
     try {
-      await auth.signInWithCredential(credential).then((value) =>
-          Navigator.push(
-              Get.context!, MaterialPageRoute(builder: (_) => SignUpScreen())));
+      await auth
+          .signInWithCredential(credential)
+          .then((value) =>
+              // Navigator.push(
+              //     Get.context!, MaterialPageRoute(builder: (_) => SignUpScreen()))
+              Get.offAll(SignUpScreen()))
+          .then((value) => SharedPreference.saveAuth(true));
     } catch (e) {
       Get.snackbar('Error', 'Wrong OTP');
+      SharedPreference.saveAuth(true);
     }
   }
 
@@ -124,21 +132,16 @@ class OTPScreen extends StatelessWidget {
                                   const Duration(milliseconds: 300),
                               enableActiveFill: true,
                               errorAnimationController: errorController,
-                              // controller: otpController.textEditingController,
                               keyboardType: TextInputType.number,
                               boxShadows: const [],
                               onCompleted: (v) {
-                                // if (otpController.textEditingController.text ==
-                                //     "123456") {
-                                //   debugPrint("Completed");
-                                // } else {}
+                                verify();
                               },
                               onChanged: (value) {
                                 debugPrint(value);
                                 otpController.changeValue(value);
                                 print(otpController.currentValue.value
                                     .toString());
-                                // print('................')
                               },
                               beforeTextPaste: (text) {
                                 debugPrint("Allowing to paste $text");
@@ -174,45 +177,6 @@ class OTPScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Visibility(
-                          visible: visible(context),
-                          child:
-                              // Obx(
-                              //   () =>
-                              CP(
-                                  h: 16,
-                                  child:
-                                      // otpController.currentValue.value == '121314'
-
-                                      CustomeRightIconButton(
-                                    borderRadius: 10,
-                                    height: 48,
-                                    width: DP.infinity(context),
-                                    label: 'Next',
-                                    icon: Icons.arrow_forward,
-                                    isIcon: true,
-                                    backgroundColor: themeColor,
-                                    onTap: verify,
-                                    // onTap: () => Navigator.of(context).push(
-                                    // MaterialPageRoute(
-                                    //     builder: (_) =>
-                                    //         PhoneVerificationScreen4())
-                                    // )
-                                  )
-                                  //           : DissableButton(
-                                  //               height: 48,
-                                  //               width: DP.infinity(context),
-                                  //               label: 'Next',
-                                  //               icon: Icons.arrow_forward,
-                                  //               isIcon: true,
-                                  //               // textColor: Colors.grey.shade600,
-                                  //               backgroundColor: Colors.grey.shade300,
-                                  //             ),
-                                  // ),
-                                  ))),
-                  sizeH(16)
                 ],
               ),
             ),

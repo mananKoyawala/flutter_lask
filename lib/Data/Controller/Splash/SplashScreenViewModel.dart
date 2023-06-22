@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:lask/Data/Controller/OTPController.dart';
+import 'package:lask/Presentation/Screen/AuthenticationScreen.dart';
 import 'package:lask/Presentation/Screen/Dashboard.dart';
 
 import '../../../Presentation/Screen/WelcomeScreen.dart';
@@ -19,7 +20,6 @@ class SplashScreenViewModel extends GetxController
   }
 
   animationInitilization() {
-    OTPController controller = OTPController();
     animationController =
         AnimationController(vsync: this, duration: const Duration(seconds: 2));
     animation =
@@ -28,7 +28,9 @@ class SplashScreenViewModel extends GetxController
             .value;
     animation.addListener(() {
       update();
-      initScreen == 0 || initScreen == null ? WelcomeScreen() : Dashboard();
+      initScreen == 0 || initScreen == null
+          ? WelcomeScreen()
+          : AuthenticationScreen();
 
       // print('.................' + initScreen.toString());
     });
@@ -37,7 +39,7 @@ class SplashScreenViewModel extends GetxController
           MaterialPageRoute(
               builder: (_) => initScreen == 0 || initScreen == null
                   ? WelcomeScreen()
-                  : Dashboard()),
+                  : AuthenticationScreen()),
         ));
   }
 }

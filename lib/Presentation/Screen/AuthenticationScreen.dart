@@ -17,6 +17,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 //Used fonts SpaceGrotesk for signup and signin or otp screen
 class AuthenticationScreen extends StatelessWidget {
   AuthenticationScreen({super.key});
+  OTPController controller = Get.put(OTPController());
+
   final formKey = GlobalKey<FormState>();
   final auth = FirebaseAuth.instance;
   validation() {
@@ -25,6 +27,8 @@ class AuthenticationScreen extends StatelessWidget {
     //       .showSnackBar(SnackBar(content: const Text('Validated')));
     // }
     print('..................${controller.phoneNumber.value}');
+    Navigator.push(
+        Get.context!, MaterialPageRoute(builder: (_) => OTPScreen()));
     auth.verifyPhoneNumber(
         phoneNumber: '+91${controller.phoneNumber.value}',
         verificationCompleted: (_) {},
@@ -32,12 +36,7 @@ class AuthenticationScreen extends StatelessWidget {
           print('...........${e.toString()}');
         },
         codeSent: (String verificationId, int? token) {
-          Navigator.push(
-              Get.context!,
-              MaterialPageRoute(
-                  builder: (_) => OTPScreen(
-                        verificationId: verificationId,
-                      )));
+          controller.changeVerficationId(verificationId);
         },
         codeAutoRetrievalTimeout: (e) {
           print('...........${e.toString()}');
@@ -46,7 +45,6 @@ class AuthenticationScreen extends StatelessWidget {
     //     Get.context!, MaterialPageRoute(builder: (_) => OTPScreen()));
   }
 
-  OTPController controller = Get.put(OTPController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,7 +78,7 @@ class AuthenticationScreen extends StatelessWidget {
                                 text: "Name *", fontSize: 16, textcolor: black),
                             const SizedBox(height: 10),
                             TextFFeild(
-                                textInputAction: TextInputAction.next,
+                                textInputAction: TextInputAction.done,
                                 focus: false,
                                 hintText: "Enter Phone Number",
                                 mainColor: black,
