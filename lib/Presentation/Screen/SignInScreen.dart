@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:lask/Presentation/Screen/AuthenticationScreen.dart';
 import 'package:lask/Presentation/Screen/ForgetPasswordScreen.dart';
+import 'package:lask/Presentation/Screen/SignUpScreen.dart';
 import '../../Package/BorderButton.dart';
 import '../../Package/Constants.dart';
 import '../../Package/CustomePadding.dart';
@@ -8,14 +10,14 @@ import '../../Package/ElevatedButton.dart';
 import '../../Package/ScrollColorRemove.dart';
 import '../../Package/TextFormFeilds.dart';
 import '../Constants.dart';
+import 'package:get/get.dart';
 
 class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});
   final formKey = GlobalKey<FormState>();
   validation() {
     if (formKey.currentState!.validate()) {
-      // ScaffoldMessenger.of(Get.context!)
-      //     .showSnackBar(const SnackBar(content: Text("Validated")));
+      Get.to(() => AuthenticationScreen());
     }
   }
 
@@ -150,10 +152,7 @@ class SignInScreen extends StatelessWidget {
                         const SizedBox(height: 10),
                         CustomButton(
                           onPress: () {
-                            // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //         builder: (_) => SignUpScreen()));
+                            Get.offAll(() => SignUpScreen());
                           },
                           radius: 10,
                           height: 48,

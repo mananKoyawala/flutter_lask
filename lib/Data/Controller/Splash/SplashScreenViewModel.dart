@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:lask/Data/Controller/OTPController.dart';
 import 'package:lask/Presentation/Screen/AuthenticationScreen.dart';
 import 'package:lask/Presentation/Screen/Dashboard.dart';
+import 'package:lask/Presentation/Screen/SignInScreen.dart';
 
 import '../../../Presentation/Screen/WelcomeScreen.dart';
 
@@ -28,9 +29,7 @@ class SplashScreenViewModel extends GetxController
             .value;
     animation.addListener(() {
       update();
-      initScreen == 0 || initScreen == null
-          ? WelcomeScreen()
-          : AuthenticationScreen();
+      initScreen == 0 || initScreen == null ? WelcomeScreen() : SignInScreen();
 
       // print('.................' + initScreen.toString());
     });
@@ -39,7 +38,7 @@ class SplashScreenViewModel extends GetxController
           MaterialPageRoute(
               builder: (_) => initScreen == 0 || initScreen == null
                   ? WelcomeScreen()
-                  : AuthenticationScreen()),
+                  : SignInScreen()),
         ));
   }
 }

@@ -22,25 +22,26 @@ class AuthenticationScreen extends StatelessWidget {
   final formKey = GlobalKey<FormState>();
   final auth = FirebaseAuth.instance;
   validation() {
-    // if (formKey.currentState!.validate()) {
-    //   ScaffoldMessenger.of(Get.context!)
-    //       .showSnackBar(SnackBar(content: const Text('Validated')));
-    // }
-    print('..................${controller.phoneNumber.value}');
-    Navigator.push(
-        Get.context!, MaterialPageRoute(builder: (_) => OTPScreen()));
-    auth.verifyPhoneNumber(
-        phoneNumber: '+91${controller.phoneNumber.value}',
-        verificationCompleted: (_) {},
-        verificationFailed: (e) {
-          print('...........${e.toString()}');
-        },
-        codeSent: (String verificationId, int? token) {
-          controller.changeVerficationId(verificationId);
-        },
-        codeAutoRetrievalTimeout: (e) {
-          print('...........${e.toString()}');
-        });
+    if (formKey.currentState!.validate()) {
+      //   ScaffoldMessenger.of(Get.context!)
+      //       .showSnackBar(SnackBar(content: const Text('Validated')));
+      // }
+      print('..................${controller.phoneNumber.value}');
+      Navigator.push(
+          Get.context!, MaterialPageRoute(builder: (_) => OTPScreen()));
+      auth.verifyPhoneNumber(
+          phoneNumber: '+91${controller.phoneNumber.value}',
+          verificationCompleted: (_) {},
+          verificationFailed: (e) {
+            print('...........${e.toString()}');
+          },
+          codeSent: (String verificationId, int? token) {
+            controller.changeVerficationId(verificationId);
+          },
+          codeAutoRetrievalTimeout: (e) {
+            print('...........${e.toString()}');
+          });
+    }
     // Navigator.push(
     //     Get.context!, MaterialPageRoute(builder: (_) => OTPScreen()));
   }

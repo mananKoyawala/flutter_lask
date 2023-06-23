@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lask/Presentation/Screen/AuthenticationScreen.dart';
 
 import '../../Package/BorderButton.dart';
 import '../../Package/Constants.dart';
@@ -19,8 +20,9 @@ class SignUpScreen extends StatelessWidget {
     if (formKey.currentState!.validate()) {
       // Navigator.of(Get.context!)
       //     .push(MaterialPageRoute(builder: (_) => WelcomeOTPScreen()));
-      ScaffoldMessenger.of(Get.context!)
-          .showSnackBar(SnackBar(content: const Text('Validated')));
+      Get.to(() => AuthenticationScreen());
+      // ScaffoldMessenger.of(Get.context!)
+      //     .showSnackBar(SnackBar(content: const Text('Validated')));
     }
   }
 
@@ -162,10 +164,7 @@ class SignUpScreen extends StatelessWidget {
                               const SizedBox(width: 5),
                               CustomTextButton(
                                 onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (_) => SignInScreen()));
+                                  Get.offAll(() => SignInScreen());
                                 },
                                 textStyle: TextStyles.textStyleW500(
                                   context,
