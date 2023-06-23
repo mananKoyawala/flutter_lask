@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lask/Data/Controller/GreetingController.dart';
 import 'package:lask/Data/Controller/OTPController.dart';
+import 'package:lask/Data/Controller/SharedPreferences.dart';
 import 'package:lask/Presentation/Screen/ArticaleScreen.dart';
 import 'package:lask/Presentation/Screen/Dashboard.dart';
 import 'package:lask/Presentation/Utils/Widgets/SearchPage.dart';
@@ -12,6 +13,7 @@ import 'Presentation/Screen/ForgetPasswordScreen.dart';
 import 'Presentation/Screen/MyAccountScreen.dart';
 import 'Presentation/Screen/OTPScreen.dart';
 import 'Presentation/Screen/ProfileScreen.dart';
+import 'Presentation/Screen/S_1.dart';
 import 'Presentation/Screen/SearchResult.dart';
 import 'Presentation/Screen/SignInScreen.dart';
 import 'Presentation/Screen/SignUpScreen.dart';
@@ -25,6 +27,7 @@ import 'firebase_options.dart';
 
 int? initScreen;
 Future<void> main() async {
+  SharedPreference controller = Get.put(SharedPreference());
   WidgetsFlutterBinding.ensureInitialized();
   // await Firebase.initializeApp(options: Default)
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
@@ -44,16 +47,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme:
-            ThemeData(primarySwatch: materialThemeColor, fontFamily: 'fonts'),
-        home: SplashScreen(
-          initScreen: initScreen,
-        )
-        // SplashScreen(
-        //   initScreen: initScreen,
-        // ),
-        // initialBinding: Bind(),
-        );
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(primarySwatch: materialThemeColor, fontFamily: 'fonts'),
+      home:
+          //  S_1()
+          SplashScreen(
+        initScreen: initScreen,
+      ),
+      // initialBinding: Bind(),
+    );
   }
 }

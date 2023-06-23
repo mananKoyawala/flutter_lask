@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:lask/Data/Controller/OTPController.dart';
 import 'package:lask/Data/Controller/SharedPreferences.dart';
 import 'package:lask/Package/CustomeRightIconButton.dart';
+import 'package:lask/Presentation/Screen/Dashboard.dart';
 import 'package:lask/Presentation/Screen/SignUpScreen.dart';
 import '../../Package/Constants.dart';
 import '../../Package/CustomePadding.dart';
@@ -24,6 +25,7 @@ class OTPScreen extends StatelessWidget {
     super.key,
   });
   // final String verificationId;
+  SharedPreference pref = Get.find<SharedPreference>();
   ScrollController controller = ScrollController();
   StreamController<ErrorAnimationType>? errorController;
   OTPController otpController = Get.find<OTPController>();
@@ -36,16 +38,17 @@ class OTPScreen extends StatelessWidget {
         smsCode: otpController.currentValue.value);
 
     try {
-      await auth
-          .signInWithCredential(credential)
-          .then((value) =>
-              // Navigator.push(
-              //     Get.context!, MaterialPageRoute(builder: (_) => SignUpScreen()))
-              Get.offAll(SignUpScreen()))
-          .then((value) => SharedPreference.saveAuth(true));
+      await auth.signInWithCredential(credential).then((value) {
+        // Navigator.push(
+        //     Get.context!, MaterialPageRoute(builder: (_) => SignUpScreen()))
+        pref.set(1);
+        print('************${pref.isAuthenticated}');
+
+        Get.offAll(Dashboard());
+      });
     } catch (e) {
       Get.snackbar('Error', 'Wrong OTP');
-      SharedPreference.saveAuth(true);
+      pref.set(0);
     }
   }
 
