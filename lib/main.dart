@@ -47,14 +47,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: materialThemeColor, fontFamily: 'fonts'),
-      home:
-          //  S_1()
-          SplashScreen(
-        initScreen: initScreen,
-      ),
-      // initialBinding: Bind(),
-    );
+        debugShowCheckedModeBanner: false,
+        theme:
+            ThemeData(primarySwatch: materialThemeColor, fontFamily: 'fonts'),
+        home: SignUpScreen()
+        //     SplashScreen(
+        //   initScreen: initScreen,
+        // ),
+        );
   }
 }

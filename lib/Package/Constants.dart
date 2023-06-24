@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'CustomeTexts.dart';
 import 'ElevatedButton.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 Color white = Colors.white;
 Color black = Colors.black;
@@ -89,6 +90,17 @@ radius(double d) {
 
 visible(BuildContext context) {
   return MediaQuery.of(context).viewInsets.bottom == 0;
+}
+
+toast(String msg) {
+  Fluttertoast.showToast(
+      msg: msg,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.CENTER,
+      timeInSecForIosWeb: 1,
+      backgroundColor: Colors.red,
+      textColor: Colors.white,
+      fontSize: 16.0);
 }
 
 Future<dynamic> dialogSuccess(BuildContext context) {
