@@ -12,6 +12,7 @@ import 'Presentation/Screen/ExploreScreen.dart';
 import 'Presentation/Screen/ForgetPasswordScreen.dart';
 import 'Presentation/Screen/MyAccountScreen.dart';
 import 'Presentation/Screen/OTPScreen.dart';
+import 'Presentation/Screen/P_1.dart';
 import 'Presentation/Screen/ProfileScreen.dart';
 import 'Presentation/Screen/S_1.dart';
 import 'Presentation/Screen/SearchResult.dart';
@@ -50,7 +51,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme:
             ThemeData(primarySwatch: materialThemeColor, fontFamily: 'fonts'),
-        home: Dashboard()
+        home: P_1()
         //     SplashScreen(
         //   initScreen: initScreen,
         // ),
