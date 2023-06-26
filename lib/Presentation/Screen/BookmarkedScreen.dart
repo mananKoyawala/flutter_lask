@@ -82,7 +82,7 @@ class BookmarkedScreen extends StatelessWidget {
                   ],
                 ),
               )),
-              sizeH(16)
+              sizeH(60)
             ],
           ),
         ),

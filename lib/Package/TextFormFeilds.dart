@@ -20,7 +20,7 @@ class TextFFeild extends StatelessWidget {
   final FocusNode? focusNode;
   final String? Function(String?) funValidate;
   // final Function(String?) onFieldSubmitted;
-  final Function? onSubmitField;
+  final VoidCallback? onSubmitField;
   final Function? onFieldTap;
   final Widget? prifixIcon;
   final double borderRadius;
@@ -84,6 +84,7 @@ class TextFFeild extends StatelessWidget {
         scrollPadding: EdgeInsets.only(bottom: bottomInsets + 65.0),
         onChanged: onChanged,
         maxLines: maxLines,
+        onEditingComplete: onSubmitField,
         style:
             TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: black),
         maxLength: length,

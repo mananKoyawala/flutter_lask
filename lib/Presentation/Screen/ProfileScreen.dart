@@ -129,7 +129,7 @@ class ProfileScreen extends StatelessWidget {
                 onTap: () {},
                 vPadd: 15,
               ),
-              sizeH10(),
+              sizeH(60)
             ],
           ),
         ),

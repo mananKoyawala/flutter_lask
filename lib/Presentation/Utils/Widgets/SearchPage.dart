@@ -4,7 +4,7 @@ import 'package:lask/Package/CustomeTexts.dart';
 import 'package:lask/Package/TextFormFeilds.dart';
 import 'package:lask/Presentation/Constants.dart';
 import 'package:lask/Presentation/Screen/SearchResult.dart';
-
+import 'package:get/get.dart';
 import '../../../Package/Constants.dart';
 
 class SearchPage extends StatelessWidget {
@@ -23,6 +23,9 @@ class SearchPage extends StatelessWidget {
               sizeW(16),
               Expanded(
                 child: TextFFeild(
+                  onSubmitField: () {
+                    Get.to(() => SearchResult());
+                  },
                   border: true,
                   focus: true,
                   mainColor: blue,

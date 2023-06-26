@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme:
             ThemeData(primarySwatch: materialThemeColor, fontFamily: 'fonts'),
-        home: SignUpScreen()
+        home: Dashboard()
         //     SplashScreen(
         //   initScreen: initScreen,
         // ),

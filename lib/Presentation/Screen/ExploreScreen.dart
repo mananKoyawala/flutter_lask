@@ -123,7 +123,7 @@ class ExploreScreen extends StatelessWidget {
                   ],
                 ),
               )),
-              sizeH(16)
+              sizeH(60)
             ],
           ),
         ),
