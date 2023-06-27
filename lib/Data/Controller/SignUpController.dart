@@ -17,6 +17,8 @@ class SignUpController extends GetxController {
   final password = TextEditingController();
   final cpassword = TextEditingController();
   final mobileNumber = TextEditingController();
+  var visible1 = true.obs;
+  var visible2 = true.obs;
 
   //* OTP
   var phoneNumber = ''.obs;
@@ -57,5 +59,15 @@ class SignUpController extends GetxController {
     phoneNumber.value = '';
     verificationId.value = '';
     currentValue.value = '';
+    visible1.value = true;
+    visible2.value = true;
+  }
+
+  void changeVisible1() {
+    visible1.toggle();
+  }
+
+  void changeVisible2() {
+    visible2.toggle();
   }
 }

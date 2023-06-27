@@ -39,10 +39,15 @@ class _SplashScreenState extends State<SplashScreen> {
     // Get.to(() => S_2());
     if (widget.initScreen == 0 || widget.initScreen == null) {
       Get.offAll(() => const WelcomeScreen());
+    } else if (controller.u_email.value == '' ||
+        controller.u_password.value == '' ||
+        controller.u_mobileNumber.value == '' ||
+        controller.u_email.isEmpty ||
+        controller.u_password.isEmpty ||
+        controller.u_mobileNumber.isEmpty) {
+      Get.offAll(() => SignInScreen());
     } else {
-      controller.isAuthenticated.value == 0
-          ? Get.offAll(() => SignInScreen())
-          : Get.offAll(() => Dashboard());
+      Get.offAll(() => Dashboard());
     }
   }
 

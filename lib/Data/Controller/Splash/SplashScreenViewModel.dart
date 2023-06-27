@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:lask/Data/Controller/OTPController.dart';
+import 'package:lask/Data/Controller/SharedPreferences.dart';
 import 'package:lask/Presentation/Screen/AuthenticationScreen.dart';
 import 'package:lask/Presentation/Screen/Dashboard.dart';
 import 'package:lask/Presentation/Screen/SignInScreen.dart';
@@ -29,16 +30,29 @@ class SplashScreenViewModel extends GetxController
             .value;
     animation.addListener(() {
       update();
-      initScreen == 0 || initScreen == null ? WelcomeScreen() : SignInScreen();
+      status(initScreen);
 
       // print('.................' + initScreen.toString());
     });
     animationController.forward().then((value) => Navigator.push(
           Get.context!,
-          MaterialPageRoute(
-              builder: (_) => initScreen == 0 || initScreen == null
-                  ? WelcomeScreen()
-                  : SignInScreen()),
+          MaterialPageRoute(builder: (_) => status(initScreen)),
         ));
+  }
+}
+
+status(int? initScreen) {
+  SharedPreference pref = Get.find<SharedPreference>();
+  if (initScreen == 0 || initScreen == null) {
+    return WelcomeScreen();
+  } else if (pref.u_email.value == '' ||
+      pref.u_password.value == '' ||
+      pref.u_mobileNumber.value == '' ||
+      pref.u_email.isEmpty ||
+      pref.u_password.isEmpty ||
+      pref.u_mobileNumber.isEmpty) {
+    return SignInScreen();
+  } else {
+    return Dashboard();
   }
 }

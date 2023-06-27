@@ -40,10 +40,11 @@ class SharedPreference extends GetxController {
     isAuthenticated.value = i;
   }
 
-  setUserData(
+  Future<void> setUserData(
       String email, String password, String name, String mobileNumber) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('u_email', email);
+    print('++++++++++++++${email}');
     await prefs.setString('u_password', password);
     await prefs.setString('u_name', name);
     await prefs.setString('u_mobileNumber', mobileNumber);
@@ -51,9 +52,13 @@ class SharedPreference extends GetxController {
 
   Future<void> getUserData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    u_email.value = prefs.getString('u_email')!;
-    u_password.value = prefs.getString('u_password')!;
-    u_name.value = prefs.getString('u_name')!;
-    u_mobileNumber.value = prefs.getString('u_mobileNumber')!;
+    u_email.value = prefs.getString('u_email') ?? '';
+    u_password.value = prefs.getString('u_password') ?? '';
+    u_name.value = prefs.getString('u_name') ?? '';
+    u_mobileNumber.value = prefs.getString('u_mobileNumber') ?? '';
+  }
+
+  changeName(String name) {
+    u_name.value = name;
   }
 }

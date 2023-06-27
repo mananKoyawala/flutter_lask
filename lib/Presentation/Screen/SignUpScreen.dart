@@ -9,6 +9,7 @@ import '../../Package/Constants.dart';
 import '../../Package/CustomePadding.dart';
 import '../../Package/CustomeTexts.dart';
 import '../../Package/ElevatedButton.dart';
+import '../../Package/RippleEffectContainer.dart';
 import '../../Package/ScrollColorRemove.dart';
 import '../../Package/TextFormFeilds.dart';
 import '../Constants.dart';
@@ -128,57 +129,85 @@ class SignUpScreen extends StatelessWidget {
                                 fontSize: 16,
                                 textcolor: black),
                             sizeH10(),
-                            TextFFeild(
-                                textInputAction: TextInputAction.next,
-                                focus: false,
-                                hintText: "Enter Password",
-                                mainColor: black,
-                                textInputType: TextInputType.text,
-                                obsecureText: false,
-                                controller: controller.password,
-                                funValidate: (val) {
-                                  if (val != null && val.isEmpty) {
-                                    return "Password required";
-                                  } else if (val != null && val.length < 8) {
-                                    return "*Must be at least 8 Characters";
-                                  }
-                                  return null;
-                                },
-                                borderRadius: 10,
-                                border: true,
-                                hintStyle: TextStyle(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 18,
-                                    color: blackO_30)),
+                            Obx(
+                              () => TextFFeild(
+                                  textInputAction: TextInputAction.next,
+                                  focus: false,
+                                  hintText: "Enter Password",
+                                  mainColor: black,
+                                  maxLines: 1,
+                                  textInputType: TextInputType.text,
+                                  obsecureText: controller.visible1.value,
+                                  controller: controller.password,
+                                  funValidate: (val) {
+                                    if (val != null && val.isEmpty) {
+                                      return "Password required";
+                                    } else if (val != null && val.length < 8) {
+                                      return "*Must be at least 8 Characters";
+                                    }
+                                    return null;
+                                  },
+                                  suffixIconData: ClickEffect(
+                                    onTap: () => controller.changeVisible1(),
+                                    borderRadius: radius(10),
+                                    child: Container(
+                                      padding: const EdgeInsets.all(15),
+                                      height: 40,
+                                      child: controller.visible1.value
+                                          ? const Icon(Icons.visibility)
+                                          : const Icon(Icons.visibility_off),
+                                    ),
+                                  ),
+                                  borderRadius: 10,
+                                  border: true,
+                                  hintStyle: TextStyle(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 18,
+                                      color: blackO_30)),
+                            ),
                             sizeH25(),
                             TextFW400(
                                 text: "Confirm Password *",
                                 fontSize: 16,
                                 textcolor: black),
                             sizeH10(),
-                            TextFFeild(
-                                textInputAction: TextInputAction.next,
-                                focus: false,
-                                hintText: "Enter Confirm Password",
-                                mainColor: black,
-                                textInputType: TextInputType.text,
-                                obsecureText: false,
-                                controller: controller.cpassword,
-                                funValidate: (val) {
-                                  if (val != null && val.isEmpty) {
-                                    return "Confirm Password required";
-                                  } else if (controller.password.value !=
-                                      controller.cpassword.value) {
-                                    return "Password and Confitm Password should be same";
-                                  }
-                                  return null;
-                                },
-                                borderRadius: 10,
-                                border: true,
-                                hintStyle: TextStyle(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 18,
-                                    color: blackO_30)),
+                            Obx(
+                              () => TextFFeild(
+                                  textInputAction: TextInputAction.next,
+                                  focus: false,
+                                  hintText: "Enter Confirm Password",
+                                  mainColor: black,
+                                  maxLines: 1,
+                                  textInputType: TextInputType.text,
+                                  obsecureText: controller.visible2.value,
+                                  controller: controller.cpassword,
+                                  suffixIconData: ClickEffect(
+                                    onTap: () => controller.changeVisible2(),
+                                    borderRadius: radius(10),
+                                    child: Container(
+                                      padding: const EdgeInsets.all(15),
+                                      height: 40,
+                                      child: controller.visible2.value
+                                          ? const Icon(Icons.visibility)
+                                          : const Icon(Icons.visibility_off),
+                                    ),
+                                  ),
+                                  funValidate: (val) {
+                                    if (val != null && val.isEmpty) {
+                                      return "Confirm Password required";
+                                    } else if (controller.password.value !=
+                                        controller.cpassword.value) {
+                                      return "Password and Confitm Password should be same";
+                                    }
+                                    return null;
+                                  },
+                                  borderRadius: 10,
+                                  border: true,
+                                  hintStyle: TextStyle(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 18,
+                                      color: blackO_30)),
+                            ),
                             sizeH25(),
                             TextFW400(
                                 text: "Mobile Number *",

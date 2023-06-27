@@ -1,26 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lask/Data/Controller/GreetingController.dart';
-import 'package:lask/Data/Controller/OTPController.dart';
 import 'package:lask/Data/Controller/SharedPreferences.dart';
-import 'package:lask/Presentation/Screen/ArticaleScreen.dart';
-import 'package:lask/Presentation/Screen/Dashboard.dart';
-import 'package:lask/Presentation/Utils/Widgets/SearchPage.dart';
-import 'Presentation/Screen/AuthenticationScreen.dart';
-import 'Presentation/Screen/ClappedArticalesScreen.dart';
-import 'Presentation/Screen/ExploreScreen.dart';
-import 'Presentation/Screen/ForgetPasswordScreen.dart';
-import 'Presentation/Screen/MyAccountScreen.dart';
-import 'Presentation/Screen/OTPScreen.dart';
-import 'Presentation/Screen/P_1.dart';
-import 'Presentation/Screen/ProfileScreen.dart';
-import 'Presentation/Screen/S_1.dart';
-import 'Presentation/Screen/SearchResult.dart';
-import 'Presentation/Screen/SignInScreen.dart';
-import 'Presentation/Screen/SignUpScreen.dart';
 import 'Presentation/Screen/SplashScreen.dart';
 import 'Presentation/Constants.dart';
-import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -34,11 +16,15 @@ Future<void> main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   SharedPreferences prefs = await SharedPreferences.getInstance();
   initScreen = prefs.getInt("initScreen");
-  print('initScreen ${initScreen}');
+  // print('initScreen ${initScreen}');
   await prefs.setInt("initScreen", 1);
   // controller.change(initScreen);
 
-  print('initScreen ${initScreen}');
+  // print('initScreen ${initScreen}');
+  print('###########${controller.u_email}');
+  print('###########${controller.u_password}');
+  print('###########${controller.u_mobileNumber}');
+
   runApp(const MyApp());
 }
 
@@ -48,13 +34,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme:
-            ThemeData(primarySwatch: materialThemeColor, fontFamily: 'fonts'),
-        home: P_1()
-        //     SplashScreen(
-        //   initScreen: initScreen,
-        // ),
-        );
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(primarySwatch: materialThemeColor, fontFamily: 'fonts'),
+      // home: SignInScreen()
+      home: SplashScreen(
+        initScreen: initScreen,
+      ),
+    );
   }
 }

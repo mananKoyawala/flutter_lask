@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:lask/Data/Controller/SharedPreferences.dart';
 import 'package:lask/Package/Constants.dart';
 import 'package:lask/Package/CustomeTexts.dart';
 import 'package:lask/Package/RippleEffectContainer.dart';
@@ -15,9 +16,11 @@ class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
   ScrollController scrollController = ScrollController();
   final Greeting greetings = Get.put(Greeting());
+  SharedPreference preference = Get.find<SharedPreference>();
 
   @override
   Widget build(BuildContext context) {
+    print('User\'s Name :- ${preference.u_name.value.split(' ')[0]}');
     return Scaffold(
       body: ScrollColorRemove(
         child: CP(
@@ -36,7 +39,8 @@ class HomeScreen extends StatelessWidget {
                         children: [
                           Obx(
                             () => TextFW400(
-                                text: '${greet.greeting.value}, Manan',
+                                text:
+                                    '${greet.greeting.value}, ${preference.u_name.value.split(' ')[0]}',
                                 fontSize: 14,
                                 textcolor: textColor2),
                           ),
