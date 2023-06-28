@@ -23,21 +23,36 @@ class SignUpScreen extends StatelessWidget {
   SignUpController controller = Get.put(SignUpController());
   final auth = FirebaseAuth.instance;
 
-  validation() {
+  validation() async {
     if (formKey.currentState!.validate()) {
-      auth.verifyPhoneNumber(
-          phoneNumber: '+91${controller.phoneNumber.value}',
-          verificationCompleted: (_) {},
-          verificationFailed: (e) {
-            // print('...........${e.toString()}');
-          },
-          codeSent: (String verificationId, int? token) {
-            controller.changeVerficationId(verificationId);
-          },
-          codeAutoRetrievalTimeout: (e) {
-            // print('...........${e.toString()}');
-          });
-      Get.to(() => SignUpAuthentication());
+      controller.checkUserExist();
+      ScaffoldMessenger.of(Get.context!).showSnackBar(SnackBar(
+        content: TextFW500(
+          text: 'It Taks Some Time',
+          fontSize: 14,
+          textcolor: white,
+          textAlign: TextAlign.center,
+        ),
+        duration: const Duration(milliseconds: 1500),
+      ));
+      await Future.delayed(const Duration(seconds: 5));
+      if (controller.alreadyExist.value) {
+        toast('User Already Exist with provided Email Address');
+      } else {
+        auth.verifyPhoneNumber(
+            phoneNumber: '+91${controller.phoneNumber.value}',
+            verificationCompleted: (_) {},
+            verificationFailed: (e) {
+              // print('...........${e.toString()}');
+            },
+            codeSent: (String verificationId, int? token) {
+              controller.changeVerficationId(verificationId);
+            },
+            codeAutoRetrievalTimeout: (e) {
+              // print('...........${e.toString()}');
+            });
+        Get.to(() => SignUpAuthentication());
+      }
     }
   }
 

@@ -32,6 +32,7 @@ class SignUpAuthentication extends StatelessWidget {
     try {
       await auth.signInWithCredential(credential).then((value) {
         signUpController.addData();
+
         toast("Account is Created");
         Get.offAll(() => SignInScreen());
         signUpController.resetAll();
