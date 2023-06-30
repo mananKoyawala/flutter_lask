@@ -38,6 +38,7 @@ dev_dependencies:
   cloud_firestore: ^4.8.1
   firebase_storage: ^11.2.3
   fluttertoast: ^8.2.2
+  http: ^0.13.6
 
 flutter:
   uses-material-design: true
