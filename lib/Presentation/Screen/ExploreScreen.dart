@@ -1,22 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:lask/Data/Controller/API/BusinessController.dart';
+import 'package:lask/Data/Controller/API/EntertainmentController.dart';
+import 'package:lask/Data/Controller/API/HealthController.dart';
+import 'package:lask/Data/Controller/API/SceinceController.dart';
+import 'package:lask/Data/Controller/API/SportsController.dart';
+import 'package:lask/Data/Controller/API/TechnologyController.dart';
 import 'package:lask/Package/Constants.dart';
 import 'package:lask/Package/CustomeTexts.dart';
-import 'package:lask/Package/RippleEffectContainer.dart';
 import 'package:lask/Package/ScrollColorRemove.dart';
 import 'package:lask/Presentation/Constants.dart';
-import 'package:lask/Presentation/Utils/Widgets/SearchPage.dart';
-
-import '../../Package/ButtonTab.dart';
+import 'package:lask/Presentation/Utils/Widgets/Explore/Business.dart';
+import 'package:lask/Presentation/Utils/Widgets/Explore/Entertainment.dart';
+import 'package:lask/Presentation/Utils/Widgets/Explore/Health.dart';
+import 'package:lask/Presentation/Utils/Widgets/Explore/Science.dart';
+import 'package:lask/Presentation/Utils/Widgets/Explore/Technology.dart';
+import 'package:get/get.dart';
 import '../../Package/CustomePadding.dart';
+import 'package:button_tab/button_tab.dart';
+
+import '../Utils/Widgets/Explore/Sports.dart';
 
 class ExploreScreen extends StatelessWidget {
-  int _currentIndex = 0;
   List<String> items = [
-    "All (132)",
-    "Travel (51)",
-    "Technology (16)",
-    "Business (1)",
+    "Sports",
+    "Entertainment",
+    "Health",
+    "Technology",
+    "Science",
+    "Business",
+    "Travel",
+    "Political",
   ];
+  SportsController sportsController = Get.put(SportsController());
+  BusinessController businessController = Get.put(BusinessController());
+  HealthController healthController = Get.put(HealthController());
+  TechnologyController technologyController = Get.put(TechnologyController());
+  ScienceController scienceController = Get.put(ScienceController());
+  EntertainmentController entertainmentController =
+      Get.put(EntertainmentController());
   ExploreScreen({super.key});
   ScrollController scrollController = ScrollController();
   @override
@@ -36,93 +57,55 @@ class ExploreScreen extends StatelessWidget {
                     const TextFW600(text: 'Explore', fontSize: 24),
                     IconButton(
                         onPressed: () {
-                          showModalBottomSheet(
-                              isScrollControlled: true,
-                              enableDrag: false,
-                              isDismissible: false,
-                              shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.vertical(
-                                      top: Radius.circular(25))),
-                              context: context,
-                              builder: (context) => SearchPage());
+                          // showModalBottomSheet(
+                          //     isScrollControlled: true,
+                          //     enableDrag: false,
+                          //     isDismissible: false,
+                          //     shape: const RoundedRectangleBorder(
+                          //         borderRadius: BorderRadius.vertical(
+                          //             top: Radius.circular(25))),
+                          //     context: context,
+                          //     builder: (context) => SearchPage());
                         },
                         icon: const Icon(Icons.search))
                   ],
                 ),
               ),
               sizeH(10),
-              CP(
-                  h: 16,
-                  child: ButtonTab(
-                    items: items,
-                    currentIndex: _currentIndex,
-                  )),
+              // CP(
+              //     h: 16,
+              //     child: ButtonTab(
+              //       items: items,
+              //       currentIndex: _currentIndex,
+              //     )),
+              EasyAnimatedTab(
+                buttonTitles: items,
+                onSelected: (index) {
+                  sportsController.changeIndex(index);
+                },
+                animationDuration: 500,
+                minWidthOfItem: 70,
+                minHeightOfItem: 40,
+                deActiveItemColor: white,
+                activeItemColor: lightblue,
+                activeTextStyle: TextStyle(
+                    color: black, fontSize: 14, fontWeight: FontWeight.w700),
+                deActiveTextStyle: TextStyle(
+                    color: black, fontSize: 14, fontWeight: FontWeight.w700),
+                activeBorderRadius: 20,
+                deActiveBorderRadius: 20,
+              ),
               sizeH(20),
-              Expanded(
-                  child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                controller: scrollController,
-                child: Column(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                            height: 230,
-                            width: DP.infinity(context),
-                            decoration: BoxDecoration(borderRadius: radius(10)),
-                            child: ClipRRect(
-                              borderRadius: radius(5),
-                              child: Image.asset(
-                                'assets/images/img1.png',
-                                fit: BoxFit.cover,
-                              ),
-                            )),
-                        sizeH(20),
-                        SizedBox(
-                          width: 285,
-                          child: TextFW600(
-                            text:
-                                "Experience the Serenity of Japan's Traditional Countryside",
-                            fontSize: 18,
-                            textcolor: black,
-                          ),
-                        ),
-                        sizeH10(),
-                        Row(
-                          children: [
-                            Image.asset(
-                              'assets/images/person1.png',
-                              height: 24,
-                            ),
-                            sizeW10(),
-                            TextFW400(
-                                text: 'Harry Harper · Apr 12, 2023',
-                                fontSize: 12,
-                                textcolor: textColor2)
-                          ],
-                        ),
-                      ],
-                    ),
-                    ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      padding: const EdgeInsets.all(0),
-                      controller: scrollController,
-                      itemCount: 10,
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        return AddressItem(
-                            title:
-                                "Experience the Serenity of Japan's Traditional Countryside",
-                            onTap: () {},
-                            imgurl: 'assets/images/person1.png',
-                            authorname: 'Harry Harper',
-                            datetime: 'Apr 12, 2023');
-                      },
-                    ),
-                  ],
-                ),
-              )),
+              Obx(
+                () => showPages(
+                    sportsController.currentIndex.value,
+                    sportsController,
+                    businessController,
+                    healthController,
+                    scienceController,
+                    entertainmentController,
+                    technologyController),
+              ),
               sizeH(60)
             ],
           ),
@@ -132,72 +115,35 @@ class ExploreScreen extends StatelessWidget {
   }
 }
 
-class AddressItem extends StatelessWidget {
-  const AddressItem(
-      {super.key,
-      required this.title,
-      required this.onTap,
-      required this.imgurl,
-      required this.authorname,
-      required this.datetime});
-  final String title;
-  final String imgurl;
-  final String authorname;
-  final String datetime;
-  final VoidCallback onTap;
-  @override
-  Widget build(BuildContext context) {
-    return ClickEffect(
-      onTap: onTap,
-      borderRadius: radius(5),
-      child: Container(
-        margin: const EdgeInsets.only(top: 10, bottom: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  TextFW500(
-                    fontFamily: 'poppins',
-                    text: title,
-                    fontSize: 16,
-                    textcolor: textColor1,
-                    fontWeight: FontWeight.w600,
-                  ),
-                  sizeH(5),
-                  Row(
-                    children: [
-                      Image.asset(
-                        imgurl,
-                        height: 24,
-                      ),
-                      sizeW10(),
-                      Expanded(
-                        child: TextFW400(
-                            text: '$authorname · $datetime',
-                            fontSize: 12,
-                            textcolor: textColor2),
-                      )
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            // sizeW10(),
-            ClipRRect(
-              borderRadius: radius(5),
-              child: Image.asset(
-                'assets/images/img1.png',
-                height: 80,
-                width: 120,
-                fit: BoxFit.cover,
-              ),
-            )
-          ],
-        ),
-      ),
-    );
+showPages(int index, sportsController, businessController, healthController,
+    scienceController, entertainmentController, technologyController) {
+  switch (index) {
+    case 0:
+      return Sports(sportsController: sportsController);
+    case 1:
+      return Entertainment(entertainmentController: entertainmentController);
+
+    // return Text('Entertainment');
+    case 2:
+      return Health(healthController: healthController);
+
+    // return Text('Health');
+
+    case 3:
+      return Technology(technologyController: technologyController);
+
+    // return Text('Technology');
+    case 4:
+      return Science(scienceController: scienceController);
+
+    // return Text('Science');
+    case 5:
+      return Business(businessController: businessController);
+
+    // return Text('Business');
+    case 6:
+      return Text('Travel');
+    case 7:
+      return Text('Political');
   }
 }

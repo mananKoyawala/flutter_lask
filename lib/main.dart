@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:lask/Data/Controller/SharedPreferences.dart';
 import 'Data/Controller/API/NewModel.dart';
 import 'PageScreen.dart';
+import 'Presentation/Screen/ExploreScreen.dart';
 import 'Presentation/Screen/SplashScreen.dart';
 import 'Presentation/Constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -42,7 +43,7 @@ class MyApp extends StatelessWidget {
         theme:
             ThemeData(primarySwatch: materialThemeColor, fontFamily: 'fonts'),
         // home: SignInScreen()
-        home: PageScreen()
+        home: ExploreScreen()
         // SplashScreen(
         //   initScreen: initScreen,
         // ),

@@ -33,6 +33,10 @@ dev_dependencies:
     git:
       url: git@github.com:mananKoyawala/package_curverd_nav_bar.git
       ref: master
+  button_tab:
+    git:
+      url: git@github.com:mananKoyawala/package_button_tab.git
+      ref: master
   firebase_core: ^2.14.0
   firebase_auth: ^4.6.3
   cloud_firestore: ^4.8.1
