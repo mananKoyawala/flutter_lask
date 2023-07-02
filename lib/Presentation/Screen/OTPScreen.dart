@@ -1,13 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lask/Data/Controller/OTPController.dart';
 import 'package:lask/Data/Controller/SharedPreferences.dart';
-import 'package:lask/Package/CustomeRightIconButton.dart';
 import 'package:lask/Presentation/Screen/Dashboard.dart';
-import 'package:lask/Presentation/Screen/SignUpScreen.dart';
 import '../../Package/Constants.dart';
 import '../../Package/CustomePadding.dart';
 import '../../Package/CustomeTexts.dart';
@@ -16,9 +13,9 @@ import '../../Package/OTP/PinTheme.dart';
 import '../../Package/OTP/animation_Enam.dart';
 import '../../Package/OTP/pin_feild.dart';
 import '../../Package/ScrollColorRemove.dart';
-import '../../Package/TextFormFeilds.dart';
 import '../Constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+// ignore_for_file: must_be_immutable
 
 class OTPScreen extends StatelessWidget {
   OTPScreen({

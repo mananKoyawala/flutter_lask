@@ -69,7 +69,7 @@ class AddressItem extends StatelessWidget {
                 ],
               ),
             ),
-            // sizeW10(),
+            sizeW10(),
             ClipRRect(
               borderRadius: radius(5),
               child: Image.network(

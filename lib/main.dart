@@ -1,16 +1,10 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lask/Data/Controller/SharedPreferences.dart';
-import 'Data/Controller/API/NewModel.dart';
-import 'PageScreen.dart';
 import 'Presentation/Screen/ExploreScreen.dart';
-import 'Presentation/Screen/SplashScreen.dart';
 import 'Presentation/Constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:http/http.dart' as http;
 import 'firebase_options.dart';
 
 int? initScreen;

@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lask/Data/Controller/SignUpController.dart';
-import 'package:lask/Presentation/Screen/AuthenticationScreen.dart';
 import 'package:lask/Presentation/Screen/SignUpAuthentication.dart';
-
-import '../../Package/BorderButton.dart';
 import '../../Package/Constants.dart';
 import '../../Package/CustomePadding.dart';
 import '../../Package/CustomeTexts.dart';
@@ -15,6 +12,7 @@ import '../../Package/TextFormFeilds.dart';
 import '../Constants.dart';
 import 'SignInScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+// ignore_for_file: must_be_immutable
 
 //Used fonts SpaceGrotesk for signup and signin or otp screen
 class SignUpScreen extends StatelessWidget {

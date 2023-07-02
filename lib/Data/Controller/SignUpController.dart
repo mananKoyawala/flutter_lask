@@ -1,10 +1,7 @@
 // ignore_for_file: depend_on_referenced_packages
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:lask/Data/Controller/OTPController.dart';
-import 'package:lask/Package/Constants.dart';
 
 class SignUpController extends GetxController {
   // Reference ref = FirebaseStorage.instance.ref().child('profilePicture.png');

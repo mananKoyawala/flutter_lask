@@ -19,6 +19,7 @@ import '../../Package/CustomePadding.dart';
 import 'package:button_tab/button_tab.dart';
 
 import '../Utils/Widgets/Explore/Sports.dart';
+// ignore_for_file: must_be_immutable
 
 class ExploreScreen extends StatelessWidget {
   List<String> items = [
@@ -122,28 +123,17 @@ showPages(int index, sportsController, businessController, healthController,
       return Sports(sportsController: sportsController);
     case 1:
       return Entertainment(entertainmentController: entertainmentController);
-
-    // return Text('Entertainment');
     case 2:
       return Health(healthController: healthController);
-
-    // return Text('Health');
-
     case 3:
       return Technology(technologyController: technologyController);
-
-    // return Text('Technology');
     case 4:
       return Science(scienceController: scienceController);
-
-    // return Text('Science');
     case 5:
       return Business(businessController: businessController);
-
-    // return Text('Business');
     case 6:
-      return Text('Travel');
+      return const Text('Travel');
     case 7:
-      return Text('Political');
+      return const Text('Political');
   }
 }

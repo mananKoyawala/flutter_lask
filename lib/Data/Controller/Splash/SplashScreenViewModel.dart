@@ -1,8 +1,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:lask/Data/Controller/OTPController.dart';
 import 'package:lask/Data/Controller/SharedPreferences.dart';
-import 'package:lask/Presentation/Screen/AuthenticationScreen.dart';
 import 'package:lask/Presentation/Screen/Dashboard.dart';
 import 'package:lask/Presentation/Screen/SignInScreen.dart';
 
@@ -31,8 +29,6 @@ class SplashScreenViewModel extends GetxController
     animation.addListener(() {
       update();
       status(initScreen);
-
-      // print('.................' + initScreen.toString());
     });
     animationController.forward().then((value) => Navigator.push(
           Get.context!,

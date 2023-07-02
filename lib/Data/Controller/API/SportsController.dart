@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -13,6 +14,8 @@ class SportsController extends GetxController {
   void changeIndex(int value) {
     currentIndex.value = value;
   }
+
+  var isLoading = false.obs;
 
   //* Paggination
   var sports = <ArticleModel>[].obs;
@@ -111,11 +114,14 @@ class SportsController extends GetxController {
   }
 
   Future getData() async {
+    changeLoading(false);
     page = 0;
     sports.clear();
     changeisFirstLoadRunning(false);
     changehasNextPage(true);
     changeisLoadRunning(false);
+    await Future.delayed(const Duration(milliseconds: 3500));
+    changeLoading(true);
     firstLoad();
     controller = ScrollController()..addListener(loadMore);
   }
@@ -125,6 +131,12 @@ class SportsController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    loadData();
+  }
+
+  Future<void> loadData() async {
+    await Future.delayed(const Duration(milliseconds: 3500));
+    changeLoading(true);
     firstLoad();
     controller = ScrollController()..addListener(loadMore);
   }
@@ -141,5 +153,9 @@ class SportsController extends GetxController {
 
   void changehasNextPage(bool value) {
     hasNextPage.value = value;
+  }
+
+  changeLoading(bool value) {
+    isLoading.value = value;
   }
 }

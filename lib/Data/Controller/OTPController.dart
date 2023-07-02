@@ -1,9 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:lask/Data/Controller/SharedPreferences.dart';
-import 'package:lask/Presentation/Screen/AuthenticationScreen.dart';
-import 'package:lask/Presentation/Screen/Dashboard.dart';
-import 'package:lask/Presentation/Screen/SignUpScreen.dart';
 
 class OTPController extends GetxController {
   var visible = true.obs;

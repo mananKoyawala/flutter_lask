@@ -11,6 +11,7 @@ import 'package:intl/intl.dart';
 import '../../Data/Controller/GreetingController.dart';
 import '../../Package/CustomePadding.dart';
 import 'package:get/get.dart';
+// ignore_for_file: must_be_immutable
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});

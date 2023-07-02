@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lask/Presentation/Constants.dart';
 import '../../../../Data/Controller/API/SportsController.dart';
 import '../../../Screen/ArticaleScreen.dart';
 import '../AddressItem.dart';
@@ -18,8 +19,21 @@ class Sports extends StatelessWidget {
       child: RefreshIndicator(
         onRefresh: () => sportsController.getData(),
         child: Obx(
-          () => sportsController.isFirstLoadRunning.value
-              ? const Center(child: CircularProgressIndicator())
+          () => sportsController.isFirstLoadRunning.value ||
+                  sportsController.isLoading.value == false
+              ? Column(
+                  children: [
+                    Expanded(
+                        child: ListView.builder(
+                            padding: const EdgeInsets.all(0),
+                            controller: sportsController.controller,
+                            itemCount: 10,
+                            shrinkWrap: true,
+                            itemBuilder: (context, index) {
+                              return getShimmerAddressItems();
+                            })),
+                  ],
+                )
               : Column(
                   children: [
                     Expanded(

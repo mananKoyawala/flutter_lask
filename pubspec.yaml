@@ -43,6 +43,7 @@ dev_dependencies:
   firebase_storage: ^11.2.3
   fluttertoast: ^8.2.2
   http: ^0.13.6
+  shimmer: ^3.0.0
 
 flutter:
   uses-material-design: true

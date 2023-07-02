@@ -3,12 +3,9 @@ import 'package:get/get.dart';
 import 'package:lask/Package/Constants.dart';
 import 'package:lask/Presentation/Screen/SignInScreen.dart';
 import 'package:lask/Presentation/Screen/WelcomeScreen.dart';
-
 import '../../Data/Controller/SharedPreferences.dart';
-import '../../Data/Controller/Splash/SplashScreenViewModel.dart';
 import '../Constants.dart';
 import 'Dashboard.dart';
-import 'MyAccountScreen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key, this.initScreen}) : super(key: key);
