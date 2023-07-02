@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:jumping_dot/jumping_dot.dart';
 import '../../../Package/Constants.dart';
 import '../../../Package/CustomeTexts.dart';
 import '../../../Package/RippleEffectContainer.dart';
@@ -53,10 +53,12 @@ class AddressItem extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            TextFW400(
-                                text: authorname,
-                                fontSize: 12,
-                                textcolor: textColor2),
+                            FittedBox(
+                              child: TextFW400(
+                                  text: authorname,
+                                  fontSize: 12,
+                                  textcolor: textColor2),
+                            ),
                             TextFW400(
                                 text: datetime.substring(0, 10),
                                 fontSize: 12,
@@ -77,6 +79,34 @@ class AddressItem extends StatelessWidget {
                 height: 80,
                 width: 120,
                 fit: BoxFit.cover,
+                loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress == null) return child;
+                  return Container(
+                    height: 80,
+                    width: 120,
+                    alignment: Alignment.center,
+                    child: Center(
+                      child: JumpingDots(
+                        color: themeColor,
+                        radius: 10,
+                        numberOfDots: 3,
+                        animationDuration: const Duration(milliseconds: 200),
+                      ),
+                    ),
+                  );
+                },
+                errorBuilder: (context, error, stackTrace) {
+                  return Container(
+                    height: 80,
+                    width: 120,
+                    alignment: Alignment.center,
+                    child: Center(
+                      child: Image.asset(
+                          'assets/images/imageisnotavialable.jpg',
+                          fit: BoxFit.cover),
+                    ),
+                  );
+                },
               ),
             )
           ],

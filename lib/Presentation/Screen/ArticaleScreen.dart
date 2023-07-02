@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:lask/Data/Controller/API/NewModel.dart';
 import 'package:lask/Package/CustomeTexts.dart';
 import 'package:lask/Presentation/Constants.dart';
-
+import 'package:jumping_dot/jumping_dot.dart';
 import '../../Package/Constants.dart';
 import '../../Package/CustomePadding.dart';
 
@@ -59,6 +59,23 @@ class ArticaleScreen extends StatelessWidget {
                   child: Image.network(
                     article.urlToImage,
                     fit: BoxFit.cover,
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if (loadingProgress == null) return child;
+                      return Container(
+                        height: 80,
+                        width: 120,
+                        alignment: Alignment.center,
+                        child: Center(
+                          child: JumpingDots(
+                            color: themeColor,
+                            radius: 10,
+                            numberOfDots: 3,
+                            animationDuration:
+                                const Duration(milliseconds: 200),
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 ),
                 Column(
@@ -92,11 +109,26 @@ class ArticaleScreen extends StatelessWidget {
                                 height: 24,
                               ),
                               sizeW10(),
-                              TextFW400(
-                                  text:
-                                      '${article.author} · ${article.publishedAt.substring(0, 10)}',
-                                  fontSize: 12,
-                                  textcolor: textColor2)
+                              sizeW10(),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    FittedBox(
+                                      child: TextFW400(
+                                          text: article.author,
+                                          fontSize: 12,
+                                          textcolor: textColor2),
+                                    ),
+                                    TextFW400(
+                                        text: article.publishedAt
+                                            .substring(0, 10),
+                                        fontSize: 12,
+                                        textcolor: textColor2),
+                                  ],
+                                ),
+                              )
                             ],
                           ),
                         ],
