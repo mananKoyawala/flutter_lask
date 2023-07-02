@@ -10,6 +10,7 @@ import 'NewModel.dart';
 
 class SportsController extends GetxController {
   var currentIndex = 0.obs;
+  var status = "ok".obs;
 
   void changeIndex(int value) {
     currentIndex.value = value;
@@ -34,7 +35,10 @@ class SportsController extends GetxController {
       final res = await http
           .get(Uri.parse('$sportsUrl&page=$page&pageSize=$limit$apiKey'));
       var jsonData = jsonDecode(res.body);
+
       if (jsonData['status'] == "ok") {
+        changeStatus("ok");
+
         jsonData["articles"].forEach((json) {
           if (json["urlToImage"] != null &&
               json["description"] != null &&
@@ -54,6 +58,8 @@ class SportsController extends GetxController {
             sports.add(articleModel);
           }
         });
+      } else {
+        changeStatus("error");
       }
     } catch (err) {
       if (kDebugMode) {
@@ -79,7 +85,9 @@ class SportsController extends GetxController {
               .get(Uri.parse('$sportsUrl&page=$page&pageSize=$limit$apiKey'));
 
           var jsonData = jsonDecode(res.body);
+
           if (jsonData['status'] == "ok" && jsonData.isNotEmpty) {
+            changeStatus("ok");
             jsonData["articles"].forEach((json) {
               if (json["urlToImage"] != null &&
                   json["description"] != null &&
@@ -157,5 +165,9 @@ class SportsController extends GetxController {
 
   changeLoading(bool value) {
     isLoading.value = value;
+  }
+
+  changeStatus(String status) {
+    this.status.value = status;
   }
 }

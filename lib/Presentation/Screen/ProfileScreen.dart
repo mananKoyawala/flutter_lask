@@ -1,4 +1,7 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
+import 'package:lask/Data/Controller/SharedPreferences.dart';
 import 'package:lask/Package/Constants.dart';
 import 'package:lask/Package/CustomePadding.dart';
 import 'package:lask/Package/CustomeTexts.dart';
@@ -6,12 +9,12 @@ import 'package:lask/Package/ScrollColorRemove.dart';
 import 'package:lask/Presentation/Constants.dart';
 import 'package:lask/Presentation/Screen/ClappedArticalesScreen.dart';
 import 'package:lask/Presentation/Screen/ReadArticalesScreen.dart';
-
+import 'package:get/get.dart';
 import 'MyAccountScreen.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
-
+  ProfileScreen({super.key});
+  SharedPreference pref = Get.find<SharedPreference>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +42,7 @@ class ProfileScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       TextFW600(
-                          text: 'Dainne Russell',
+                          text: pref.u_name.value,
                           fontSize: 24,
                           textcolor: textColorMain),
                       sizeH10(),
@@ -61,8 +64,8 @@ class ProfileScreen extends StatelessWidget {
                 ],
               ),
               sizeH25(),
-              Row(
-                children: const [
+              const Row(
+                children: [
                   Item(
                     title: 'Article Read',
                     subtitle: '320',

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lask/Presentation/Constants.dart';
 import '../../../../Data/Controller/API/SportsController.dart';
+import '../../../../Package/CustomeTexts.dart';
 import '../../../Screen/ArticaleScreen.dart';
 import '../AddressItem.dart';
 
@@ -18,8 +19,17 @@ class Sports extends StatelessWidget {
     return Expanded(
       child: RefreshIndicator(
         onRefresh: () => sportsController.getData(),
-        child: Obx(
-          () => sportsController.isFirstLoadRunning.value ||
+        child: Obx(() {
+          if (sportsController.status.value == "error") {
+            return Column(
+              children: [
+                const Expanded(
+                    child:
+                        Center(child: TextFW400(text: 'Error', fontSize: 18))),
+              ],
+            );
+          }
+          return sportsController.isFirstLoadRunning.value ||
                   sportsController.isLoading.value == false
               ? Column(
                   children: [
@@ -60,8 +70,8 @@ class Sports extends StatelessWidget {
                     if (sportsController.isLoadRunning.value == true)
                       const Center(child: CircularProgressIndicator()),
                   ],
-                ),
-        ),
+                );
+        }),
       ),
     );
   }

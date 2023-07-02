@@ -5,6 +5,7 @@ import 'Presentation/Screen/ExploreScreen.dart';
 import 'Presentation/Constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'Presentation/Screen/SplashScreen.dart';
 import 'firebase_options.dart';
 
 int? initScreen;
@@ -33,15 +34,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme:
-            ThemeData(primarySwatch: materialThemeColor, fontFamily: 'fonts'),
-        // home: SignInScreen()
-        home: ExploreScreen()
-        // SplashScreen(
-        //   initScreen: initScreen,
-        // ),
-        );
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(primarySwatch: materialThemeColor, fontFamily: 'fonts'),
+      // home: SignInScreen()
+      home:
+          // ExploreScreen()
+          SplashScreen(
+        initScreen: initScreen,
+      ),
+    );
   }
 }
 
