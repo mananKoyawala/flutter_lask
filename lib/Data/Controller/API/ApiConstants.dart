@@ -7,13 +7,9 @@ String healthUrl =
 String technologyUrl =
     'https://newsapi.org/v2/top-headlines?country=in&category=technology';
 String scienceUrl =
-    'https://newsapi.org/v2/top-headlines?country=in&category=science';
+    'https://newsapi.org/v2/top-headlines?country=in&category=technology';
 String businessUrl =
     'https://newsapi.org/v2/top-headlines?country=in&category=business';
 String generalUrl =
     'https://newsapi.org/v2/top-headlines?country=in&category=general';
-// String travelUrl = 'https://newsapi.org/v2/top-headlines?country=in&category=entertainment';
-// String politicalUrl = 'https://newsapi.org/v2/top-headlines?country=in&category=entertainment';
-// String apiKey = '&apiKey=b6be894833f247f28d166ea1d82f4256';
-// String apiKey = '&apiKey=9b7a9b86779f45f1bceccaa9596f57ca';
-String apiKey = '&apiKey=a31351fc13114d6cb684d86359975e6a';
+String apiKey = '&apiKey=6e0487582b604f03811e07a40dbc59bc';

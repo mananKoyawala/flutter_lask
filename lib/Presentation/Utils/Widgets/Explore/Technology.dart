@@ -1,30 +1,54 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../Data/Controller/API/TechnologyController.dart';
+import '../../../../Package/CustomeTexts.dart';
+import '../../../Constants.dart';
 import '../../../Screen/ArticaleScreen.dart';
 import '../AddressItem.dart';
 
 class Technology extends StatelessWidget {
-  const Technology({
+  Technology({
     super.key,
-    required this.technologyController,
   });
 
-  final TechnologyController technologyController;
+  TechnologyController technologyController = Get.put(TechnologyController());
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: RefreshIndicator(
         onRefresh: () => technologyController.getData(),
-        child: Obx(
-          () => technologyController.isFirstLoadRunning.value
-              ? const Center(child: CircularProgressIndicator())
+        child: Obx(() {
+          if (technologyController.status.value == "error") {
+            return const Column(
+              children: [
+                Expanded(
+                    child:
+                        Center(child: TextFW400(text: 'Error', fontSize: 18))),
+              ],
+            );
+          }
+          return technologyController.isFirstLoadRunning.value ||
+                  technologyController.isLoading.value == false
+              ? Column(
+                  children: [
+                    Expanded(
+                        child: ListView.builder(
+                            padding: const EdgeInsets.all(0),
+                            controller: technologyController.controller,
+                            itemCount: 10,
+                            shrinkWrap: true,
+                            itemBuilder: (context, index) {
+                              return getShimmerAddressItems();
+                            })),
+                  ],
+                )
               : Column(
                   children: [
                     Expanded(
                       child: ListView.builder(
-                        // physics: const BouncingScrollPhysics(),
                         padding: const EdgeInsets.all(0),
                         controller: technologyController.controller,
                         itemCount: technologyController.technology.length,
@@ -50,8 +74,8 @@ class Technology extends StatelessWidget {
                     if (technologyController.isLoadRunning.value == true)
                       const Center(child: CircularProgressIndicator()),
                   ],
-                ),
-        ),
+                );
+        }),
       ),
     );
   }

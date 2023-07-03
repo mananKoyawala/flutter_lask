@@ -128,7 +128,7 @@ class SportsController extends GetxController {
     changeisFirstLoadRunning(false);
     changehasNextPage(true);
     changeisLoadRunning(false);
-    await Future.delayed(const Duration(milliseconds: 3500));
+    await Future.delayed(const Duration(milliseconds: 1500));
     changeLoading(true);
     firstLoad();
     controller = ScrollController()..addListener(loadMore);
@@ -143,7 +143,7 @@ class SportsController extends GetxController {
   }
 
   Future<void> loadData() async {
-    await Future.delayed(const Duration(milliseconds: 3500));
+    await Future.delayed(const Duration(milliseconds: 1500));
     changeLoading(true);
     firstLoad();
     controller = ScrollController()..addListener(loadMore);

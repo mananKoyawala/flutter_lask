@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lask/Data/Controller/API/BusinessController.dart';
 import 'package:lask/Data/Controller/API/EntertainmentController.dart';
+import 'package:lask/Data/Controller/API/ExploreController.dart';
 import 'package:lask/Data/Controller/API/HealthController.dart';
 import 'package:lask/Data/Controller/API/SceinceController.dart';
 import 'package:lask/Data/Controller/API/SportsController.dart';
@@ -32,15 +33,16 @@ class ExploreScreen extends StatelessWidget {
     "Travel",
     "Political",
   ];
-  SportsController sportsController = Get.put(SportsController());
-  BusinessController businessController = Get.put(BusinessController());
-  HealthController healthController = Get.put(HealthController());
-  TechnologyController technologyController = Get.put(TechnologyController());
-  ScienceController scienceController = Get.put(ScienceController());
-  EntertainmentController entertainmentController =
-      Get.put(EntertainmentController());
+  // SportsController sportsController = Get.put(SportsController());
+  // BusinessController businessController = Get.put(BusinessController());
+  // HealthController healthController = Get.put(HealthController());
+  // TechnologyController technologyController = Get.put(TechnologyController());
+  // ScienceController scienceController = Get.put(ScienceController());
+  // EntertainmentController entertainmentController =
+  //     Get.put(EntertainmentController());
   ExploreScreen({super.key});
   ScrollController scrollController = ScrollController();
+  ExploreController exploreController = ExploreController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,7 +84,7 @@ class ExploreScreen extends StatelessWidget {
               EasyAnimatedTab(
                 buttonTitles: items,
                 onSelected: (index) {
-                  sportsController.changeIndex(index);
+                  exploreController.changeIndex(index);
                 },
                 animationDuration: 500,
                 minWidthOfItem: 70,
@@ -98,14 +100,7 @@ class ExploreScreen extends StatelessWidget {
               ),
               sizeH(20),
               Obx(
-                () => showPages(
-                    sportsController.currentIndex.value,
-                    sportsController,
-                    businessController,
-                    healthController,
-                    scienceController,
-                    entertainmentController,
-                    technologyController),
+                () => showPages(exploreController.currentIndex.value),
               ),
               sizeH(60)
             ],
@@ -116,21 +111,20 @@ class ExploreScreen extends StatelessWidget {
   }
 }
 
-showPages(int index, sportsController, businessController, healthController,
-    scienceController, entertainmentController, technologyController) {
+showPages(int index) {
   switch (index) {
     case 0:
-      return Sports(sportsController: sportsController);
+      return Sports();
     case 1:
-      return Entertainment(entertainmentController: entertainmentController);
+      return Entertainment();
     case 2:
-      return Health(healthController: healthController);
+      return Health();
     case 3:
-      return Technology(technologyController: technologyController);
+      return Technology();
     case 4:
-      return Science(scienceController: scienceController);
+      return Science();
     case 5:
-      return Business(businessController: businessController);
+      return Business();
     case 6:
       return const Text('Travel');
     case 7:

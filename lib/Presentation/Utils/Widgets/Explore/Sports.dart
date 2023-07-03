@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lask/Presentation/Constants.dart';
@@ -7,12 +9,11 @@ import '../../../Screen/ArticaleScreen.dart';
 import '../AddressItem.dart';
 
 class Sports extends StatelessWidget {
-  const Sports({
+  Sports({
     super.key,
-    required this.sportsController,
   });
 
-  final SportsController sportsController;
+  SportsController sportsController = Get.put(SportsController());
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +22,9 @@ class Sports extends StatelessWidget {
         onRefresh: () => sportsController.getData(),
         child: Obx(() {
           if (sportsController.status.value == "error") {
-            return Column(
+            return const Column(
               children: [
-                const Expanded(
+                Expanded(
                     child:
                         Center(child: TextFW400(text: 'Error', fontSize: 18))),
               ],
@@ -48,7 +49,6 @@ class Sports extends StatelessWidget {
                   children: [
                     Expanded(
                       child: ListView.builder(
-                        // physics: const BouncingScrollPhysics(),
                         padding: const EdgeInsets.all(0),
                         controller: sportsController.controller,
                         itemCount: sportsController.sports.length,

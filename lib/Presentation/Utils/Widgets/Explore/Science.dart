@@ -1,30 +1,54 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lask/Data/Controller/API/SceinceController.dart';
+import '../../../../Package/CustomeTexts.dart';
+import '../../../Constants.dart';
 import '../../../Screen/ArticaleScreen.dart';
 import '../AddressItem.dart';
 
 class Science extends StatelessWidget {
-  const Science({
+  Science({
     super.key,
-    required this.scienceController,
   });
 
-  final ScienceController scienceController;
+  ScienceController scienceController = Get.put(ScienceController());
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: RefreshIndicator(
         onRefresh: () => scienceController.getData(),
-        child: Obx(
-          () => scienceController.isFirstLoadRunning.value
-              ? const Center(child: CircularProgressIndicator())
+        child: Obx(() {
+          if (scienceController.status.value == "error") {
+            return const Column(
+              children: [
+                Expanded(
+                    child:
+                        Center(child: TextFW400(text: 'Error', fontSize: 18))),
+              ],
+            );
+          }
+          return scienceController.isFirstLoadRunning.value ||
+                  scienceController.isLoading.value == false
+              ? Column(
+                  children: [
+                    Expanded(
+                        child: ListView.builder(
+                            padding: const EdgeInsets.all(0),
+                            controller: scienceController.controller,
+                            itemCount: 10,
+                            shrinkWrap: true,
+                            itemBuilder: (context, index) {
+                              return getShimmerAddressItems();
+                            })),
+                  ],
+                )
               : Column(
                   children: [
                     Expanded(
                       child: ListView.builder(
-                        // physics: const BouncingScrollPhysics(),
                         padding: const EdgeInsets.all(0),
                         controller: scienceController.controller,
                         itemCount: scienceController.science.length,
@@ -48,8 +72,8 @@ class Science extends StatelessWidget {
                     if (scienceController.isLoadRunning.value == true)
                       const Center(child: CircularProgressIndicator()),
                   ],
-                ),
-        ),
+                );
+        }),
       ),
     );
   }

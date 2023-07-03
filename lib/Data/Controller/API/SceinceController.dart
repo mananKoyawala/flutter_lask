@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -8,11 +9,10 @@ import 'package:lask/Data/Controller/API/ApiConstants.dart';
 import 'NewModel.dart';
 
 class ScienceController extends GetxController {
-  var currentIndex = 0.obs;
+  // var currentIndex = 0.obs;
+  var status = "ok".obs;
 
-  void changeIndex(int value) {
-    currentIndex.value = value;
-  }
+  var isLoading = false.obs;
 
   //* Paggination
   var science = <ArticleModel>[].obs;
@@ -31,7 +31,10 @@ class ScienceController extends GetxController {
       final res = await http
           .get(Uri.parse('$scienceUrl&page=$page&pageSize=$limit$apiKey'));
       var jsonData = jsonDecode(res.body);
+
       if (jsonData['status'] == "ok") {
+        changeStatus("ok");
+
         jsonData["articles"].forEach((json) {
           if (json["urlToImage"] != null &&
               json["description"] != null &&
@@ -51,6 +54,8 @@ class ScienceController extends GetxController {
             science.add(articleModel);
           }
         });
+      } else {
+        changeStatus("error");
       }
     } catch (err) {
       if (kDebugMode) {
@@ -76,7 +81,9 @@ class ScienceController extends GetxController {
               .get(Uri.parse('$scienceUrl&page=$page&pageSize=$limit$apiKey'));
 
           var jsonData = jsonDecode(res.body);
+
           if (jsonData['status'] == "ok" && jsonData.isNotEmpty) {
+            changeStatus("ok");
             jsonData["articles"].forEach((json) {
               if (json["urlToImage"] != null &&
                   json["description"] != null &&
@@ -111,11 +118,14 @@ class ScienceController extends GetxController {
   }
 
   Future getData() async {
+    changeLoading(false);
     page = 0;
     science.clear();
     changeisFirstLoadRunning(false);
     changehasNextPage(true);
     changeisLoadRunning(false);
+    await Future.delayed(const Duration(milliseconds: 1500));
+    changeLoading(true);
     firstLoad();
     controller = ScrollController()..addListener(loadMore);
   }
@@ -125,6 +135,12 @@ class ScienceController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    loadData();
+  }
+
+  Future<void> loadData() async {
+    await Future.delayed(const Duration(milliseconds: 1500));
+    changeLoading(true);
     firstLoad();
     controller = ScrollController()..addListener(loadMore);
   }
@@ -141,5 +157,13 @@ class ScienceController extends GetxController {
 
   void changehasNextPage(bool value) {
     hasNextPage.value = value;
+  }
+
+  changeLoading(bool value) {
+    isLoading.value = value;
+  }
+
+  changeStatus(String status) {
+    this.status.value = status;
   }
 }

@@ -9,10 +9,13 @@ import 'NewModel.dart';
 
 class BusinessController extends GetxController {
   var currentIndex = 0.obs;
+  var status = "ok".obs;
 
   void changeIndex(int value) {
     currentIndex.value = value;
   }
+
+  var isLoading = false.obs;
 
   //* Paggination
   var business = <ArticleModel>[].obs;
@@ -32,6 +35,7 @@ class BusinessController extends GetxController {
           .get(Uri.parse('$businessUrl&page=$page&pageSize=$limit$apiKey'));
       var jsonData = jsonDecode(res.body);
       if (jsonData['status'] == "ok") {
+        changeStatus("ok");
         jsonData["articles"].forEach((json) {
           if (json["urlToImage"] != null &&
               json["description"] != null &&
@@ -51,6 +55,8 @@ class BusinessController extends GetxController {
             business.add(articleModel);
           }
         });
+      } else {
+        changeStatus("error");
       }
     } catch (err) {
       if (kDebugMode) {
@@ -77,6 +83,7 @@ class BusinessController extends GetxController {
 
           var jsonData = jsonDecode(res.body);
           if (jsonData['status'] == "ok" && jsonData.isNotEmpty) {
+            changeStatus("ok");
             jsonData["articles"].forEach((json) {
               if (json["urlToImage"] != null &&
                   json["description"] != null &&
@@ -111,11 +118,14 @@ class BusinessController extends GetxController {
   }
 
   Future getData() async {
+    changeLoading(false);
     page = 0;
     business.clear();
     changeisFirstLoadRunning(false);
     changehasNextPage(true);
     changeisLoadRunning(false);
+    await Future.delayed(const Duration(milliseconds: 1500));
+    changeLoading(true);
     firstLoad();
     controller = ScrollController()..addListener(loadMore);
   }
@@ -125,10 +135,15 @@ class BusinessController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    loadData();
+  }
+
+  Future<void> loadData() async {
+    await Future.delayed(const Duration(milliseconds: 1500));
+    changeLoading(true);
     firstLoad();
     controller = ScrollController()..addListener(loadMore);
   }
-
   //* Variable Changes
 
   void changeisFirstLoadRunning(bool value) {
@@ -141,5 +156,13 @@ class BusinessController extends GetxController {
 
   void changehasNextPage(bool value) {
     hasNextPage.value = value;
+  }
+
+  changeLoading(bool value) {
+    isLoading.value = value;
+  }
+
+  changeStatus(String status) {
+    this.status.value = status;
   }
 }

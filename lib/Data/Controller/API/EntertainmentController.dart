@@ -9,10 +9,13 @@ import 'NewModel.dart';
 
 class EntertainmentController extends GetxController {
   var currentIndex = 0.obs;
+  var status = "ok".obs;
 
   void changeIndex(int value) {
     currentIndex.value = value;
   }
+
+  var isLoading = false.obs;
 
   //* Paggination
   var entertainment = <ArticleModel>[].obs;
@@ -32,6 +35,8 @@ class EntertainmentController extends GetxController {
           Uri.parse('$entertainmentUrl&page=$page&pageSize=$limit$apiKey'));
       var jsonData = jsonDecode(res.body);
       if (jsonData['status'] == "ok") {
+        changeStatus("ok");
+
         jsonData["articles"].forEach((json) {
           if (json["urlToImage"] != null &&
               json["description"] != null &&
@@ -51,6 +56,8 @@ class EntertainmentController extends GetxController {
             entertainment.add(articleModel);
           }
         });
+      } else {
+        changeStatus("error");
       }
     } catch (err) {
       if (kDebugMode) {
@@ -77,6 +84,8 @@ class EntertainmentController extends GetxController {
 
           var jsonData = jsonDecode(res.body);
           if (jsonData['status'] == "ok" && jsonData.isNotEmpty) {
+            changeStatus("ok");
+
             jsonData["articles"].forEach((json) {
               if (json["urlToImage"] != null &&
                   json["description"] != null &&
@@ -111,11 +120,15 @@ class EntertainmentController extends GetxController {
   }
 
   Future getData() async {
+    changeLoading(false);
+
     page = 0;
     entertainment.clear();
     changeisFirstLoadRunning(false);
     changehasNextPage(true);
     changeisLoadRunning(false);
+    await Future.delayed(const Duration(milliseconds: 1500));
+    changeLoading(true);
     firstLoad();
     controller = ScrollController()..addListener(loadMore);
   }
@@ -125,6 +138,12 @@ class EntertainmentController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    loadData();
+  }
+
+  Future<void> loadData() async {
+    await Future.delayed(const Duration(milliseconds: 1500));
+    changeLoading(true);
     firstLoad();
     controller = ScrollController()..addListener(loadMore);
   }
@@ -141,5 +160,13 @@ class EntertainmentController extends GetxController {
 
   void changehasNextPage(bool value) {
     hasNextPage.value = value;
+  }
+
+  changeLoading(bool value) {
+    isLoading.value = value;
+  }
+
+  changeStatus(String status) {
+    this.status.value = status;
   }
 }
