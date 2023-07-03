@@ -4,6 +4,7 @@ import '../../../Package/Constants.dart';
 import '../../../Package/CustomeTexts.dart';
 import '../../../Package/RippleEffectContainer.dart';
 import '../../Constants.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class AddressItem extends StatelessWidget {
   const AddressItem(
@@ -74,41 +75,78 @@ class AddressItem extends StatelessWidget {
             sizeW10(),
             ClipRRect(
               borderRadius: radius(5),
-              child: Image.network(
-                imgurl,
-                height: 80,
-                width: 120,
-                fit: BoxFit.cover,
-                loadingBuilder: (context, child, loadingProgress) {
-                  if (loadingProgress == null) return child;
+              child: CachedNetworkImage(
+                imageUrl: imgurl,
+                imageBuilder: (context, imageProvider) {
                   return Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: imageProvider, fit: BoxFit.cover),
+                    ),
+                    height: 80,
+                    width: 120,
+                  );
+                },
+                placeholder: (context, url) => Container(
+                  height: 80,
+                  width: 120,
+                  alignment: Alignment.center,
+                  child: Center(
+                    child: JumpingDots(
+                      color: themeColor,
+                      radius: 10,
+                      numberOfDots: 3,
+                      animationDuration: const Duration(milliseconds: 200),
+                    ),
+                  ),
+                ),
+                errorWidget: (context, url, error) => Container(
                     height: 80,
                     width: 120,
                     alignment: Alignment.center,
-                    child: Center(
-                      child: JumpingDots(
-                        color: themeColor,
-                        radius: 10,
-                        numberOfDots: 3,
-                        animationDuration: const Duration(milliseconds: 200),
-                      ),
-                    ),
-                  );
-                },
-                errorBuilder: (context, error, stackTrace) {
-                  return Container(
-                    height: 80,
-                    width: 120,
-                    alignment: Alignment.center,
-                    child: Center(
-                      child: Image.asset(
-                          'assets/images/imageisnotavialable.jpg',
-                          fit: BoxFit.cover),
-                    ),
-                  );
-                },
+                    child: Image.asset(
+                      'assets/images/imageisnotavialable.jpg',
+                      fit: BoxFit.cover,
+                    )),
               ),
-            )
+            ),
+            // ClipRRect(
+            //   borderRadius: radius(5),
+            //   child: Image.network(
+            //     imgurl,
+            //     height: 80,
+            //     width: 120,
+            //     fit: BoxFit.cover,
+            //     loadingBuilder: (context, child, loadingProgress) {
+            //       if (loadingProgress == null) return child;
+            //       return Container(
+            //         height: 80,
+            //         width: 120,
+            //         alignment: Alignment.center,
+            //         child: Center(
+            //           child: JumpingDots(
+            //             color: themeColor,
+            //             radius: 10,
+            //             numberOfDots: 3,
+            //             animationDuration: const Duration(milliseconds: 200),
+            //           ),
+            //         ),
+            //       );
+            //     },
+            //     errorBuilder: (context, error, stackTrace) {
+            //       return Container(
+            //         height: 80,
+            //         width: 120,
+            //         alignment: Alignment.center,
+            //         child: Center(
+            //           child: Image.asset(
+            //               'assets/images/imageisnotavialable.jpg',
+            //               fit: BoxFit.cover),
+            //         ),
+            //       );
+            //     },
+            //   ),
+            // )
           ],
         ),
       ),

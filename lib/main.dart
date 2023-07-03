@@ -5,7 +5,6 @@ import 'Presentation/Screen/ExploreScreen.dart';
 import 'Presentation/Constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'Presentation/Screen/SplashScreen.dart';
 import 'firebase_options.dart';
 
 int? initScreen;
@@ -18,9 +17,6 @@ Future<void> main() async {
   initScreen = prefs.getInt("initScreen");
   // print('initScreen ${initScreen}');
   await prefs.setInt("initScreen", 1);
-  // controller.change(initScreen);
-
-  // print('initScreen ${initScreen}');
   print('###########${controller.u_email}');
   print('###########${controller.u_password}');
   print('###########${controller.u_mobileNumber}');
@@ -34,16 +30,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: materialThemeColor, fontFamily: 'fonts'),
-      // home: SignInScreen()
-      home:
-          // ExploreScreen()
-          SplashScreen(
-        initScreen: initScreen,
-      ),
-    );
+        debugShowCheckedModeBanner: false,
+        theme:
+            ThemeData(primarySwatch: materialThemeColor, fontFamily: 'fonts'),
+        home: ExploreScreen()
+        //     SplashScreen(
+        //   initScreen: initScreen,
+        // ),
+        );
   }
 }
-
-//! Pagination completed but first it code by getx

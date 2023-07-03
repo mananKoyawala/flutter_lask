@@ -21,7 +21,7 @@ class TechnologyController extends GetxController {
   var technology = <ArticleModel>[].obs;
   ScrollController controller = ScrollController();
   int page = 0;
-  final int limit = 30;
+  final int limit = 10;
   var isFirstLoadRunning = false.obs;
   var hasNextPage = true.obs;
   var isLoadRunning = false.obs;

@@ -7,6 +7,7 @@ import 'package:lask/Presentation/Constants.dart';
 import 'package:jumping_dot/jumping_dot.dart';
 import '../../Package/Constants.dart';
 import '../../Package/CustomePadding.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class ArticaleScreen extends StatelessWidget {
   ArticaleScreen({super.key, required this.article});
@@ -56,26 +57,30 @@ class ArticaleScreen extends StatelessWidget {
                 SizedBox(
                   height: 300,
                   width: DP.infinity(context),
-                  child: Image.network(
-                    article.urlToImage,
+                  child: CachedNetworkImage(
+                    imageUrl: article.urlToImage,
+                    height: 80,
+                    width: 120,
                     fit: BoxFit.cover,
-                    loadingBuilder: (context, child, loadingProgress) {
-                      if (loadingProgress == null) return child;
-                      return Container(
+                    placeholder: (context, url) => Container(
+                      height: 80,
+                      width: 120,
+                      alignment: Alignment.center,
+                      child: Center(
+                        child: JumpingDots(
+                          color: themeColor,
+                          radius: 10,
+                          numberOfDots: 3,
+                          animationDuration: const Duration(milliseconds: 200),
+                        ),
+                      ),
+                    ),
+                    errorWidget: (context, url, error) => Container(
                         height: 80,
                         width: 120,
                         alignment: Alignment.center,
-                        child: Center(
-                          child: JumpingDots(
-                            color: themeColor,
-                            radius: 10,
-                            numberOfDots: 3,
-                            animationDuration:
-                                const Duration(milliseconds: 200),
-                          ),
-                        ),
-                      );
-                    },
+                        child: Image.asset(
+                            'assets/images/imageisnotavialable.jpg')),
                   ),
                 ),
                 Column(

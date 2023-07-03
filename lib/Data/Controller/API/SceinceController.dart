@@ -18,7 +18,7 @@ class ScienceController extends GetxController {
   var science = <ArticleModel>[].obs;
   ScrollController controller = ScrollController();
   int page = 0;
-  final int limit = 30;
+  final int limit = 10;
   var isFirstLoadRunning = false.obs;
   var hasNextPage = true.obs;
   var isLoadRunning = false.obs;
@@ -72,7 +72,7 @@ class ScienceController extends GetxController {
       if (hasNextPage.value == true &&
           isFirstLoadRunning.value == false &&
           isLoadRunning.value == false &&
-          controller.position.extentAfter < 10) {
+          controller.position.extentAfter < 300) {
         changeisLoadRunning(true);
         page += 1;
 
