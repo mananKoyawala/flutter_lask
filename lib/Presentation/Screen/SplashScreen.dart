@@ -34,6 +34,10 @@ class _SplashScreenState extends State<SplashScreen> {
 
   move() {
     // Get.to(() => S_2());
+    print('*********${controller.u_email.value}');
+    print('*********${controller.u_password.value}');
+    print('*********${controller.u_mobileNumber.value}');
+    print('*********${controller.u_name.value}');
     if (widget.initScreen == 0 || widget.initScreen == null) {
       Get.offAll(() => const WelcomeScreen());
     } else if (controller.u_email.value == '' ||

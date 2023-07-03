@@ -200,3 +200,34 @@ MaterialColor createMaterialColor(Color color) {
 
   return MaterialColor(color.value, swatch);
 }
+
+Future<void> decisionDialog(BuildContext context, String title, String negative,
+    String positive, VoidCallback onPositive, VoidCallback onNegative) async {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        // <-- SEE HERE
+        title: const Text('Cancel booking'),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: [
+              Text(title),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            onPressed: onNegative,
+            child: Text(negative),
+          ),
+          TextButton(
+            onPressed: onPositive,
+            child: Text(positive),
+          ),
+        ],
+      );
+    },
+  );
+}

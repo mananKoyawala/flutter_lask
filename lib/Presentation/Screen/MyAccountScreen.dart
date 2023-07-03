@@ -4,12 +4,16 @@ import 'package:lask/Package/CustomeTexts.dart';
 import 'package:lask/Package/RippleEffectContainer.dart';
 import 'package:lask/Package/ScrollColorRemove.dart';
 import 'package:lask/Presentation/Constants.dart';
+import 'package:lask/Presentation/Screen/SignInScreen.dart';
+import '../../Data/Controller/SharedPreferences.dart';
 import '../../Package/CustomePadding.dart';
+import 'package:get/get.dart';
 // ignore_for_file: must_be_immutable
 
 class MyAccountScreen extends StatelessWidget {
   MyAccountScreen({super.key});
   ScrollController scrollController = ScrollController();
+  SharedPreference pref = Get.put(SharedPreference());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,7 +56,8 @@ class MyAccountScreen extends StatelessWidget {
                   children: [
                     AccountItem(
                       title: 'Email Address',
-                      subtitle: 'le*******gds@gmail.com',
+                      subtitle:
+                          '${pref.u_email.value.substring(0, 2)}*******@${pref.u_email.value.split('@')[1]}',
                       onTap: () {},
                     ),
                     sizeH10(),
@@ -65,6 +70,19 @@ class MyAccountScreen extends StatelessWidget {
                     SingleAccountItem(title: 'Account Password', onTap: () {}),
                     sizeH10(),
                     Divider(color: rippleColor),
+                    sizeH10(),
+                    SingleAccountItem(
+                        title: 'Logout',
+                        onTap: () {
+                          decisionDialog(context,
+                              'Are you sure went to Logout?', "No", "Yes", () {
+                            pref.resetAll();
+                            Get.to(() => SignInScreen());
+                            toast('Logout Successful');
+                          }, () {
+                            Nav.pop(context);
+                          });
+                        }),
                     sizeH10(),
                     AccountItem(
                       title: 'Delete Account',

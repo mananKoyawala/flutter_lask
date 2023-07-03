@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreference extends GetxController {
-  var isVerifed = false.obs;
+  // var isVerifed = false.obs;
   var isAuthenticated = 0.obs;
 
   //* User Data For authentication
@@ -10,7 +10,7 @@ class SharedPreference extends GetxController {
   var u_password = ''.obs;
   var u_name = ''.obs;
   var u_mobileNumber = ''.obs;
-  int? isAuth;
+  // int? isAuth;
   @override
   void onInit() {
     // TODO: implement onInit
@@ -60,5 +60,14 @@ class SharedPreference extends GetxController {
 
   changeName(String name) {
     u_name.value = name;
+  }
+
+  resetAll() {
+    u_email.value = "";
+    u_password.value = "";
+    u_name.value = "";
+    u_mobileNumber.value = "";
+    isAuthenticated.value = 0;
+    setUserData('', '', '', '');
   }
 }
