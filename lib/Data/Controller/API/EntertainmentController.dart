@@ -46,13 +46,15 @@ class EntertainmentController extends GetxController {
               json["url"] != null &&
               json["publishedAt"] != null) {
             ArticleModel articleModel = ArticleModel(
-                author: json["author"],
-                title: json["title"],
-                description: json["description"],
-                url: json["url"],
-                urlToImage: json["urlToImage"],
-                content: json["content"],
-                publishedAt: json["publishedAt"]);
+              author: json["author"],
+              title: json["title"],
+              description: json["description"],
+              url: json["url"],
+              urlToImage: json["urlToImage"],
+              content: json["content"],
+              publishedAt: json["publishedAt"],
+              isOffline: false,
+            );
             entertainment.add(articleModel);
           }
         });
@@ -95,13 +97,15 @@ class EntertainmentController extends GetxController {
                   json["url"] != null &&
                   json["publishedAt"] != null) {
                 ArticleModel articleModel = ArticleModel(
-                    author: json["author"],
-                    title: json["title"],
-                    description: json["description"],
-                    url: json["url"],
-                    urlToImage: json["urlToImage"],
-                    content: json["content"],
-                    publishedAt: json["publishedAt"]);
+                  author: json["author"],
+                  title: json["title"],
+                  description: json["description"],
+                  url: json["url"],
+                  urlToImage: json["urlToImage"],
+                  content: json["content"],
+                  publishedAt: json["publishedAt"],
+                  isOffline: false,
+                );
                 entertainment.add(articleModel);
               }
             });

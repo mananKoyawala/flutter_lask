@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lask/Data/Controller/SharedPreferences.dart';
+import 'package:lask/Presentation/Screen/ProfileScreen.dart';
+import 'package:lask/Presentation/Screen/SplashScreen.dart';
 import 'Presentation/Screen/ExploreScreen.dart';
 import 'Presentation/Constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -30,13 +32,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme:
-            ThemeData(primarySwatch: materialThemeColor, fontFamily: 'fonts'),
-        home: ExploreScreen()
-        //     SplashScreen(
-        //   initScreen: initScreen,
-        // ),
-        );
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(primarySwatch: materialThemeColor, fontFamily: 'fonts'),
+      home: SplashScreen(initScreen: initScreen),
+      // ProfileScreen()
+    );
   }
 }

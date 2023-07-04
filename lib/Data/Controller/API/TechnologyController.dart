@@ -52,6 +52,7 @@ class TechnologyController extends GetxController {
                 url: json["url"],
                 urlToImage: json["urlToImage"],
                 content: json["content"],
+                isOffline: false,
                 publishedAt: json["publishedAt"]);
             technology.add(articleModel);
           }
@@ -101,6 +102,7 @@ class TechnologyController extends GetxController {
                     url: json["url"],
                     urlToImage: json["urlToImage"],
                     content: json["content"],
+                    isOffline: false,
                     publishedAt: json["publishedAt"]);
                 technology.add(articleModel);
               }

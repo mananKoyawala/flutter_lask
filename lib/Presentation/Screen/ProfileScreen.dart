@@ -8,6 +8,7 @@ import 'package:lask/Package/CustomeTexts.dart';
 import 'package:lask/Package/ScrollColorRemove.dart';
 import 'package:lask/Presentation/Constants.dart';
 import 'package:lask/Presentation/Screen/ClappedArticalesScreen.dart';
+import 'package:lask/Presentation/Screen/OfflineReadingScreen.dart';
 import 'package:lask/Presentation/Screen/ReadArticalesScreen.dart';
 import 'package:get/get.dart';
 import 'MyAccountScreen.dart';
@@ -123,7 +124,9 @@ class ProfileScreen extends StatelessWidget {
               sizeH10(),
               SingleAccountItem(
                 title: 'Offline Reading',
-                onTap: () {},
+                onTap: () {
+                  Get.to(() => OfflineReadingScreen());
+                },
                 vPadd: 15,
               ),
               sizeH10(),

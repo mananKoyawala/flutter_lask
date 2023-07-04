@@ -1,31 +1,133 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lask/Data/Controller/API/NewModel.dart';
-import 'package:lask/Package/CustomeTexts.dart';
-import 'package:lask/Presentation/Constants.dart';
-import 'package:jumping_dot/jumping_dot.dart';
+import 'package:lask/Package/Constants.dart';
 import '../../Data/Controller/DataBaseHelper.dart';
-import '../../Package/Constants.dart';
+import '../../Data/Controller/OfflineReadingController.dart';
 import '../../Package/CustomePadding.dart';
+import '../../Package/CustomeTexts.dart';
+import '../Constants.dart';
+import '../Utils/Widgets/AddressItem.dart';
+import 'ArticaleScreen.dart';
+import 'package:jumping_dot/jumping_dot.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:lottie/lottie.dart';
+
+class OfflineReadingScreen extends StatelessWidget {
+  OfflineReadingScreen({
+    super.key,
+  });
+
+  // BusinessController businessController = Get.put(BusinessController());
+  OfflineReadingController controller = Get.put(OfflineReadingController());
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: white,
+      body: CP(
+        h: 16,
+        child: Column(
+          children: [
+            sizeH(45),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(
+                    onPressed: () {
+                      Nav.pop(context);
+                    },
+                    icon: const Icon(Icons.arrow_back)),
+                TextFW600(
+                  text: 'Offline Articles',
+                  fontSize: 18,
+                  textcolor: textColorMain,
+                ),
+                IconButton(
+                    onPressed: null,
+                    icon: Icon(
+                      Icons.arrow_back,
+                      color: white,
+                    ))
+              ],
+            ),
+            sizeH25(),
+            Expanded(
+              child: Obx(() {
+                if (controller.isLoading.value == true) {
+                  return Center(
+                    child: JumpingDots(
+                      color: themeColor,
+                      radius: 10,
+                      numberOfDots: 3,
+                      animationDuration: const Duration(milliseconds: 200),
+                    ),
+                  );
+                }
+
+                if (controller.articles.isEmpty) {
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Lottie.asset('assets/json/nodatafound.json',
+                            height: DP.dHeight(context, 2)),
+                        sizeH(150)
+                      ],
+                    ),
+                  );
+                }
+
+                return Column(
+                  children: [
+                    ListView.builder(
+                      padding: const EdgeInsets.all(0),
+                      itemCount: controller.articles.length,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        final article = ArticleModel(
+                            author: controller.articles[index]['author'],
+                            title: controller.articles[index]['title'],
+                            description: 'description',
+                            url: '',
+                            urlToImage: controller.articles[index]
+                                ['urlToImage'],
+                            content: controller.articles[index]['content'],
+                            publishedAt: controller.articles[index]
+                                    ['publishedAt'] ??
+                                '2023-06-2899',
+                            isOffline: false);
+                        return AddressItem(
+                            title: controller.articles[index]['title'],
+                            onTap: () {
+                              Get.to(() => ArticaleScreen(article: article));
+                            },
+                            imgurl: controller.articles[index]['urlToImage'],
+                            authorname: controller.articles[index]['author'],
+                            datetime: controller.articles[index]
+                                    ['publishedAt'] ??
+                                '2023-06-2899');
+                      },
+                    ),
+                  ],
+                );
+              }),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
 
 class ArticaleScreen extends StatelessWidget {
   ArticaleScreen({super.key, required this.article});
   ScrollController scrollController = ScrollController();
   final ArticleModel article;
-  Future<void> addArticle() async {
-    await SQLHelper.createItem(
-        article.title,
-        article.description,
-        article.author,
-        article.urlToImage,
-        article.content,
-        article.publishedAt);
-    // refershJournals();
-    // common();
-  }
-
+  OfflineReadingController controller = Get.find<OfflineReadingController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,18 +148,10 @@ class ArticaleScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 IconButton(
-                    onPressed: () {},
-                    icon: Image.asset('assets/icons/hand.png', height: 22)),
-                IconButton(
                     onPressed: () {
-                      addArticle();
+                      controller.deleteArticle(article.title, article.content);
                     },
-                    icon: const Icon(Icons.download)),
-                IconButton(
-                    onPressed: () {}, icon: const Icon(Icons.bookmark_outline)),
-                IconButton(
-                    onPressed: () {},
-                    icon: Image.asset('assets/icons/share.png', height: 22)),
+                    icon: const Icon(Icons.delete)),
               ],
             )
           ],

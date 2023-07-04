@@ -40,13 +40,15 @@ class HomeApiController extends GetxController {
               json["url"] != null &&
               json["publishedAt"] != null) {
             ArticleModel articleModel = ArticleModel(
-                author: json["author"],
-                title: json["title"],
-                description: json["description"],
-                url: json["url"],
-                urlToImage: json["urlToImage"],
-                content: json["content"],
-                publishedAt: json["publishedAt"]);
+              author: json["author"],
+              title: json["title"],
+              description: json["description"],
+              url: json["url"],
+              urlToImage: json["urlToImage"],
+              content: json["content"],
+              isOffline: false,
+              publishedAt: json["publishedAt"],
+            );
             news.add(articleModel);
           }
         });
@@ -97,6 +99,7 @@ class HomeApiController extends GetxController {
                     url: json["url"],
                     urlToImage: json["urlToImage"],
                     content: json["content"],
+                    isOffline: false,
                     publishedAt: json["publishedAt"]);
                 news.add(articleModel);
               }

@@ -48,13 +48,15 @@ class SportsController extends GetxController {
               json["url"] != null &&
               json["publishedAt"] != null) {
             ArticleModel articleModel = ArticleModel(
-                author: json["author"],
-                title: json["title"],
-                description: json["description"],
-                url: json["url"],
-                urlToImage: json["urlToImage"],
-                content: json["content"],
-                publishedAt: json["publishedAt"]);
+              author: json["author"],
+              title: json["title"],
+              description: json["description"],
+              url: json["url"],
+              urlToImage: json["urlToImage"],
+              content: json["content"],
+              publishedAt: json["publishedAt"],
+              isOffline: false,
+            );
             sports.add(articleModel);
           }
         });
@@ -97,13 +99,15 @@ class SportsController extends GetxController {
                   json["url"] != null &&
                   json["publishedAt"] != null) {
                 ArticleModel articleModel = ArticleModel(
-                    author: json["author"],
-                    title: json["title"],
-                    description: json["description"],
-                    url: json["url"],
-                    urlToImage: json["urlToImage"],
-                    content: json["content"],
-                    publishedAt: json["publishedAt"]);
+                  author: json["author"],
+                  title: json["title"],
+                  description: json["description"],
+                  url: json["url"],
+                  urlToImage: json["urlToImage"],
+                  content: json["content"],
+                  publishedAt: json["publishedAt"],
+                  isOffline: false,
+                );
                 sports.add(articleModel);
               }
             });

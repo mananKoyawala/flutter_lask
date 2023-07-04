@@ -46,13 +46,15 @@ class HealthController extends GetxController {
               json["url"] != null &&
               json["publishedAt"] != null) {
             ArticleModel articleModel = ArticleModel(
-                author: json["author"],
-                title: json["title"],
-                description: json["description"],
-                url: json["url"],
-                urlToImage: json["urlToImage"],
-                content: json["content"],
-                publishedAt: json["publishedAt"]);
+              author: json["author"],
+              title: json["title"],
+              description: json["description"],
+              url: json["url"],
+              urlToImage: json["urlToImage"],
+              content: json["content"],
+              publishedAt: json["publishedAt"],
+              isOffline: false,
+            );
             health.add(articleModel);
           }
         });
@@ -100,6 +102,7 @@ class HealthController extends GetxController {
                     description: json["description"],
                     url: json["url"],
                     urlToImage: json["urlToImage"],
+                    isOffline: false,
                     content: json["content"],
                     publishedAt: json["publishedAt"]);
                 health.add(articleModel);

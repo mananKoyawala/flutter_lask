@@ -46,6 +46,7 @@ dev_dependencies:
   shimmer: ^3.0.0
   jumping_dot: ^0.0.6
   cached_network_image: ^3.2.3
+  lottie: ^2.4.0
 
 flutter:
   uses-material-design: true
@@ -54,6 +55,7 @@ flutter:
     - assets/fonts/
     - assets/images/
     - assets/icons/
+    - assets/json/
 
   fonts:
     - family: fonts

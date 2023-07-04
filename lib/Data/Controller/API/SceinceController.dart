@@ -50,6 +50,7 @@ class ScienceController extends GetxController {
                 url: json["url"],
                 urlToImage: json["urlToImage"],
                 content: json["content"],
+                isOffline: false,
                 publishedAt: json["publishedAt"]);
             science.add(articleModel);
           }
@@ -99,6 +100,7 @@ class ScienceController extends GetxController {
                     url: json["url"],
                     urlToImage: json["urlToImage"],
                     content: json["content"],
+                    isOffline: false,
                     publishedAt: json["publishedAt"]);
                 science.add(articleModel);
               }
