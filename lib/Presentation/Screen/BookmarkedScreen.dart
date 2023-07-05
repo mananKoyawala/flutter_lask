@@ -13,7 +13,7 @@ import '../../Package/CustomePadding.dart';
 class BookmarkedScreen extends StatelessWidget {
   BookmarkedScreen({super.key});
   ScrollController scrollController = ScrollController();
-  BookMarkController bookMarkController = BookMarkController();
+  BookMarkController bookMarkController = Get.find<BookMarkController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(

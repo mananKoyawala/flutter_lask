@@ -53,7 +53,8 @@ class SignInAuthentication extends StatelessWidget {
 
       preference.setUserData(
           docs['email'], docs['password'], docs['name'], docs['mobilenumber']);
-      preference.changeName(docs['name']);
+      preference.changeName(
+          docs['name'], docs['email'], docs['password'], docs['mobilenumber']);
       signInController.resetAll();
       // preference.getUserData();
       // preference.changeName(docs['name']);

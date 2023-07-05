@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:lask/Data/Controller/API/NewModel.dart';
+import 'package:lask/Data/Controller/BookMarkController.dart';
 import 'package:lask/Package/CustomeTexts.dart';
 import 'package:lask/Presentation/Constants.dart';
 import 'package:jumping_dot/jumping_dot.dart';
@@ -9,10 +10,12 @@ import '../../Data/Controller/DataBaseHelper.dart';
 import '../../Package/Constants.dart';
 import '../../Package/CustomePadding.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:get/get.dart';
 
 class ArticaleScreen extends StatelessWidget {
   ArticaleScreen({super.key, required this.article});
   ScrollController scrollController = ScrollController();
+  BookMarkController bookMarkController = Get.find<BookMarkController>();
   final ArticleModel article;
   Future<void> addArticle() async {
     await SQLHelper.createItem(
@@ -54,7 +57,10 @@ class ArticaleScreen extends StatelessWidget {
                     },
                     icon: const Icon(Icons.download)),
                 IconButton(
-                    onPressed: () {}, icon: const Icon(Icons.bookmark_outline)),
+                    onPressed: () {
+                      bookMarkController.addArticles(article);
+                    },
+                    icon: const Icon(Icons.bookmark_outline)),
                 IconButton(
                     onPressed: () {},
                     icon: Image.asset('assets/icons/share.png', height: 22)),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lask/Data/Controller/SharedPreferences.dart';
 import 'package:lask/Presentation/Screen/ForgetPasswordScreen.dart';
 import 'package:lask/Presentation/Screen/SignInAuthentication.dart';
 import 'package:lask/Presentation/Screen/SignUpScreen.dart';
@@ -22,6 +23,7 @@ class SignInScreen extends StatelessWidget {
   final CollectionReference reference =
       FirebaseFirestore.instance.collection('lask_news_app');
   SignInController controller = Get.put(SignInController());
+  SharedPreference pref = Get.find<SharedPreference>();
   final auth = FirebaseAuth.instance;
 
   validation() {
@@ -41,7 +43,14 @@ class SignInScreen extends StatelessWidget {
     if (querySnapshot.docs.isNotEmpty) {
       print('######Data Recievd');
       querySnapshot.docs.forEach((docs) {
+        print('Document ID = ${docs.id}');
+        pref.chnageDoc(docs.id);
+        print('Pref Document ID = ${pref.u_doc.value}');
+
         print(docs['email']);
+        print('User doc is = ${pref.u_doc}');
+        pref.setUserDoc(docs.id);
+        print('User doc is = ${pref.u_doc}');
         auth.verifyPhoneNumber(
             phoneNumber: '+91${controller.phoneNumber.value}',
             verificationCompleted: (_) {},

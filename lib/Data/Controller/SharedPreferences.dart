@@ -10,6 +10,7 @@ class SharedPreference extends GetxController {
   var u_password = ''.obs;
   var u_name = ''.obs;
   var u_mobileNumber = ''.obs;
+  var u_doc = ''.obs;
   // int? isAuth;
   @override
   void onInit() {
@@ -17,6 +18,7 @@ class SharedPreference extends GetxController {
     super.onInit();
     get();
     getUserData();
+    getUserDoc();
   }
 
   set(int value) async {
@@ -50,6 +52,11 @@ class SharedPreference extends GetxController {
     await prefs.setString('u_mobileNumber', mobileNumber);
   }
 
+  Future<void> setUserDoc(String doc) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('u_doc', doc);
+  }
+
   Future<void> getUserData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     u_email.value = prefs.getString('u_email') ?? '';
@@ -58,8 +65,16 @@ class SharedPreference extends GetxController {
     u_mobileNumber.value = prefs.getString('u_mobileNumber') ?? '';
   }
 
-  changeName(String name) {
+  Future<void> getUserDoc() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    u_doc.value = prefs.getString('u_doc') ?? '';
+  }
+
+  changeName(String name, email, password, mobile) {
     u_name.value = name;
+    u_email.value = email;
+    u_password.value = password;
+    u_mobileNumber.value = mobile;
   }
 
   resetAll() {
@@ -67,7 +82,12 @@ class SharedPreference extends GetxController {
     u_password.value = "";
     u_name.value = "";
     u_mobileNumber.value = "";
+    u_doc.value = "";
     isAuthenticated.value = 0;
     setUserData('', '', '', '');
+  }
+
+  chnageDoc(String doc) {
+    u_doc.value = doc;
   }
 }

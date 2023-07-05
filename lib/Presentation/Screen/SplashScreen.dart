@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:lask/Package/Constants.dart';
 import 'package:lask/Presentation/Screen/SignInScreen.dart';
 import 'package:lask/Presentation/Screen/WelcomeScreen.dart';
+import '../../Data/Controller/BookMarkController.dart';
 import '../../Data/Controller/SharedPreferences.dart';
 import '../Constants.dart';
 import 'Dashboard.dart';
@@ -24,6 +25,8 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     next();
   }
+
+  BookMarkController bookMarkController = Get.put(BookMarkController());
 
   Future<void> next() async {
     await Future.delayed(const Duration(milliseconds: 3500));

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lask/Data/Controller/BookMarkController.dart';
 import 'package:lask/Data/Controller/SharedPreferences.dart';
 import 'package:lask/Presentation/Screen/ProfileScreen.dart';
 import 'package:lask/Presentation/Screen/SplashScreen.dart';
@@ -12,6 +13,7 @@ import 'firebase_options.dart';
 int? initScreen;
 Future<void> main() async {
   SharedPreference controller = Get.put(SharedPreference());
+
   WidgetsFlutterBinding.ensureInitialized();
   // await Firebase.initializeApp(options: Default)
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
@@ -19,9 +21,11 @@ Future<void> main() async {
   initScreen = prefs.getInt("initScreen");
   // print('initScreen ${initScreen}');
   await prefs.setInt("initScreen", 1);
+
   print('###########${controller.u_email}');
   print('###########${controller.u_password}');
   print('###########${controller.u_mobileNumber}');
+  print('###########${controller.u_doc}');
 
   runApp(const MyApp());
 }
