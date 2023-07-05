@@ -92,7 +92,7 @@ class ProfileScreen extends StatelessWidget {
               SingleAccountItem(
                 title: 'Clapped Articles',
                 onTap: () {
-                  Nav.pushMaterial(context, ClappedArticalesScreen());
+                  Get.to(() => ClappedArticalesScreen());
                 },
                 vPadd: 15,
               ),
@@ -100,7 +100,7 @@ class ProfileScreen extends StatelessWidget {
               SingleAccountItem(
                 title: 'Read Articles',
                 onTap: () {
-                  Nav.pushMaterial(context, ReadArticalesScreen());
+                  Get.to(() => ReadArticalesScreen());
                 },
                 vPadd: 15,
               ),
@@ -111,7 +111,7 @@ class ProfileScreen extends StatelessWidget {
               SingleAccountItem(
                 title: 'My Account',
                 onTap: () {
-                  Nav.pushMaterial(context, MyAccountScreen());
+                  Get.to(() => MyAccountScreen());
                 },
                 vPadd: 15,
               ),
