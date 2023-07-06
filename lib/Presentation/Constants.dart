@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import '../Package/Constants.dart';
+import 'Utils/Widgets/VerticalShimmer.dart';
 
 Color themeColor = const Color(0xFF2D5BD0);
 Color blue = const Color(0xFF0E0AB1);
@@ -18,70 +19,65 @@ Shimmer getShimmerAddressItems() {
   return Shimmer.fromColors(
       baseColor: Colors.grey.shade300,
       highlightColor: Colors.grey.shade100,
-      child: const Child());
+      child: const VerticleShimmer());
 }
 
-class Child extends StatelessWidget {
-  const Child({super.key});
+Widget horizontalShimmer() {
+  return ListView.builder(
+    scrollDirection: Axis.horizontal,
+    itemCount: 5,
+    itemBuilder: (context, index) {
+      return getGeneralShimmer();
+    },
+  );
+}
+
+Shimmer getGeneralShimmer() {
+  return Shimmer.fromColors(
+      baseColor: Colors.grey.shade300,
+      highlightColor: Colors.grey.shade100,
+      child: const HorizontalShimmer());
+}
+
+class HorizontalShimmer extends StatelessWidget {
+  const HorizontalShimmer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
       children: [
-        Container(
-          margin: const EdgeInsets.only(top: 10, bottom: 10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        ClipRRect(
+          borderRadius: radius(10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      height: 40,
-                      color: white,
-                    ),
-                    sizeH(5),
-                    Row(
-                      children: [
-                        Image.asset(
-                          'assets/images/person1.png',
-                          height: 24,
-                        ),
-                        sizeW10(),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                height: 15,
-                                color: white,
-                              ),
-                              sizeH(5),
-                              Container(
-                                height: 15,
-                                color: white,
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ],
+              Container(
+                height: 230,
+                width: 230,
+                decoration:
+                    BoxDecoration(borderRadius: radius(10), color: white),
+              ),
+              sizeH(20),
+              SizedBox(
+                width: 230,
+                height: 50,
+                child: Container(
+                  height: 40,
+                  decoration:
+                      BoxDecoration(borderRadius: radius(5), color: white),
                 ),
               ),
-              sizeW10(),
-              ClipRRect(
-                borderRadius: radius(5),
-                child: Container(
-                  height: 80,
-                  width: 120,
-                  color: white,
-                ),
+              sizeH10(),
+              Container(
+                height: 20,
+                width: 230,
+                decoration:
+                    BoxDecoration(borderRadius: radius(5), color: white),
               ),
             ],
           ),
         ),
+        sizeW(20)
       ],
     );
   }

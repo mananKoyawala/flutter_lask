@@ -24,7 +24,6 @@ class SQLHelper {
       String content,
       String publishedAt) async {
     final db = await SQLHelper.db();
-    // final isPresent = await isItemPresent(title, content);
     final isPresent;
     isPresent = await db.query(
       'article',
@@ -33,7 +32,7 @@ class SQLHelper {
       limit: 1,
     );
     if (isPresent.isNotEmpty) {
-      toast('Article Already Saved.');
+      toast('Article already added to Offline Reads!');
     } else {
       // print('**************${isPresent.isNotEmpty}');
 
@@ -48,7 +47,7 @@ class SQLHelper {
       final id = await db
           .insert('article', data,
               conflictAlgorithm: sql.ConflictAlgorithm.replace)
-          .then((value) => toast('Article Added Successfully.'));
+          .then((value) => toast('Article added to Offline Reads.'));
     }
 
     // return id;
@@ -74,20 +73,6 @@ class SQLHelper {
     );
     return result.isNotEmpty;
   }
-
-  // static Future<int> updateItem(
-  //     int id, String title, String? description) async {
-  //   final db = await SQLHelper.db();
-  //   final data = {
-  //     'title': title,
-  //     'description': description,
-  //     'createdAt': DateTime.now().toString(),
-  //   };
-
-  //   final result =
-  //       await db.update('items', data, where: "id = ?", whereArgs: [id]);
-  //   return result;
-  // }
 
   static Future<bool> deleteItem(String title, String content) async {
     final db = await SQLHelper.db();

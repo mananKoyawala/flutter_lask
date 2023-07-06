@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:lask/Data/Controller/API/NewModel.dart';
@@ -30,36 +29,21 @@ class BookMarkController extends GetxController {
   }
 
   void addArticles(ArticleModel article) async {
-    final querySnapshot =
-        await ref.where('article', isEqualTo: article.toMap()).get();
-    // try {
-    //   print('&&&&&&&&&& ${querySnapshot.docs.isEmpty}');
-    //   // if (querySnapshot.docs.isEmpty) {
-    //   ref.doc(pref.u_doc.value).update({
-    //     'article': FieldValue.arrayUnion([article.toMap()]),
-    //   }).then((value) => toast('Article Added'));
-    // } catch (e) {
-    //   toast('Article Not Added');
-    // }
     getData(article);
     await Future.delayed(const Duration(milliseconds: 1500));
     if (isExist.value) {
-      toast('Article Already Exist');
+      toast('Article already Bokkmarked.');
     } else {
       try {
-        print('&&&&&&&&&& ${querySnapshot.docs.isEmpty}');
-        // if (querySnapshot.docs.isEmpty) {
         ref.doc(pref.u_doc.value).update({
           'article': FieldValue.arrayUnion([article.toMap()]),
-        }).then((value) => toast('Article Added'));
+        }).then((value) => toast('Article Bookmarked.'));
       } catch (e) {
-        toast('Article Not Added');
+        toast('Error to bookmark article.');
       }
     }
     resteExist();
   }
-
-  var list;
 
   void getData(ArticleModel articles) async {
     final querySnapshot = await ref
@@ -68,16 +52,16 @@ class BookMarkController extends GetxController {
         .get();
 
     querySnapshot.docs.forEach((docs) {
-      print('@@@@@@@@@@ ${docs['article']}');
-      print('********** ${docs.get('article')}');
+      // print('@@@@@@@@@@ ${docs['article']}');
+      // print('********** ${docs.get('article')}');
       for (int i = 0; i < docs['article'].length; i++) {
         if (docs['article'][i]['title'] == articles.title) {
-          print('*********Article Exist');
+          // print('*********Article already Bokkmarked.');
           changeIsExist(true);
           break;
         }
         changeIsExist(false);
-        print('Not');
+        // print('Not');
       }
     });
   }
