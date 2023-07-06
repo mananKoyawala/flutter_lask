@@ -12,6 +12,8 @@ import '../../Package/CustomePadding.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:get/get.dart';
 
+import '../Utils/Widgets/ImagePreview.dart';
+
 class ArticaleScreen extends StatelessWidget {
   ArticaleScreen({super.key, required this.article});
   ScrollController scrollController = ScrollController();
@@ -81,30 +83,39 @@ class ArticaleScreen extends StatelessWidget {
                 SizedBox(
                   height: 300,
                   width: DP.infinity(context),
-                  child: CachedNetworkImage(
-                    imageUrl: article.urlToImage,
-                    height: 80,
-                    width: 120,
-                    fit: BoxFit.cover,
-                    placeholder: (context, url) => Container(
+                  child: GestureDetector(
+                    onTap: () async {
+                      await showDialog(
+                          context: context,
+                          builder: (_) =>
+                              imageDialog(article.urlToImage, context));
+                    },
+                    child: CachedNetworkImage(
+                      imageUrl: article.urlToImage,
                       height: 80,
                       width: 120,
-                      alignment: Alignment.center,
-                      child: Center(
-                        child: JumpingDots(
-                          color: themeColor,
-                          radius: 10,
-                          numberOfDots: 3,
-                          animationDuration: const Duration(milliseconds: 200),
-                        ),
-                      ),
-                    ),
-                    errorWidget: (context, url, error) => Container(
+                      fit: BoxFit.cover,
+                      placeholder: (context, url) => Container(
                         height: 80,
                         width: 120,
                         alignment: Alignment.center,
-                        child: Image.asset(
-                            'assets/images/imageisnotavialable.jpg')),
+                        child: Center(
+                          child: JumpingDots(
+                            color: themeColor,
+                            radius: 10,
+                            numberOfDots: 3,
+                            animationDuration:
+                                const Duration(milliseconds: 200),
+                          ),
+                        ),
+                      ),
+                      errorWidget: (context, url, error) => Container(
+                          height: 80,
+                          width: 120,
+                          alignment: Alignment.center,
+                          child: Image.asset(
+                              'assets/images/imageisnotavialable.jpg')),
+                    ),
                   ),
                 ),
                 Column(
