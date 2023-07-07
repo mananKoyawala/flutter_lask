@@ -1,11 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lask/Data/Controller/API/BusinessController.dart';
-import 'package:lask/Data/Controller/API/EntertainmentController.dart';
 import 'package:lask/Data/Controller/API/ExploreController.dart';
-import 'package:lask/Data/Controller/API/HealthController.dart';
-import 'package:lask/Data/Controller/API/SceinceController.dart';
-import 'package:lask/Data/Controller/API/SportsController.dart';
-import 'package:lask/Data/Controller/API/TechnologyController.dart';
 import 'package:lask/Package/Constants.dart';
 import 'package:lask/Package/CustomeTexts.dart';
 import 'package:lask/Package/ScrollColorRemove.dart';

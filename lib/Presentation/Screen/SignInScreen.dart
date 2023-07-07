@@ -37,6 +37,7 @@ class SignInScreen extends StatelessWidget {
     final querySnapshot = await reference
         .where('email', isEqualTo: controller.email.text)
         .where('password', isEqualTo: controller.password.text)
+        .where('mobilenumber', isEqualTo: controller.mobileNumber.text)
         .get();
     // print(
     // '******** email = ${controller.email.text} && password = ${controller.password.text}');

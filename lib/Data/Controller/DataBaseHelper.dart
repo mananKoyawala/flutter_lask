@@ -44,7 +44,7 @@ class SQLHelper {
         "content": content,
         "publishedAt": publishedAt
       };
-      final id = await db
+      await db
           .insert('article', data,
               conflictAlgorithm: sql.ConflictAlgorithm.replace)
           .then((value) => toast('Article added to Offline Reads.'));

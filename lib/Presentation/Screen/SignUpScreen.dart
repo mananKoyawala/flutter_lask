@@ -78,7 +78,6 @@ class SignUpScreen extends StatelessWidget {
                 sizeH(40),
                 Expanded(
                   child: SingleChildScrollView(
-                    physics: const BouncingScrollPhysics(),
                     child: Form(
                       key: formKey,
                       child: Column(

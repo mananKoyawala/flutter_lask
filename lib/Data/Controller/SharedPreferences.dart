@@ -14,7 +14,6 @@ class SharedPreference extends GetxController {
   // int? isAuth;
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
     get();
     getUserData();
@@ -35,7 +34,6 @@ class SharedPreference extends GetxController {
     } else {
       changeValue(1);
     }
-    print('*****Auth = ${auth}');
   }
 
   changeValue(int i) {
@@ -46,7 +44,6 @@ class SharedPreference extends GetxController {
       String email, String password, String name, String mobileNumber) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('u_email', email);
-    print('++++++++++++++${email}');
     await prefs.setString('u_password', password);
     await prefs.setString('u_name', name);
     await prefs.setString('u_mobileNumber', mobileNumber);

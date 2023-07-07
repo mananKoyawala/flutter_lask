@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lask/Data/Controller/ForgetPasswordControllers.dart';
 import 'package:lask/Data/Controller/SharedPreferences.dart';
-import '../../Data/Controller/ChangePasswordController.dart';
 import '../../Package/Constants.dart';
 import '../../Package/CustomePadding.dart';
 import '../../Package/CustomeTexts.dart';

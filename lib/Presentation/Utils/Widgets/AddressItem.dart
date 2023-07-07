@@ -5,9 +5,6 @@ import '../../../Package/CustomeTexts.dart';
 import '../../../Package/RippleEffectContainer.dart';
 import '../../Constants.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:get/get.dart';
-
-import 'ImagePreview.dart';
 
 class AddressItem extends StatelessWidget {
   const AddressItem(

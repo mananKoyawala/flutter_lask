@@ -35,6 +35,7 @@ class SignUpController extends GetxController {
       'password': password.text,
       'mobilenumber': mobileNumber.text,
       'time': DateTime.now(),
+      'article': []
     }).then((value) => print('Data Uploaded'));
   }
 
