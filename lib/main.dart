@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lask/Data/Controller/BookMarkController.dart';
 import 'package:lask/Data/Controller/SharedPreferences.dart';
+import 'package:lask/Presentation/Screen/ChangeAccountPassword.dart';
 import 'package:lask/Presentation/Screen/ProfileScreen.dart';
 import 'package:lask/Presentation/Screen/SplashScreen.dart';
 import 'Presentation/Screen/ExploreScreen.dart';
@@ -38,8 +39,9 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: materialThemeColor, fontFamily: 'fonts'),
-      home: SplashScreen(initScreen: initScreen),
-      // ProfileScreen()
+      home:
+          // ChangeAccountPassword()
+          SplashScreen(initScreen: initScreen),
     );
   }
 }

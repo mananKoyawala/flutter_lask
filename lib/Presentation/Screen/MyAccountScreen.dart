@@ -8,6 +8,8 @@ import 'package:lask/Presentation/Screen/SignInScreen.dart';
 import '../../Data/Controller/SharedPreferences.dart';
 import '../../Package/CustomePadding.dart';
 import 'package:get/get.dart';
+
+import 'ChangeAccountPassword.dart';
 // ignore_for_file: must_be_immutable
 
 class MyAccountScreen extends StatelessWidget {
@@ -67,7 +69,11 @@ class MyAccountScreen extends StatelessWidget {
                       onTap: () {},
                     ),
                     sizeH10(),
-                    SingleAccountItem(title: 'Account Password', onTap: () {}),
+                    SingleAccountItem(
+                        title: 'Change Account Password',
+                        onTap: () {
+                          Get.to(() => ChangeAccountPassword());
+                        }),
                     sizeH10(),
                     Divider(color: rippleColor),
                     sizeH10(),
