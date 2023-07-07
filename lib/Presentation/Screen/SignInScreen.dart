@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lask/Data/Controller/SharedPreferences.dart';
-import 'package:lask/Presentation/Screen/ForgetPasswordScreen.dart';
+import 'package:lask/Presentation/Screen/ForgetPasswordScreen1.dart';
 import 'package:lask/Presentation/Screen/SignInAuthentication.dart';
 import 'package:lask/Presentation/Screen/SignUpScreen.dart';
 import '../../Data/Controller/SignInController.dart';
@@ -237,7 +237,7 @@ class SignInScreen extends StatelessWidget {
                                     context,
                                     MaterialPageRoute(
                                         builder: (_) =>
-                                            ForgetPasswordscreen()));
+                                            ForgetPasswordscreen1()));
                               },
                               textStyle: TextStyles.textStyleW500(
                                 context,

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:lask/Data/Controller/BookMarkController.dart';
 import 'package:lask/Data/Controller/SharedPreferences.dart';
 import 'package:lask/Presentation/Screen/ChangeAccountPassword.dart';
+import 'package:lask/Presentation/Screen/ForgetPasswordScreen1.dart';
 import 'package:lask/Presentation/Screen/ProfileScreen.dart';
 import 'package:lask/Presentation/Screen/SplashScreen.dart';
 import 'Presentation/Screen/ExploreScreen.dart';
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: materialThemeColor, fontFamily: 'fonts'),
       home:
-          // ChangeAccountPassword()
+          // ForgetPasswordscreen1()
           SplashScreen(initScreen: initScreen),
     );
   }
