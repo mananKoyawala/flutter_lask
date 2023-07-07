@@ -4,6 +4,7 @@ import 'package:lask/Package/Constants.dart';
 import 'package:lask/Package/CustomeTexts.dart';
 import 'package:lask/Package/ScrollColorRemove.dart';
 import 'package:lask/Presentation/Constants.dart';
+import 'package:lask/Presentation/Utils/Widgets/CommingSoon.dart';
 import 'package:lask/Presentation/Utils/Widgets/Explore/Business.dart';
 import 'package:lask/Presentation/Utils/Widgets/Explore/Entertainment.dart';
 import 'package:lask/Presentation/Utils/Widgets/Explore/Health.dart';
@@ -27,13 +28,6 @@ class ExploreScreen extends StatelessWidget {
     "Travel",
     "Political",
   ];
-  // SportsController sportsController = Get.put(SportsController());
-  // BusinessController businessController = Get.put(BusinessController());
-  // HealthController healthController = Get.put(HealthController());
-  // TechnologyController technologyController = Get.put(TechnologyController());
-  // ScienceController scienceController = Get.put(ScienceController());
-  // EntertainmentController entertainmentController =
-  //     Get.put(EntertainmentController());
   ExploreScreen({super.key});
   ScrollController scrollController = ScrollController();
   ExploreController exploreController = ExploreController();
@@ -69,12 +63,6 @@ class ExploreScreen extends StatelessWidget {
                 ),
               ),
               sizeH(10),
-              // CP(
-              //     h: 16,
-              //     child: ButtonTab(
-              //       items: items,
-              //       currentIndex: _currentIndex,
-              //     )),
               EasyAnimatedTab(
                 buttonTitles: items,
                 onSelected: (index) {
@@ -120,8 +108,8 @@ showPages(int index) {
     case 5:
       return Business();
     case 6:
-      return const Text('Travel');
+      return const CommingSoon();
     case 7:
-      return const Text('Political');
+      return const CommingSoon();
   }
 }

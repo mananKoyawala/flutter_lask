@@ -10,6 +10,8 @@ import 'package:lask/Presentation/Constants.dart';
 import 'package:get/get.dart';
 import '../../Package/CustomePadding.dart';
 
+import '../Utils/Widgets/CommingSoon.dart';
+
 class BookmarkedScreen extends StatelessWidget {
   BookmarkedScreen({super.key});
   ScrollController scrollController = ScrollController();
@@ -25,7 +27,7 @@ class BookmarkedScreen extends StatelessWidget {
             children: [
               Container(
                 margin: const EdgeInsets.only(top: 45),
-                color: background1,
+                color: white,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -56,33 +58,37 @@ class BookmarkedScreen extends StatelessWidget {
                 ),
               ),
               sizeH(10),
-              Expanded(
-                  child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                controller: scrollController,
-                child: Column(
-                  children: [
-                    ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      padding: const EdgeInsets.all(0),
-                      controller: scrollController,
-                      itemCount: 10,
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        return AddressItem(
-                            bookMarkController: bookMarkController,
-                            title:
-                                "Experience the Serenity of Japan's Traditional Countryside",
-                            onTap: () {},
-                            imgurl: 'assets/images/person1.png',
-                            authorname: 'Harry Harper',
-                            datetime: 'Apr 12, 2023');
-                      },
-                    ),
-                  ],
-                ),
-              )),
+              const CommingSoon(),
               sizeH(60)
+              // Expanded(
+              //     child: SingleChildScrollView(
+              //   scrollDirection: Axis.vertical,
+              //   controller: scrollController,
+              //   child: Column(
+              //     mainAxisAlignment: MainAxisAlignment.center,
+              //     children: [
+
+              // ListView.builder(
+              //   physics: const BouncingScrollPhysics(),
+              //   padding: const EdgeInsets.all(0),
+              //   controller: scrollController,
+              //   itemCount: 10,
+              //   shrinkWrap: true,
+              //   itemBuilder: (context, index) {
+              //     return AddressItem(
+              //         bookMarkController: bookMarkController,
+              //         title:
+              //             "Experience the Serenity of Japan's Traditional Countryside",
+              //         onTap: () {},
+              //         imgurl: 'assets/images/person1.png',
+              //         authorname: 'Harry Harper',
+              //         datetime: 'Apr 12, 2023');
+              // },
+              // ),
+              //     ],
+              //   ),
+              // )),
+              // sizeH(60)
             ],
           ),
         ),
