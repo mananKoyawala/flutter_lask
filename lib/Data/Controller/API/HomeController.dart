@@ -16,13 +16,13 @@ class HomeController extends GetxController {
   var list2 = <ArticleModel>[].obs;
   var list3 = <ArticleModel>[].obs;
   var list4 = <ArticleModel>[].obs;
-  var list5 = <ArticleModel>[].obs;
+  // var list5 = <ArticleModel>[].obs;
 
   //* Paggination
   var general = <ArticleModel>[].obs;
   ScrollController controller = ScrollController();
   int page = 0;
-  final int limit = 45;
+  final int limit = 100;
 
   //*First Load
 
@@ -56,7 +56,7 @@ class HomeController extends GetxController {
               isOffline: false,
             );
             general.add(articleModel);
-            if (general.length == 25) {
+            if (general.length == 20) {
               splitList();
             }
           }
@@ -69,7 +69,8 @@ class HomeController extends GetxController {
         print('Something went wrong');
       }
     }
-    if (general.length == 25) {
+    print('*************${general.length}');
+    if (general.length == 10) {
       splitList();
     }
     await Future.delayed(const Duration(milliseconds: 1500));
@@ -103,7 +104,7 @@ class HomeController extends GetxController {
     list2.addAll(general.sublist(5, 10));
     list3.addAll(general.sublist(10, 15));
     list4.addAll(general.sublist(15, 20));
-    list5.addAll(general.sublist(20, 25));
+    // list5.addAll(general.sublist(20, 25));
   }
 
   resetAllList() {
@@ -111,6 +112,6 @@ class HomeController extends GetxController {
     list2.clear();
     list3.clear();
     list4.clear();
-    list5.clear();
+    // list5.clear();
   }
 }

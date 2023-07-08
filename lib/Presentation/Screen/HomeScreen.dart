@@ -185,31 +185,31 @@ class HomeScreen extends StatelessWidget {
                                 ),
                         )),
                     sizeH(15),
-                    SizedBox(
-                        height: 335,
-                        child: Obx(
-                          () => homeController.isLoading.value
-                              ? horizontalShimmer()
-                              : ListView.builder(
-                                  physics: const BouncingScrollPhysics(),
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: homeController.list5.length,
-                                  itemBuilder: (context, index) {
-                                    return NewContainer(
-                                      onTap: () {
-                                        Get.to(() => ArticaleScreen(
-                                            article:
-                                                homeController.list5[index]));
-                                      },
-                                      imgUrl: homeController
-                                          .list5[index].urlToImage,
-                                      title: homeController.list5[index].title,
-                                      category:
-                                          homeController.list5[index].author,
-                                    );
-                                  },
-                                ),
-                        )),
+                    // SizedBox(
+                    //     height: 335,
+                    //     child: Obx(
+                    //       () => homeController.isLoading.value
+                    //           ? horizontalShimmer()
+                    //           : ListView.builder(
+                    //               physics: const BouncingScrollPhysics(),
+                    //               scrollDirection: Axis.horizontal,
+                    //               itemCount: homeController.list5.length,
+                    //               itemBuilder: (context, index) {
+                    //                 return NewContainer(
+                    //                   onTap: () {
+                    //                     Get.to(() => ArticaleScreen(
+                    //                         article:
+                    //                             homeController.list5[index]));
+                    //                   },
+                    //                   imgUrl: homeController
+                    //                       .list5[index].urlToImage,
+                    //                   title: homeController.list5[index].title,
+                    //                   category:
+                    //                       homeController.list5[index].author,
+                    //                 );
+                    //               },
+                    //             ),
+                    //     )),
                     sizeH(60)
                   ],
                 ),
