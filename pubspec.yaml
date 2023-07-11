@@ -47,6 +47,8 @@ dev_dependencies:
   jumping_dot: ^0.0.6
   cached_network_image: ^3.2.3
   lottie: ^2.4.0
+  webview_flutter: ^4.2.2
+  flutter_inappwebview: ^5.7.2+3
 
 flutter:
   uses-material-design: true

@@ -6,6 +6,7 @@ import 'package:lask/Data/Controller/BookMarkController.dart';
 import 'package:lask/Package/CustomeTexts.dart';
 import 'package:lask/Presentation/Constants.dart';
 import 'package:jumping_dot/jumping_dot.dart';
+import 'package:lask/Presentation/Screen/WebViewScreen.dart';
 import '../../Data/Controller/DataBaseHelper.dart';
 import '../../Package/Constants.dart';
 import '../../Package/CustomePadding.dart';
@@ -20,13 +21,8 @@ class ArticaleScreen extends StatelessWidget {
   BookMarkController bookMarkController = Get.find<BookMarkController>();
   final ArticleModel article;
   Future<void> addArticle() async {
-    await SQLHelper.createItem(
-        article.title,
-        article.description,
-        article.author,
-        article.urlToImage,
-        article.content,
-        article.publishedAt);
+    await SQLHelper.createItem(article.title, article.description,
+        article.author, article.urlToImage, article.url, article.publishedAt);
     // refershJournals();
     // common();
   }
@@ -51,7 +47,9 @@ class ArticaleScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.to(() => WebViewScreen(urlToLaunch: article.url));
+                    },
                     icon: Image.asset('assets/icons/hand.png', height: 22)),
                 IconButton(
                     onPressed: () {
@@ -192,7 +190,7 @@ class ArticaleScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         TextFW400(
-                          text: article.content,
+                          text: article.description,
                           fontSize: 16,
                           textcolor: textColor3,
                         ),

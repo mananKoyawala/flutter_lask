@@ -13,6 +13,8 @@ import 'package:jumping_dot/jumping_dot.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:lottie/lottie.dart';
 
+import 'WebViewScreen.dart';
+
 class OfflineReadingScreen extends StatelessWidget {
   OfflineReadingScreen({
     super.key,
@@ -89,11 +91,12 @@ class OfflineReadingScreen extends StatelessWidget {
                         final article = ArticleModel(
                             author: controller.articles[index]['author'],
                             title: controller.articles[index]['title'],
-                            description: 'description',
+                            description: controller.articles[index]
+                                ['description'],
                             url: '',
                             urlToImage: controller.articles[index]
                                 ['urlToImage'],
-                            content: controller.articles[index]['content'],
+                            content: controller.articles[index]['description'],
                             publishedAt: controller.articles[index]
                                     ['publishedAt'] ??
                                 '2023-06-2899',
@@ -101,7 +104,10 @@ class OfflineReadingScreen extends StatelessWidget {
                         return AddressItem(
                             title: controller.articles[index]['title'],
                             onTap: () {
-                              Get.to(() => ArticaleScreen(article: article));
+                              Get.to(() => DetailScreen(
+                                    article: article,
+                                    url: controller.articles[index]['url'],
+                                  ));
                             },
                             imgurl: controller.articles[index]['urlToImage'],
                             authorname: controller.articles[index]['author'],
@@ -121,11 +127,12 @@ class OfflineReadingScreen extends StatelessWidget {
   }
 }
 
-class ArticaleScreen extends StatelessWidget {
-  ArticaleScreen({super.key, required this.article});
+class DetailScreen extends StatelessWidget {
+  DetailScreen({super.key, required this.article, required this.url});
   ScrollController scrollController = ScrollController();
   final ArticleModel article;
   OfflineReadingController controller = Get.find<OfflineReadingController>();
+  final String url;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -147,9 +154,15 @@ class ArticaleScreen extends StatelessWidget {
               children: [
                 IconButton(
                     onPressed: () {
-                      controller.deleteArticle(article.title, article.content);
+                      Get.to(() => WebViewScreen(urlToLaunch: url));
+                    },
+                    icon: Image.asset('assets/icons/hand.png', height: 22)),
+                IconButton(
+                    onPressed: () {
+                      controller.deleteArticle(article.title, url);
                     },
                     icon: const Icon(Icons.delete)),
+                sizeW10()
               ],
             )
           ],
@@ -267,7 +280,7 @@ class ArticaleScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         TextFW400(
-                          text: article.content,
+                          text: article.description,
                           fontSize: 16,
                           textcolor: textColor3,
                         ),

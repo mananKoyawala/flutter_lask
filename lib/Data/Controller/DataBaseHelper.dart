@@ -6,7 +6,7 @@ import '../../Package/Constants.dart';
 class SQLHelper {
   static Future<void> createTable(sql.Database database) async {
     await database.execute(
-        """CREATE TABLE article(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, title TEXT, description TEXT, author TEXT, urlToImage TEXT, content TEXT,publishedAt TEXT) """);
+        """CREATE TABLE article(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, title TEXT, description TEXT, author TEXT, urlToImage TEXT, url TEXT,publishedAt TEXT) """);
   }
 
   static Future<sql.Database> db() async {
@@ -16,19 +16,14 @@ class SQLHelper {
     });
   }
 
-  static Future<void> createItem(
-      String title,
-      String description,
-      String author,
-      String urlToImage,
-      String content,
-      String publishedAt) async {
+  static Future<void> createItem(String title, String description,
+      String author, String urlToImage, String url, String publishedAt) async {
     final db = await SQLHelper.db();
     final isPresent;
     isPresent = await db.query(
       'article',
-      where: 'title = ? AND content = ?',
-      whereArgs: [title, content],
+      where: 'title = ? AND url = ?',
+      whereArgs: [title, url],
       limit: 1,
     );
     if (isPresent.isNotEmpty) {
@@ -41,7 +36,7 @@ class SQLHelper {
         'description': description,
         "author": author,
         "urlToImage": urlToImage,
-        "content": content,
+        "url": url,
         "publishedAt": publishedAt
       };
       await db
@@ -63,22 +58,22 @@ class SQLHelper {
     return db.query('article', where: "id = ?", whereArgs: [id], limit: 1);
   }
 
-  Future<bool> isItemPresent(String title, String content) async {
+  Future<bool> isItemPresent(String title, String url) async {
     final db = await SQLHelper.db();
     final result = await db.query(
       'article',
-      where: 'title = ? AND content = ?',
-      whereArgs: [title, content],
+      where: 'title = ? AND url = ?',
+      whereArgs: [title, url],
       limit: 1,
     );
     return result.isNotEmpty;
   }
 
-  static Future<bool> deleteItem(String title, String content) async {
+  static Future<bool> deleteItem(String title, String url) async {
     final db = await SQLHelper.db();
     try {
       await db.delete("article",
-          where: "title = ? AND content = ?", whereArgs: [title, content]);
+          where: "title = ? AND url = ?", whereArgs: [title, url]);
       return true;
     } catch (err) {
       debugPrint("Something went wrong when deleting an item : $err");
