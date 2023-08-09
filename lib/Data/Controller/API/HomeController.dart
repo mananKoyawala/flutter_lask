@@ -11,7 +11,7 @@ import 'NewModel.dart';
 
 class HomeController extends GetxController {
   var status = "ok".obs;
-  // NetwrokController netwrokControler = Get.find<NetwrokController>();
+  NetwrokController netwrokControler = Get.find<NetwrokController>();
   // var isApiCalled = false.obs;
   var isLoading = true.obs;
   var list1 = <ArticleModel>[].obs;
@@ -85,8 +85,9 @@ class HomeController extends GetxController {
   void onInit() {
     super.onInit();
     // changeApiCalled(true);
-
-    loadData();
+    if (netwrokControler.noInternet.value == false) {
+      loadData();
+    }
     // .then((value) => changeApiCalled(false));
   }
 
