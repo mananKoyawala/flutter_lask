@@ -11,12 +11,16 @@ import 'package:lask/Presentation/Screen/ProfileScreen.dart';
 // import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:get/get.dart';
 import 'package:curved_nav_bar/curved_nav_bar.dart';
+import '../../Data/Controller/NetworkController.dart';
+
 // import '../../Package/NavigationBar.dart';
 import 'BookmarkedScreen.dart';
 
 class Dashboard extends StatelessWidget {
   Dashboard({super.key});
   DashboardController controller = DashboardController();
+  NetwrokController netwrokControler = Get.find<NetwrokController>();
+
   List pages = [
     HomeScreen(),
     ExploreScreen(),

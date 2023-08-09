@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
+import '../Data/Controller/API/HomeController.dart';
 import '../Package/Constants.dart';
 import 'Utils/Widgets/VerticalShimmer.dart';
+import 'package:lottie/lottie.dart';
+import 'package:get/get.dart';
 
 Color themeColor = const Color(0xFF2D5BD0);
 Color blue = const Color(0xFF0E0AB1);
@@ -79,6 +82,18 @@ class HorizontalShimmer extends StatelessWidget {
         ),
         sizeW(20)
       ],
+    );
+  }
+}
+
+class NoInternet extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: SizedBox(
+        height: DP.height(context, 5),
+        child: Lottie.asset('assets/json/nointernet.json'),
+      ),
     );
   }
 }

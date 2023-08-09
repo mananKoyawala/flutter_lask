@@ -6,11 +6,13 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:lask/Data/Controller/API/ApiConstants.dart';
 
+import '../NetworkController.dart';
 import 'NewModel.dart';
 
 class HomeController extends GetxController {
   var status = "ok".obs;
-
+  // NetwrokController netwrokControler = Get.find<NetwrokController>();
+  // var isApiCalled = false.obs;
   var isLoading = true.obs;
   var list1 = <ArticleModel>[].obs;
   var list2 = <ArticleModel>[].obs;
@@ -82,10 +84,14 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    // changeApiCalled(true);
+
     loadData();
+    // .then((value) => changeApiCalled(false));
   }
 
   Future<void> loadData() async {
+    print('**********Called the API');
     await Future.delayed(const Duration(milliseconds: 1500));
     changeLoading(true);
     firstLoad();
@@ -114,4 +120,8 @@ class HomeController extends GetxController {
     list4.clear();
     // list5.clear();
   }
+
+  // changeApiCalled(bool value) {
+  //   isApiCalled.value = value;
+  // }
 }
