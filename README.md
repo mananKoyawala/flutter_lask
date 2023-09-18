@@ -1,16 +1,5 @@
-# lask
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+#Lask is a News Application
+Based on the Flutter Framework that used newsapi.org api for fetch the news
+#After open the application the flow is shown as below
+1. Splash Screen
+   ![1](https://github.com/mananKoyawala/flutter_lask/assets/92900568/3f05ed8c-6dca-4837-94fd-1731f9bfb19a)
