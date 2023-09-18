@@ -133,4 +133,5 @@ and also provides varoius categories like Business, Sports, Technology and many 
 </table>
 
 ## Download APK
+Here -> https://www.upload-apk.com/t3jOCeV6OJtxaGl
 
