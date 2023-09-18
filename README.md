@@ -6,8 +6,13 @@ A Lask is a news application that fetch Latest news for it users.
 It uses newapi.org api that free for developers with api keys
 and also provides varoius categories like Business, Sports, Technology and many more.
 
+-> https://newsapi.org/
+
 ## App Logo
 <img src="https://iili.io/JHLMuUv.png" height="50px">
+
+## App Design From Figma
+-> https://www.figma.com/file/KWmhpnkhtr9SQFJp2JnNee/Lask-Mobile-News-App-UI-Kit-(Community)?type=design&node-id=5%3A61&mode=design&t=1m62IfDUveqj7KSw-1
     
 ## Screen Shorts
 
