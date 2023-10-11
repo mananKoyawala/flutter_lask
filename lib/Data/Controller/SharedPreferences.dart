@@ -49,6 +49,14 @@ class SharedPreference extends GetxController {
     await prefs.setString('u_mobileNumber', mobileNumber);
   }
 
+  Future<void> setOnlyData(
+      String email, String name, String mobileNumber) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('u_email', email);
+    await prefs.setString('u_name', name);
+    await prefs.setString('u_mobileNumber', mobileNumber);
+  }
+
   Future<void> setUserDoc(String doc) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('u_doc', doc);

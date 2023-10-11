@@ -11,6 +11,7 @@ import 'package:lask/Presentation/Utils/Widgets/Explore/Health.dart';
 import 'package:lask/Presentation/Utils/Widgets/Explore/Science.dart';
 import 'package:lask/Presentation/Utils/Widgets/Explore/Technology.dart';
 import 'package:get/get.dart';
+import '../../Data/Controller/DashboardController.dart';
 import '../../Package/CustomePadding.dart';
 import 'package:button_tab/button_tab.dart';
 
@@ -31,61 +32,71 @@ class ExploreScreen extends StatelessWidget {
   ExploreScreen({super.key});
   ScrollController scrollController = ScrollController();
   ExploreController exploreController = ExploreController();
+  DashboardController controller = Get.find<DashboardController>();
+
+  Future<bool> _onWillPop() async {
+    controller.changeIndex(0);
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ScrollColorRemove(
-        child: CP(
-          h: 16,
-          child: Column(
-            children: [
-              Container(
-                margin: const EdgeInsets.only(top: 45),
-                color: background1,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const TextFW600(text: 'Explore', fontSize: 24),
-                    IconButton(
-                        onPressed: () {
-                          // showModalBottomSheet(
-                          //     isScrollControlled: true,
-                          //     enableDrag: false,
-                          //     isDismissible: false,
-                          //     shape: const RoundedRectangleBorder(
-                          //         borderRadius: BorderRadius.vertical(
-                          //             top: Radius.circular(25))),
-                          //     context: context,
-                          //     builder: (context) => SearchPage());
-                        },
-                        icon: const Icon(Icons.search))
-                  ],
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: Scaffold(
+        body: ScrollColorRemove(
+          child: CP(
+            h: 16,
+            child: Column(
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(top: 45),
+                  color: background1,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const TextFW600(text: 'Explore', fontSize: 24),
+                      IconButton(
+                          onPressed: () {
+                            // showModalBottomSheet(
+                            //     isScrollControlled: true,
+                            //     enableDrag: false,
+                            //     isDismissible: false,
+                            //     shape: const RoundedRectangleBorder(
+                            //         borderRadius: BorderRadius.vertical(
+                            //             top: Radius.circular(25))),
+                            //     context: context,
+                            //     builder: (context) => SearchPage());
+                          },
+                          icon: const Icon(Icons.search))
+                    ],
+                  ),
                 ),
-              ),
-              sizeH(10),
-              EasyAnimatedTab(
-                buttonTitles: items,
-                onSelected: (index) {
-                  exploreController.changeIndex(index);
-                },
-                animationDuration: 500,
-                minWidthOfItem: 70,
-                minHeightOfItem: 40,
-                deActiveItemColor: white,
-                activeItemColor: lightblue,
-                activeTextStyle: TextStyle(
-                    color: black, fontSize: 14, fontWeight: FontWeight.w700),
-                deActiveTextStyle: TextStyle(
-                    color: black, fontSize: 14, fontWeight: FontWeight.w700),
-                activeBorderRadius: 20,
-                deActiveBorderRadius: 20,
-              ),
-              sizeH(20),
-              Obx(
-                () => showPages(exploreController.currentIndex.value),
-              ),
-              sizeH(60)
-            ],
+                sizeH(10),
+                EasyAnimatedTab(
+                  buttonTitles: items,
+                  onSelected: (index) {
+                    exploreController.changeIndex(index);
+                  },
+                  animationDuration: 500,
+                  minWidthOfItem: 70,
+                  minHeightOfItem: 40,
+                  deActiveItemColor: white,
+                  activeItemColor: lightblue,
+                  activeTextStyle: TextStyle(
+                      color: black, fontSize: 14, fontWeight: FontWeight.w700),
+                  deActiveTextStyle: TextStyle(
+                      color: black, fontSize: 14, fontWeight: FontWeight.w700),
+                  activeBorderRadius: 20,
+                  deActiveBorderRadius: 20,
+                ),
+                sizeH(20),
+                Obx(
+                  () => showPages(exploreController.currentIndex.value),
+                ),
+                sizeH(60)
+              ],
+            ),
           ),
         ),
       ),

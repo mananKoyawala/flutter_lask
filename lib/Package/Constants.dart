@@ -209,7 +209,7 @@ Future<void> decisionDialog(BuildContext context, String title, String negative,
     builder: (BuildContext context) {
       return AlertDialog(
         // <-- SEE HERE
-        title: const Text('Cancel booking'),
+        title: const Text('Logout'),
         content: SingleChildScrollView(
           child: ListBody(
             children: [

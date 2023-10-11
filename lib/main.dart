@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:lask/Data/Controller/SharedPreferences.dart';
 import 'package:lask/Data/Controller/WebViewController.dart';
 import 'package:lask/Presentation/Screen/SplashScreen.dart';
+import 'Data/Controller/NetworkController.dart';
 import 'Presentation/Constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -12,6 +13,7 @@ import 'firebase_options.dart';
 
 int? initScreen;
 Future<void> main() async {
+  Get.put<NetwrokController>(NetwrokController(), permanent: true);
   SharedPreference controller = Get.put(SharedPreference());
   WebController webViewController = Get.put(WebController());
 

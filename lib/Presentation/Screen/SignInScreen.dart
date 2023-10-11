@@ -3,6 +3,7 @@ import 'package:lask/Data/Controller/SharedPreferences.dart';
 import 'package:lask/Presentation/Screen/ForgetPasswordScreen1.dart';
 import 'package:lask/Presentation/Screen/SignInAuthentication.dart';
 import 'package:lask/Presentation/Screen/SignUpScreen.dart';
+import '../../Data/Controller/NetworkController.dart';
 import '../../Data/Controller/SignInController.dart';
 import '../../Package/Constants.dart';
 import '../../Package/CustomePadding.dart';
@@ -24,12 +25,67 @@ class SignInScreen extends StatelessWidget {
       FirebaseFirestore.instance.collection('lask_news_app');
   SignInController controller = Get.put(SignInController());
   SharedPreference pref = Get.find<SharedPreference>();
+  NetwrokController netwrokController = Get.find<NetwrokController>();
+
   final auth = FirebaseAuth.instance;
 
   validation() {
     if (formKey.currentState!.validate()) {
       // Get.to(() => AuthenticationScreen());
+      if (!netwrokController.noInternet.value) {
+        checkUserExist();
+      } else {
+        toast('Please Check your Internet Connection');
+      }
+    }
+  }
+
+  // login() async {
+  //   final querySnapshot = await reference
+  //       .where('email', isEqualTo: controller.email.text)
+  //       .where('password', isEqualTo: controller.password.text)
+  //       .where('mobilenumber', isEqualTo: controller.mobileNumber.text)
+  //       .get();
+  //   // print(
+  //   // '******** email = ${controller.email.text} && password = ${controller.password.text}');
+  //   if (querySnapshot.docs.isNotEmpty) {
+  //     print('######Data Recievd');
+  //     querySnapshot.docs.forEach((docs) {
+  //       print('Document ID = ${docs.id}');
+  //       pref.chnageDoc(docs.id);
+  //       print('Pref Document ID = ${pref.u_doc.value}');
+
+  //       print(docs['email']);
+  //       print('User doc is = ${pref.u_doc}');
+  //       pref.setUserDoc(docs.id);
+  //       print('User doc is = ${pref.u_doc}');
+  //       auth.verifyPhoneNumber(
+  //           phoneNumber: '+91${controller.phoneNumber.value}',
+  //           verificationCompleted: (_) {},
+  //           verificationFailed: (e) {
+  //             // print('...........${e.toString()}');
+  //           },
+  //           codeSent: (String verificationId, int? token) {
+  //             controller.changeVerficationId(verificationId);
+  //           },
+  //           codeAutoRetrievalTimeout: (e) {
+  //             // print('...........${e.toString()}');
+  //           });
+  //       Get.to(() => SignInAuthentication(docs: docs));
+  //     });
+  //   } else {
+  //     toast('User Not Exist');
+  //   }
+  // }
+
+  checkUserExist() async {
+    final querySnapshot = await reference
+        .where('mobilenumber', isEqualTo: controller.mobileNumber.text)
+        .get();
+    if (querySnapshot.docs.isNotEmpty) {
       login();
+    } else {
+      toast("Can't Find User with given Mobile Number");
     }
   }
 
@@ -64,10 +120,11 @@ class SignInScreen extends StatelessWidget {
             codeAutoRetrievalTimeout: (e) {
               // print('...........${e.toString()}');
             });
+        toast("We send you OTP");
         Get.to(() => SignInAuthentication(docs: docs));
       });
     } else {
-      toast('User Not Exist');
+      toast('Email or Password is Wrong!');
     }
   }
 
@@ -254,7 +311,7 @@ class SignInScreen extends StatelessWidget {
                         const SizedBox(height: 10),
                         CustomButton(
                           onPress: () {
-                            Get.offAll(() => SignUpScreen());
+                            Get.to(() => SignUpScreen());
                           },
                           radius: 10,
                           height: 48,

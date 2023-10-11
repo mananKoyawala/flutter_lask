@@ -6,10 +6,12 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:lask/Data/Controller/API/ApiConstants.dart';
 
+import '../NetworkController.dart';
 import 'NewModel.dart';
 
 class HomeController extends GetxController {
   var status = "ok".obs;
+  NetwrokController netwrokControler = Get.find<NetwrokController>();
 
   var isLoading = true.obs;
   var list1 = <ArticleModel>[].obs;
@@ -82,7 +84,9 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    loadData();
+    if (netwrokControler.noInternet.value == false) {
+      loadData();
+    }
   }
 
   Future<void> loadData() async {

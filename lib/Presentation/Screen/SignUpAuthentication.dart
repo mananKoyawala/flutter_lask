@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lask/Data/Controller/SignUpController.dart';
 import 'package:lask/Presentation/Screen/SignInScreen.dart';
+import '../../Data/Controller/NetworkController.dart';
 import '../../Package/Constants.dart';
 import '../../Package/CustomePadding.dart';
 import '../../Package/CustomeTexts.dart';
@@ -22,6 +23,7 @@ class SignUpAuthentication extends StatelessWidget {
   ScrollController controller = ScrollController();
   StreamController<ErrorAnimationType>? errorController;
   SignUpController signUpController = Get.find<SignUpController>();
+  NetwrokController netwrokController = Get.find<NetwrokController>();
 
   final auth = FirebaseAuth.instance;
 
@@ -137,7 +139,12 @@ class SignUpAuthentication extends StatelessWidget {
                               keyboardType: TextInputType.number,
                               boxShadows: const [],
                               onCompleted: (v) {
-                                verify();
+                                if (!netwrokController.noInternet.value) {
+                                  verify();
+                                } else {
+                                  toast(
+                                      'Please Check your Internet Connection');
+                                }
                               },
                               onChanged: (value) {
                                 debugPrint(value);

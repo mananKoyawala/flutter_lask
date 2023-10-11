@@ -5,6 +5,7 @@ import 'package:lask/Data/Controller/SharedPreferences.dart';
 import 'package:lask/Data/Controller/SignInController.dart';
 import 'package:lask/Presentation/Screen/Dashboard.dart';
 import 'package:lask/Presentation/Screen/SignInScreen.dart';
+import '../../Data/Controller/NetworkController.dart';
 import '../../Package/Constants.dart';
 import '../../Package/CustomePadding.dart';
 import '../../Package/CustomeTexts.dart';
@@ -26,6 +27,8 @@ class SignInAuthentication extends StatelessWidget {
   ScrollController controller = ScrollController();
   StreamController<ErrorAnimationType>? errorController;
   SignInController signInController = Get.find<SignInController>();
+  NetwrokController netwrokController = Get.find<NetwrokController>();
+
   final QueryDocumentSnapshot<Object?> docs;
   final auth = FirebaseAuth.instance;
   SharedPreference preference = Get.find<SharedPreference>();
@@ -154,7 +157,11 @@ class SignInAuthentication extends StatelessWidget {
                               keyboardType: TextInputType.number,
                               boxShadows: const [],
                               onCompleted: (v) {
-                                verify();
+                                if (!netwrokController.noInternet.value) {
+                                  verify();
+                                } else {
+                                  toast('Please check the Internet Connection');
+                                }
                               },
                               onChanged: (value) {
                                 debugPrint(value);

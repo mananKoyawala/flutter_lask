@@ -8,6 +8,7 @@ import 'package:lask/Package/RippleEffectContainer.dart';
 import 'package:lask/Package/ScrollColorRemove.dart';
 import 'package:lask/Presentation/Constants.dart';
 import 'package:get/get.dart';
+import '../../Data/Controller/DashboardController.dart';
 import '../../Package/CustomePadding.dart';
 
 import '../Utils/Widgets/CommingSoon.dart';
@@ -16,80 +17,90 @@ class BookmarkedScreen extends StatelessWidget {
   BookmarkedScreen({super.key});
   ScrollController scrollController = ScrollController();
   BookMarkController bookMarkController = Get.find<BookMarkController>();
+  DashboardController controller = Get.find<DashboardController>();
+
+  Future<bool> _onWillPop() async {
+    controller.changeIndex(0);
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: white,
-      body: ScrollColorRemove(
-        child: CP(
-          h: 16,
-          child: Column(
-            children: [
-              Container(
-                margin: const EdgeInsets.only(top: 45),
-                color: white,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const TextFW600(text: 'Bookmark', fontSize: 24),
-                    Obx(
-                      () => bookMarkController.isShow.value
-                          ? ClickEffect(
-                              onTap: () => bookMarkController.changeStatus(),
-                              borderRadius: radius(10),
-                              child: CircleAvatar(
-                                backgroundColor: white,
-                                radius: 24,
-                                child: TextFW600(
-                                  text: 'Done',
-                                  fontSize: 14,
-                                  textcolor: blue,
-                                ),
-                              ))
-                          : IconButton(
-                              onPressed: () =>
-                                  bookMarkController.changeStatus(),
-                              icon: Icon(
-                                Icons.edit_outlined,
-                                color: textColorMain,
-                              )),
-                    )
-                  ],
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: Scaffold(
+        backgroundColor: white,
+        body: ScrollColorRemove(
+          child: CP(
+            h: 16,
+            child: Column(
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(top: 45),
+                  color: white,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const TextFW600(text: 'Bookmark', fontSize: 24),
+                      Obx(
+                        () => bookMarkController.isShow.value
+                            ? ClickEffect(
+                                onTap: () => bookMarkController.changeStatus(),
+                                borderRadius: radius(10),
+                                child: CircleAvatar(
+                                  backgroundColor: white,
+                                  radius: 24,
+                                  child: TextFW600(
+                                    text: 'Done',
+                                    fontSize: 14,
+                                    textcolor: blue,
+                                  ),
+                                ))
+                            : IconButton(
+                                onPressed: () =>
+                                    bookMarkController.changeStatus(),
+                                icon: Icon(
+                                  Icons.edit_outlined,
+                                  color: textColorMain,
+                                )),
+                      )
+                    ],
+                  ),
                 ),
-              ),
-              sizeH(10),
-              const CommingSoon(),
-              sizeH(60)
-              // Expanded(
-              //     child: SingleChildScrollView(
-              //   scrollDirection: Axis.vertical,
-              //   controller: scrollController,
-              //   child: Column(
-              //     mainAxisAlignment: MainAxisAlignment.center,
-              //     children: [
+                sizeH(10),
+                const CommingSoon(),
+                sizeH(60)
+                // Expanded(
+                //     child: SingleChildScrollView(
+                //   scrollDirection: Axis.vertical,
+                //   controller: scrollController,
+                //   child: Column(
+                //     mainAxisAlignment: MainAxisAlignment.center,
+                //     children: [
 
-              // ListView.builder(
-              //   physics: const BouncingScrollPhysics(),
-              //   padding: const EdgeInsets.all(0),
-              //   controller: scrollController,
-              //   itemCount: 10,
-              //   shrinkWrap: true,
-              //   itemBuilder: (context, index) {
-              //     return AddressItem(
-              //         bookMarkController: bookMarkController,
-              //         title:
-              //             "Experience the Serenity of Japan's Traditional Countryside",
-              //         onTap: () {},
-              //         imgurl: 'assets/images/person1.png',
-              //         authorname: 'Harry Harper',
-              //         datetime: 'Apr 12, 2023');
-              // },
-              // ),
-              //     ],
-              //   ),
-              // )),
-              // sizeH(60)
-            ],
+                // ListView.builder(
+                //   physics: const BouncingScrollPhysics(),
+                //   padding: const EdgeInsets.all(0),
+                //   controller: scrollController,
+                //   itemCount: 10,
+                //   shrinkWrap: true,
+                //   itemBuilder: (context, index) {
+                //     return AddressItem(
+                //         bookMarkController: bookMarkController,
+                //         title:
+                //             "Experience the Serenity of Japan's Traditional Countryside",
+                //         onTap: () {},
+                //         imgurl: 'assets/images/person1.png',
+                //         authorname: 'Harry Harper',
+                //         datetime: 'Apr 12, 2023');
+                // },
+                // ),
+                //     ],
+                //   ),
+                // )),
+                // sizeH(60)
+              ],
+            ),
           ),
         ),
       ),

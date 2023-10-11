@@ -16,7 +16,8 @@ import 'BookmarkedScreen.dart';
 
 class Dashboard extends StatelessWidget {
   Dashboard({super.key});
-  DashboardController controller = DashboardController();
+  DashboardController controller = Get.put(DashboardController());
+
   List pages = [
     HomeScreen(),
     ExploreScreen(),

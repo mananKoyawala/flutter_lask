@@ -4,6 +4,7 @@ import 'package:lask/Package/CustomeTexts.dart';
 import 'package:lask/Package/RippleEffectContainer.dart';
 import 'package:lask/Package/ScrollColorRemove.dart';
 import 'package:lask/Presentation/Constants.dart';
+import 'package:lask/Presentation/Screen/EditProfileScreen.dart';
 import 'package:lask/Presentation/Screen/SignInScreen.dart';
 import '../../Data/Controller/SharedPreferences.dart';
 import '../../Package/CustomePadding.dart';
@@ -56,12 +57,17 @@ class MyAccountScreen extends StatelessWidget {
                 controller: scrollController,
                 child: Column(
                   children: [
-                    AccountItem(
-                      title: 'Email Address',
-                      subtitle:
-                          '${pref.u_email.value.substring(0, 2)}*******@${pref.u_email.value.split('@')[1]}',
-                      onTap: () {},
-                    ),
+                    // AccountItem(
+                    //   title: 'Email Address',
+                    //   subtitle:
+                    //       '${pref.u_email.value.substring(0, 2)}*******@${pref.u_email.value.split('@')[1]}',
+                    //   onTap: () {},
+                    // ),
+                    SingleAccountItem(
+                        title: 'Edit Profile',
+                        onTap: () {
+                          Get.to(() => EditProfileScreen());
+                        }),
                     sizeH10(),
                     AccountItem(
                       title: 'Connect Account',

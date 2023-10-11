@@ -35,7 +35,9 @@ class SignUpController extends GetxController {
       'password': password.text,
       'mobilenumber': mobileNumber.text,
       'time': DateTime.now(),
-      'article': []
+      'article': [],
+      'img':
+          'https://firebasestorage.googleapis.com/v0/b/lask-177aa.appspot.com/o/unknown.jpeg?alt=media&token=2ad52e5a-d25e-4fd1-b5a0-60e8b513b3b3'
     }).then((value) => print('Data Uploaded'));
   }
 

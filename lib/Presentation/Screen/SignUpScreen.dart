@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lask/Data/Controller/NetworkController.dart';
 import 'package:lask/Data/Controller/SignUpController.dart';
 import 'package:lask/Presentation/Screen/SignUpAuthentication.dart';
 import '../../Package/Constants.dart';
@@ -20,9 +21,15 @@ class SignUpScreen extends StatelessWidget {
   final formKey = GlobalKey<FormState>();
   SignUpController controller = Get.put(SignUpController());
   final auth = FirebaseAuth.instance;
-
+  NetwrokController netwrokController = Get.find<NetwrokController>();
   validation() async {
     if (formKey.currentState!.validate()) {
+      checkInternet();
+    }
+  }
+
+  checkInternet() async {
+    if (!netwrokController.noInternet.value) {
       controller.checkUserExist();
       ScaffoldMessenger.of(Get.context!).showSnackBar(SnackBar(
         content: TextFW500(
@@ -51,6 +58,8 @@ class SignUpScreen extends StatelessWidget {
             });
         Get.to(() => SignUpAuthentication());
       }
+    } else {
+      toast('Please Check the Internet Connection');
     }
   }
 

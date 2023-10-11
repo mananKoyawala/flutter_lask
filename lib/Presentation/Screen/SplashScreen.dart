@@ -29,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
   BookMarkController bookMarkController = Get.put(BookMarkController());
 
   Future<void> next() async {
-    await Future.delayed(const Duration(milliseconds: 3500));
+    await Future.delayed(const Duration(milliseconds: 1500));
     setState(() {
       move();
     });
