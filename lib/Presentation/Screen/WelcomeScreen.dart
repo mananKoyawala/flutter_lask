@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:lask/Package/Constants.dart';
 import 'package:lask/Package/CustomeTexts.dart';
-import 'package:lask/Package/ElevatedButton.dart';
 import 'package:lask/Package/CustomeRightIconButton.dart';
 import 'package:lask/Presentation/Constants.dart';
 import 'package:get/get.dart';
-import 'package:lask/Presentation/Screen/AuthenticationScreen.dart';
-import 'package:lask/Presentation/Screen/Dashboard.dart';
-import 'package:lask/Presentation/Screen/HomeScreen.dart';
+import 'package:lask/Presentation/Screen/SignInScreen.dart';
 
 import '../../Package/CustomePadding.dart';
 
@@ -52,7 +48,7 @@ class WelcomeScreen extends StatelessWidget {
                     isIcon: true,
                     onTap: () => Navigator.pushAndRemoveUntil(
                       Get.context!,
-                      MaterialPageRoute(builder: (_) => AuthenticationScreen()),
+                      MaterialPageRoute(builder: (_) => SignInScreen()),
                       (route) => false,
                     ),
                     textColor: white,

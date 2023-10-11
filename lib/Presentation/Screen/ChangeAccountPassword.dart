@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lask/Data/Controller/ForgetPasswordControllers.dart';
-import '../../Package/BorderButton.dart';
+import 'package:lask/Data/Controller/SharedPreferences.dart';
+import '../../Data/Controller/ChangePasswordController.dart';
 import '../../Package/Constants.dart';
 import '../../Package/CustomePadding.dart';
 import '../../Package/CustomeTexts.dart';
@@ -10,15 +10,18 @@ import '../../Package/ScrollColorRemove.dart';
 import '../../Package/TextFormFeilds.dart';
 import '../Constants.dart';
 import 'package:get/get.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+// ignore_for_file: must_be_immutable
 
-class ForgetPasswordscreen extends StatelessWidget {
-  ForgetPasswordController controller = ForgetPasswordController();
-  ForgetPasswordscreen({super.key});
+class ChangeAccountPassword extends StatelessWidget {
+  ChangeAccountPassword({super.key});
   final formKey = GlobalKey<FormState>();
-  validation() {
+  SharedPreference pref = Get.find<SharedPreference>();
+  final auth = FirebaseAuth.instance;
+  ChangePasswordController controller = Get.put(ChangePasswordController());
+  updatePassword() {
     if (formKey.currentState!.validate()) {
-      // ScaffoldMessenger.of(Get.context!)
-      //     .showSnackBar(const SnackBar(content: Text("Validated")));
+      controller.updatePassword();
     }
   }
 
@@ -37,7 +40,7 @@ class ForgetPasswordscreen extends StatelessWidget {
                 const SizedBox(height: 70),
                 Center(
                   child: TextFW700(
-                    text: "Change Password",
+                    text: "Update Password",
                     fontSize: 28,
                     textcolor: black,
                     textAlign: TextAlign.center,
@@ -52,20 +55,19 @@ class ForgetPasswordscreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             TextFW400(
-                                text: "Password",
+                                text: "New Password",
                                 fontSize: 16,
                                 textcolor: black),
-                            const SizedBox(height: 10),
+                            sizeH10(),
                             Obx(
                               () => TextFFeild(
                                   textInputAction: TextInputAction.next,
                                   focus: false,
-                                  maxLines: 1,
-                                  hintText: "Enter New Password",
+                                  hintText: "Enter Password Here",
                                   mainColor: black,
                                   textInputType: TextInputType.text,
-                                  obsecureText: controller.visible1.value,
-                                  controller: controller.passwordController,
+                                  obsecureText: controller.pass1.value,
+                                  maxLines: 1,
                                   funValidate: (val) {
                                     if (val != null && val.isEmpty) {
                                       return "Password required";
@@ -75,16 +77,17 @@ class ForgetPasswordscreen extends StatelessWidget {
                                     return null;
                                   },
                                   suffixIconData: ClickEffect(
-                                    onTap: () => controller.changeVisible1(),
+                                    onTap: () => controller.changepass1(),
                                     borderRadius: radius(10),
                                     child: Container(
                                       padding: const EdgeInsets.all(15),
                                       height: 40,
-                                      child: controller.visible1.value
+                                      child: controller.pass1.value
                                           ? const Icon(Icons.visibility)
                                           : const Icon(Icons.visibility_off),
                                     ),
                                   ),
+                                  controller: controller.password,
                                   borderRadius: 10,
                                   border: true,
                                   hintStyle: TextStyle(
@@ -92,44 +95,40 @@ class ForgetPasswordscreen extends StatelessWidget {
                                       fontSize: 18,
                                       color: blackO_30)),
                             ),
-                            const SizedBox(height: 22),
+                            sizeH25(),
                             TextFW400(
                                 text: "Confirm Password",
                                 fontSize: 16,
                                 textcolor: black),
-                            const SizedBox(height: 10),
+                            sizeH10(),
                             Obx(
                               () => TextFFeild(
+                                  textInputAction: TextInputAction.done,
                                   focus: false,
-                                  hintText: "Enter Confirm Password",
+                                  hintText: "Re-write Password",
                                   mainColor: black,
-                                  maxLines: 1,
                                   textInputType: TextInputType.text,
-                                  obsecureText: controller.visible2.value,
-                                  controller:
-                                      controller.confirmPasswordController,
+                                  obsecureText: controller.pass2.value,
+                                  maxLines: 1,
                                   funValidate: (val) {
-                                    if (val != null && val.isEmpty) {
-                                      return "Confirm Password required";
-                                    } else if (controller
-                                            .passwordController.value !=
-                                        controller
-                                            .confirmPasswordController.value) {
-                                      return "Passowrd and Confirm Password must be same!!!";
+                                    if (controller.password.value !=
+                                        controller.cppassword.value) {
+                                      return 'Password must be Same as Above!!!';
                                     }
                                     return null;
                                   },
                                   suffixIconData: ClickEffect(
-                                    onTap: () => controller.changeVisible2(),
+                                    onTap: () => controller.changepass2(),
                                     borderRadius: radius(10),
                                     child: Container(
                                       padding: const EdgeInsets.all(15),
                                       height: 40,
-                                      child: controller.visible2.value
+                                      child: controller.pass2.value
                                           ? const Icon(Icons.visibility)
                                           : const Icon(Icons.visibility_off),
                                     ),
                                   ),
+                                  controller: controller.cppassword,
                                   borderRadius: 10,
                                   border: true,
                                   hintStyle: TextStyle(
@@ -137,7 +136,7 @@ class ForgetPasswordscreen extends StatelessWidget {
                                       fontSize: 18,
                                       color: blackO_30)),
                             ),
-                            const SizedBox(height: 30),
+                            sizeH25(),
                           ]),
                     ),
                   ),
@@ -146,14 +145,15 @@ class ForgetPasswordscreen extends StatelessWidget {
                     visible: DP.visibility(context),
                     child: Column(
                       children: [
+                        const SizedBox(height: 10),
                         CustomButton(
                           onPress: () {
-                            validation();
+                            updatePassword();
                           },
                           radius: 10,
                           height: 48,
                           width: DP.infinity(context),
-                          label: "Update Password",
+                          label: "UPDATE PASSWORD",
                           bgcolor: themeColor,
                           txtcolor: white,
                           weight: FontWeight.w500,

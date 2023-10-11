@@ -4,10 +4,10 @@ import 'package:lask/Package/CustomeTexts.dart';
 import 'package:lask/Package/RippleEffectContainer.dart';
 import 'package:lask/Package/ScrollColorRemove.dart';
 import 'package:lask/Presentation/Constants.dart';
-import 'package:lask/Presentation/Utils/Widgets/SearchPage.dart';
 
 import '../../Package/ButtonTab.dart';
 import '../../Package/CustomePadding.dart';
+// ignore_for_file: must_be_immutable
 
 class SearchResult extends StatelessWidget {
   int _currentIndex = 0;

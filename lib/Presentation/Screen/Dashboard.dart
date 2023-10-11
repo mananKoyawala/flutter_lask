@@ -1,9 +1,9 @@
 import 'dart:ui';
+// ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
 import 'package:lask/Data/Controller/DashboardController.dart';
 import 'package:lask/Package/Constants.dart';
-import 'package:lask/Package/CustomeTexts.dart';
 import 'package:lask/Presentation/Constants.dart';
 import 'package:lask/Presentation/Screen/ExploreScreen.dart';
 import 'package:lask/Presentation/Screen/HomeScreen.dart';
@@ -16,7 +16,8 @@ import 'BookmarkedScreen.dart';
 
 class Dashboard extends StatelessWidget {
   Dashboard({super.key});
-  DashboardController controller = DashboardController();
+  DashboardController controller = Get.put(DashboardController());
+
   List pages = [
     HomeScreen(),
     ExploreScreen(),

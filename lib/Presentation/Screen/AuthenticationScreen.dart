@@ -1,9 +1,9 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lask/Data/Controller/OTPController.dart';
 import 'package:lask/Presentation/Screen/OTPScreen.dart';
-
-import '../../Package/BorderButton.dart';
 import '../../Package/Constants.dart';
 import '../../Package/CustomePadding.dart';
 import '../../Package/CustomeTexts.dart';
@@ -11,7 +11,6 @@ import '../../Package/ElevatedButton.dart';
 import '../../Package/ScrollColorRemove.dart';
 import '../../Package/TextFormFeilds.dart';
 import '../Constants.dart';
-import 'SignInScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 //Used fonts SpaceGrotesk for signup and signin or otp screen
@@ -22,25 +21,26 @@ class AuthenticationScreen extends StatelessWidget {
   final formKey = GlobalKey<FormState>();
   final auth = FirebaseAuth.instance;
   validation() {
-    // if (formKey.currentState!.validate()) {
-    //   ScaffoldMessenger.of(Get.context!)
-    //       .showSnackBar(SnackBar(content: const Text('Validated')));
-    // }
-    print('..................${controller.phoneNumber.value}');
-    Navigator.push(
-        Get.context!, MaterialPageRoute(builder: (_) => OTPScreen()));
-    auth.verifyPhoneNumber(
-        phoneNumber: '+91${controller.phoneNumber.value}',
-        verificationCompleted: (_) {},
-        verificationFailed: (e) {
-          print('...........${e.toString()}');
-        },
-        codeSent: (String verificationId, int? token) {
-          controller.changeVerficationId(verificationId);
-        },
-        codeAutoRetrievalTimeout: (e) {
-          print('...........${e.toString()}');
-        });
+    if (formKey.currentState!.validate()) {
+      //   ScaffoldMessenger.of(Get.context!)
+      //       .showSnackBar(SnackBar(content: const Text('Validated')));
+      // }
+      print('..................${controller.phoneNumber.value}');
+      Navigator.push(
+          Get.context!, MaterialPageRoute(builder: (_) => OTPScreen()));
+      auth.verifyPhoneNumber(
+          phoneNumber: '+91${controller.phoneNumber.value}',
+          verificationCompleted: (_) {},
+          verificationFailed: (e) {
+            print('...........${e.toString()}');
+          },
+          codeSent: (String verificationId, int? token) {
+            controller.changeVerficationId(verificationId);
+          },
+          codeAutoRetrievalTimeout: (e) {
+            print('...........${e.toString()}');
+          });
+    }
     // Navigator.push(
     //     Get.context!, MaterialPageRoute(builder: (_) => OTPScreen()));
   }

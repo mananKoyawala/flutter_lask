@@ -124,6 +124,7 @@ class _ClickEffectState extends State<ClickEffect>
         begin: 0,
         end: widget.width == null
             ? _mWidth
+            // ignore: unnecessary_null_comparison
             : widget.width! * 2 + widget.height! == null
                 ? _mHeight
                 : widget.height! * 2);
