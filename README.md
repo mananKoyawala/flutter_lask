@@ -16,37 +16,6 @@ and also provides varoius categories like Business, Sports, Technology and many 
     
 ## Screen Shorts
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mobile Responsive Image Blocks</title>
-<style>
-  /* Define mobile responsive layout */
-  @media screen and (max-width: 600px) {
-    table {
-      width: 100%;
-      
-    }
-    table td {
-      display: block; /* Display table cells as blocks */
-      text-align: center; /* Center-align text */
-    }
-    table td img {
-      display: block; /* Make images fill the width */
-      margin: 0 auto; /* Center-align images */
-    }
-   
-  }
-  p{
-    font-weight: 600;
-    text-align: center;
-  }
-</style>
-</head>
-<body>
-
 <table align="center">
   
   <tr>
@@ -153,10 +122,7 @@ and also provides varoius categories like Business, Sports, Technology and many 
   </tr>
 </table>
 
-</body>
-</html>
-
 
 ## Download APK
-Here -> https://www.upload-apk.com/t3jOCeV6OJtxaGl
+Here -> https://fastupload.io/zBi55GvETGPZP9k/file
 
