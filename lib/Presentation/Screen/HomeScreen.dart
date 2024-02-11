@@ -25,220 +25,237 @@ class HomeScreen extends StatelessWidget {
   final Greeting greetings = Get.put(Greeting());
   SharedPreference preference = Get.find<SharedPreference>();
   HomeController homeController = Get.put(HomeController());
+  DateTime? _lastBackPressed;
   @override
   Widget build(BuildContext context) {
     print('User\'s Name :- ${preference.u_name.value.split(' ')[0]}');
-    return Scaffold(
-      body: ScrollColorRemove(
-        child: Obx(() {
-          if (netwrokControler.noInternet.value) {
-            // return NoInternet();
-            return const Center(
-              child: Text('No Internet'),
-            );
-          }
-          if (homeController.general.isEmpty) {
-            // if (homeController.isApiCalled.value == false) {
-            homeController.loadData();
+    return WillPopScope(
+      onWillPop: () {
+        if (_lastBackPressed == null ||
+            DateTime.now().difference(_lastBackPressed!) >
+                const Duration(seconds: 5)) {
+          // Notify user to press back again immediately
 
-            print('!!!!!!!!!!!!!!!!!!Called');
-            // }
-          }
+          toast("Press back again to exit");
+          _lastBackPressed = DateTime.now();
+          return Future.value(false);
+        } else {
+          // If pressed again within 2 seconds, allow app exit
+          return Future.value(true);
+        }
+      },
+      child: Scaffold(
+        body: ScrollColorRemove(
+          child: Obx(() {
+            if (netwrokControler.noInternet.value) {
+              // return NoInternet();
+              return const Center(
+                child: Text('No Internet'),
+              );
+            }
+            if (homeController.general.isEmpty) {
+              // if (homeController.isApiCalled.value == false) {
+              homeController.loadData();
 
-          return CP(
-            h: 16,
-            child: Column(
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(top: 45),
-                  color: background1,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      GetBuilder<Greeting>(builder: (greet) {
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+              print('!!!!!!!!!!!!!!!!!!Called');
+              // }
+            }
+
+            return CP(
+              h: 16,
+              child: Column(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(top: 45),
+                    color: background1,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        GetBuilder<Greeting>(builder: (greet) {
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Obx(
+                                () => TextFW400(
+                                    text:
+                                        '${greet.greeting.value}, ${preference.u_name.value.split(' ')[0]}',
+                                    fontSize: 14,
+                                    textcolor: textColor2),
+                              ),
+                              TextFW600(
+                                text: DateFormat('EE dd MMM, yyyy')
+                                    .format(DateTime.now()),
+                                fontSize: 18,
+                                textcolor: black,
+                              )
+                            ],
+                          );
+                        }),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Obx(
-                              () => TextFW400(
-                                  text:
-                                      '${greet.greeting.value}, ${preference.u_name.value.split(' ')[0]}',
-                                  fontSize: 14,
-                                  textcolor: textColor2),
-                            ),
+                            SizedBox(
+                                height: 24,
+                                child: Image.asset('assets/images/sun.png')),
+                            sizeW10(),
                             TextFW600(
-                              text: DateFormat('EE dd MMM, yyyy')
-                                  .format(DateTime.now()),
-                              fontSize: 18,
-                              textcolor: black,
+                              text: 'Sunny 32oC',
+                              fontSize: 14,
+                              textcolor: textColor2,
                             )
                           ],
-                        );
-                      }),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                              height: 24,
-                              child: Image.asset('assets/images/sun.png')),
-                          sizeW10(),
-                          TextFW600(
-                            text: 'Sunny 32oC',
-                            fontSize: 14,
-                            textcolor: textColor2,
-                          )
-                        ],
-                      )
-                    ],
+                        )
+                      ],
+                    ),
                   ),
-                ),
-                sizeH(20),
-                Expanded(
-                    child: SingleChildScrollView(
-                  controller: scrollController,
-                  child: Column(
-                    children: [
-                      SizedBox(
-                          height: 335,
-                          child: Obx(
-                            () => homeController.isLoading.value
-                                ? horizontalShimmer()
-                                : ListView.builder(
-                                    physics: const BouncingScrollPhysics(),
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: homeController.list1.length,
-                                    itemBuilder: (context, index) {
-                                      return NewContainer(
-                                        onTap: () {
-                                          Get.to(() => ArticaleScreen(
-                                              article:
-                                                  homeController.list1[index]));
-                                        },
-                                        imgUrl: homeController
-                                            .list1[index].urlToImage,
-                                        title:
-                                            homeController.list1[index].title,
-                                        category:
-                                            homeController.list1[index].author,
-                                      );
-                                    },
-                                  ),
-                          )),
-                      sizeH(15),
-                      SizedBox(
-                          height: 335,
-                          child: Obx(
-                            () => homeController.isLoading.value
-                                ? horizontalShimmer()
-                                : ListView.builder(
-                                    physics: const BouncingScrollPhysics(),
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: homeController.list2.length,
-                                    itemBuilder: (context, index) {
-                                      return NewContainer(
-                                        onTap: () {
-                                          Get.to(() => ArticaleScreen(
-                                              article:
-                                                  homeController.list2[index]));
-                                        },
-                                        imgUrl: homeController
-                                            .list2[index].urlToImage,
-                                        title:
-                                            homeController.list2[index].title,
-                                        category:
-                                            homeController.list2[index].author,
-                                      );
-                                    },
-                                  ),
-                          )),
-                      sizeH(15),
-                      SizedBox(
-                          height: 335,
-                          child: Obx(
-                            () => homeController.isLoading.value
-                                ? horizontalShimmer()
-                                : ListView.builder(
-                                    physics: const BouncingScrollPhysics(),
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: homeController.list3.length,
-                                    itemBuilder: (context, index) {
-                                      return NewContainer(
-                                        onTap: () {
-                                          Get.to(() => ArticaleScreen(
-                                              article:
-                                                  homeController.list3[index]));
-                                        },
-                                        imgUrl: homeController
-                                            .list3[index].urlToImage,
-                                        title:
-                                            homeController.list3[index].title,
-                                        category:
-                                            homeController.list3[index].author,
-                                      );
-                                    },
-                                  ),
-                          )),
-                      sizeH(15),
-                      SizedBox(
-                          height: 335,
-                          child: Obx(
-                            () => homeController.isLoading.value
-                                ? horizontalShimmer()
-                                : ListView.builder(
-                                    physics: const BouncingScrollPhysics(),
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: homeController.list4.length,
-                                    itemBuilder: (context, index) {
-                                      return NewContainer(
-                                        onTap: () {
-                                          Get.to(() => ArticaleScreen(
-                                              article:
-                                                  homeController.list4[index]));
-                                        },
-                                        imgUrl: homeController
-                                            .list4[index].urlToImage,
-                                        title:
-                                            homeController.list4[index].title,
-                                        category:
-                                            homeController.list4[index].author,
-                                      );
-                                    },
-                                  ),
-                          )),
-                      sizeH(15),
-                      // SizedBox(
-                      //     height: 335,
-                      //     child: Obx(
-                      //       () => homeController.isLoading.value
-                      //           ? horizontalShimmer()
-                      //           : ListView.builder(
-                      //               physics: const BouncingScrollPhysics(),
-                      //               scrollDirection: Axis.horizontal,
-                      //               itemCount: homeController.list5.length,
-                      //               itemBuilder: (context, index) {
-                      //                 return NewContainer(
-                      //                   onTap: () {
-                      //                     Get.to(() => ArticaleScreen(
-                      //                         article:
-                      //                             homeController.list5[index]));
-                      //                   },
-                      //                   imgUrl: homeController
-                      //                       .list5[index].urlToImage,
-                      //                   title: homeController.list5[index].title,
-                      //                   category:
-                      //                       homeController.list5[index].author,
-                      //                 );
-                      //               },
-                      //             ),
-                      //     )),
-                      sizeH(60)
-                    ],
-                  ),
-                ))
-              ],
-            ),
-          );
-        }),
+                  sizeH(20),
+                  Expanded(
+                      child: SingleChildScrollView(
+                    controller: scrollController,
+                    child: Column(
+                      children: [
+                        SizedBox(
+                            height: 335,
+                            child: Obx(
+                              () => homeController.isLoading.value
+                                  ? horizontalShimmer()
+                                  : ListView.builder(
+                                      physics: const BouncingScrollPhysics(),
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: homeController.list1.length,
+                                      itemBuilder: (context, index) {
+                                        return NewContainer(
+                                          onTap: () {
+                                            Get.to(() => ArticaleScreen(
+                                                article: homeController
+                                                    .list1[index]));
+                                          },
+                                          imgUrl: homeController
+                                              .list1[index].urlToImage,
+                                          title:
+                                              homeController.list1[index].title,
+                                          category: homeController
+                                              .list1[index].author,
+                                        );
+                                      },
+                                    ),
+                            )),
+                        sizeH(15),
+                        SizedBox(
+                            height: 335,
+                            child: Obx(
+                              () => homeController.isLoading.value
+                                  ? horizontalShimmer()
+                                  : ListView.builder(
+                                      physics: const BouncingScrollPhysics(),
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: homeController.list2.length,
+                                      itemBuilder: (context, index) {
+                                        return NewContainer(
+                                          onTap: () {
+                                            Get.to(() => ArticaleScreen(
+                                                article: homeController
+                                                    .list2[index]));
+                                          },
+                                          imgUrl: homeController
+                                              .list2[index].urlToImage,
+                                          title:
+                                              homeController.list2[index].title,
+                                          category: homeController
+                                              .list2[index].author,
+                                        );
+                                      },
+                                    ),
+                            )),
+                        sizeH(15),
+                        SizedBox(
+                            height: 335,
+                            child: Obx(
+                              () => homeController.isLoading.value
+                                  ? horizontalShimmer()
+                                  : ListView.builder(
+                                      physics: const BouncingScrollPhysics(),
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: homeController.list3.length,
+                                      itemBuilder: (context, index) {
+                                        return NewContainer(
+                                          onTap: () {
+                                            Get.to(() => ArticaleScreen(
+                                                article: homeController
+                                                    .list3[index]));
+                                          },
+                                          imgUrl: homeController
+                                              .list3[index].urlToImage,
+                                          title:
+                                              homeController.list3[index].title,
+                                          category: homeController
+                                              .list3[index].author,
+                                        );
+                                      },
+                                    ),
+                            )),
+                        sizeH(15),
+                        SizedBox(
+                            height: 335,
+                            child: Obx(
+                              () => homeController.isLoading.value
+                                  ? horizontalShimmer()
+                                  : ListView.builder(
+                                      physics: const BouncingScrollPhysics(),
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: homeController.list4.length,
+                                      itemBuilder: (context, index) {
+                                        return NewContainer(
+                                          onTap: () {
+                                            Get.to(() => ArticaleScreen(
+                                                article: homeController
+                                                    .list4[index]));
+                                          },
+                                          imgUrl: homeController
+                                              .list4[index].urlToImage,
+                                          title:
+                                              homeController.list4[index].title,
+                                          category: homeController
+                                              .list4[index].author,
+                                        );
+                                      },
+                                    ),
+                            )),
+                        sizeH(15),
+                        // SizedBox(
+                        //     height: 335,
+                        //     child: Obx(
+                        //       () => homeController.isLoading.value
+                        //           ? horizontalShimmer()
+                        //           : ListView.builder(
+                        //               physics: const BouncingScrollPhysics(),
+                        //               scrollDirection: Axis.horizontal,
+                        //               itemCount: homeController.list5.length,
+                        //               itemBuilder: (context, index) {
+                        //                 return NewContainer(
+                        //                   onTap: () {
+                        //                     Get.to(() => ArticaleScreen(
+                        //                         article:
+                        //                             homeController.list5[index]));
+                        //                   },
+                        //                   imgUrl: homeController
+                        //                       .list5[index].urlToImage,
+                        //                   title: homeController.list5[index].title,
+                        //                   category:
+                        //                       homeController.list5[index].author,
+                        //                 );
+                        //               },
+                        //             ),
+                        //     )),
+                        sizeH(60)
+                      ],
+                    ),
+                  ))
+                ],
+              ),
+            );
+          }),
+        ),
       ),
     );
   }

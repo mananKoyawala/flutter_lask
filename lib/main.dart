@@ -9,6 +9,7 @@ import 'Data/Controller/NetworkController.dart';
 import 'Presentation/Constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'firebase_options.dart';
 
 int? initScreen;
@@ -17,7 +18,9 @@ Future<void> main() async {
   SharedPreference controller = Get.put(SharedPreference());
   WebController webViewController = Get.put(WebController());
 
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  FlutterNativeSplash.remove();
   // await Firebase.initializeApp(options: Default)
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   SharedPreferences prefs = await SharedPreferences.getInstance();
